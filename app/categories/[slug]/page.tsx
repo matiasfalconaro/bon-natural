@@ -3,8 +3,8 @@
 import { useEffect, useState, useCallback } from "react"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-import ProductCard from "@/components/molecules/product-card/product-card"
-import ProductFilter from "@/components/molecules/product-filter/product-filter"
+import ProductCard from "@/components/product-card"
+import ProductFilter from "@/components/product-filter"
 import { useLanguage } from "@/contexts/language-context"
 import styles from "./page.module.css"
 

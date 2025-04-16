@@ -8,6 +8,7 @@ import ProductCard from "@/components/product-card"
 import SearchBar from "@/components/search-bar"
 import { useLanguage } from "@/contexts/language-context"
 import styles from "./page.module.css"
+import './globals.css'
 
 export default function Home() {
   const { t } = useLanguage()

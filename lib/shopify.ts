@@ -1,4 +1,9 @@
-export async function shopifyFetch({ query, variables = {} }) {
+type ShopifyFetchParams = {
+  query: string
+  variables?: Record<string, any>
+}
+
+export async function shopifyFetch({ query, variables = {} }: ShopifyFetchParams) {
   const endpoint = `https://${process.env.SHOPIFY_STORE_DOMAIN}/api/2023-10/graphql.json`
 
   try {
@@ -23,6 +28,7 @@ export async function shopifyFetch({ query, variables = {} }) {
     }
   }
 }
+
 
 export async function getAllProducts() {
   return shopifyFetch({
@@ -57,7 +63,7 @@ export async function getAllProducts() {
   })
 }
 
-export async function getProductByHandle(handle) {
+export async function getProductByHandle(handle: string) {
   return shopifyFetch({
     query: `
       query getProductByHandle($handle: String!) {

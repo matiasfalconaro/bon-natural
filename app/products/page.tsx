@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
-import ProductCard from "@/components/molecules/product-card/product-card"
-import ProductFilter from "@/components/molecules/product-filter/product-filter"
-import SearchBar from "@/components/molecules/search-bar/search-bar"
+import ProductCard from "@/components/product-card"
+import ProductFilter from "@/components/product-filter"
+import SearchBar from "@/components/search-bar"
 import { useLanguage } from "@/contexts/language-context"
 import styles from "./page.module.css"
 

@@ -3,10 +3,10 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Button } from "@/components/atoms/button/button"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
 import { useLanguage } from "@/contexts/language-context"
 import { MapPin, Phone, Mail, Clock } from "lucide-react"
 import styles from "./page.module.css"
