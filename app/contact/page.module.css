@@ -1,0 +1,141 @@
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--muted-foreground);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoCard {
+  background-color: var(--background);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+  height: 100%;
+}
+
+.infoHeader {
+  margin-bottom: 2rem;
+}
+
+.infoTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.infoSubtitle {
+  color: var(--muted-foreground);
+}
+
+.infoItems {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.infoItem {
+  display: flex;
+  gap: 1rem;
+}
+
+.infoIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.infoItemTitle {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.infoItemText {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.contactForm {
+  background-color: var(--background);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formLabel {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.formInput,
+.formTextarea {
+  width: 100%;
+}
+
+.submitButton {
+  background-color: var(--color-primary);
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.submitButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Dark mode specific styles */
+:global(.dark).infoCard,
+:global(.dark).contactForm {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark).subtitle,
+:global(.dark).infoSubtitle,
+:global(.dark).infoItemText {
+  color: hsl(215, 20.2%, 75.1%);
+}

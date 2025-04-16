@@ -1,0 +1,95 @@
+.container {
+  background-color: var(--background);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.resetButton {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.resetButton:hover {
+  color: var(--foreground);
+}
+
+.searchForm {
+  margin-bottom: 1.5rem;
+}
+
+.searchContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.searchInput {
+  flex: 1;
+}
+
+.searchButton {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.searchButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.accordion {
+  margin-top: 1rem;
+}
+
+.priceRangeContainer {
+  padding: 0.5rem 0;
+}
+
+.priceLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkboxLabel {
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+/* Dark mode specific styles */
+:global(.dark).resetButton {
+  color: hsl(215, 20.2%, 75.1%);
+}
+
+:global(.dark).resetButton:hover {
+  color: hsl(0, 0%, 100%);
+}
+
+:global(.dark).priceLabels {
+  color: hsl(215, 20.2%, 75.1%);
+}

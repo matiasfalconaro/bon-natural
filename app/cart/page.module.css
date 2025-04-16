@@ -1,0 +1,261 @@
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.backLink {
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: var(--foreground);
+}
+
+.emptyCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 0;
+}
+
+.emptyIcon {
+  width: 4rem;
+  height: 4rem;
+  color: var(--muted-foreground);
+  margin-bottom: 1.5rem;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.emptyText {
+  color: var(--muted-foreground);
+  margin-bottom: 1.5rem;
+}
+
+.shopButton {
+  background-color: var(--color-primary);
+  color: white; /* Ensure text is white for better contrast */
+}
+
+.shopButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.content {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .content {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.cartItems {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.cartHeader {
+  display: none;
+  padding: 1rem;
+  background-color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .cartHeader {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+    gap: 1rem;
+  }
+}
+
+.cartItem {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+  .cartItem {
+    grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+    align-items: center;
+  }
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.productImage {
+  border-radius: 0.25rem;
+  object-fit: cover;
+}
+
+.productTitle {
+  font-weight: 500;
+}
+
+.price,
+.total {
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .price::before {
+    content: "Price: ";
+    font-weight: normal;
+    color: var(--muted-foreground);
+  }
+
+  .total::before {
+    content: "Total: ";
+    font-weight: normal;
+    color: var(--muted-foreground);
+  }
+}
+
+.quantity {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+}
+
+.quantityButton {
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+}
+
+.quantityValue {
+  padding: 0 0.75rem;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.removeButton {
+  color: var(--muted-foreground);
+}
+
+.removeButton:hover {
+  color: var(--destructive);
+}
+
+.summary {
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  height: fit-content;
+}
+
+.summaryTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin: 1.5rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.checkoutButton {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  background-color: var(--color-primary);
+  color: white; /* Ensure text is white for better contrast */
+}
+
+.checkoutButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.clearButton {
+  width: 100%;
+}
+
+/* Dark mode specific styles */
+:global(.dark).emptyIcon,
+:global(.dark).emptyText,
+:global(.dark).backLink {
+  color: hsl(215, 20.2%, 75.1%); /* Brighter text in dark mode */
+}
+
+:global(.dark).backLink:hover {
+  color: hsl(0, 0%, 100%); /* White text on hover */
+}
+
+:global(.dark).removeButton {
+  color: hsl(215, 20.2%, 75.1%); /* Brighter icon in dark mode */
+}
+
+:global(.dark).removeButton:hover {
+  color: hsl(0, 84.2%, 70.2%); /* Brighter red in dark mode */
+}
+
+:global(.dark).cartHeader {
+  background-color: hsl(217.2, 32.6%, 20%); /* Slightly brighter background for better contrast */
+}

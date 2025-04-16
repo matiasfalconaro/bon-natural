@@ -1,0 +1,12 @@
+.button {
+  transition: transform 0.2s;
+}
+
+.button:hover {
+  transform: rotate(15deg);
+}
+
+.active {
+  background-color: var(--muted);
+  font-weight: 500;
+}

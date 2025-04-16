@@ -1,0 +1,106 @@
+.searchContainer {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.searchForm {
+  width: 100%;
+}
+
+.inputWrapper {
+  display: flex;
+  width: 100%;
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
+  background-color: var(--background);
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  border-radius: 0;
+  padding-left: 1.5rem;
+  height: 3.5rem;
+  font-size: 1rem;
+}
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.searchButton {
+  border-radius: 0;
+  height: 3.5rem;
+  padding: 0 1.5rem;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 500;
+}
+
+.searchButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.suggestionsContainer {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--background);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+  z-index: 50;
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+
+.suggestionSection {
+  margin-bottom: 1rem;
+}
+
+.suggestionSection:last-child {
+  margin-bottom: 0;
+}
+
+.suggestionTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+
+.suggestionList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.suggestionItem {
+  background-color: var(--muted);
+  color: var(--foreground);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.suggestionItem:hover {
+  background-color: var(--secondary);
+}
+
+/* Dark mode specific styles */
+:global(.dark).suggestionsContainer {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+:global(.dark).suggestionItem:hover {
+  background-color: var(--secondary);
+}

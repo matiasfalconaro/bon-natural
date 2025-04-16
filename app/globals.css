@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #e8a054;
+  --color-primary-dark: #c4956a;
+  --color-secondary: #d4b48e;
+  --color-accent: #e94d8a;
+
+  --background: 0 0% 100%;
+  --foreground: 30 15% 15%;
+  --card: 0 0% 100%;
+  --card-foreground: 30 15% 15%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 30 15% 15%;
+  --primary: 30 70% 62%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 33 40% 70%;
+  --secondary-foreground: 30 15% 15%;
+  --muted: 33 25% 95%;
+  --muted-foreground: 30 10% 40%;
+  --accent: 335 80% 60%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 30 15% 90%;
+  --input: 30 15% 90%;
+  --ring: 30 70% 62%;
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* Improved dark theme with better contrast */
+  --background: 30 15% 10%;
+  --foreground: 33 25% 90%;
+  --card: 30 15% 15%;
+  --card-foreground: 33 25% 90%;
+  --popover: 30 15% 15%;
+  --popover-foreground: 33 25% 90%;
+  --primary: 30 70% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 33 30% 30%;
+  --secondary-foreground: 33 25% 90%;
+  --muted: 33 20% 20%;
+  --muted-foreground: 33 20% 75%;
+  --accent: 335 70% 50%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 50.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 33 20% 25%;
+  --input: 33 20% 25%;
+  --ring: 30 70% 55%;
+}
+
+@layer base {
+  * {
+    /*pply border-border;*/
+    border-color: hsl(var(--border));
+  }
+  body {
+    /*apply bg-background text-foreground;*/
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
+
+/* Dark mode specific overrides for better contrast */
+.dark .text-muted-foreground {
+  color: hsl(33, 20%, 75%);
+}
+
+.dark a:hover {
+  color: hsl(30, 70%, 65%);
+}
+
+.dark .border {
+  border-color: hsl(33, 20%, 25%);
+}
+
+/* Custom gradient for Bon Natural logo */
+.bon-natural-gradient {
+  background: linear-gradient(45deg, #e8a054, #e94d8a, #8a4d9b);
+}
+
+/* Solid backgrounds for sections that previously had patterns */
+.hero-section {
+  background-color: var(--color-secondary);
+}
+
+.testimonials-section {
+  background-color: var(--color-secondary);
+}
+
+.search-section {
+  background-color: white;
+}
+
+.dark .hero-section,
+.dark .testimonials-section {
+  background-color: hsl(33, 30%, 20%);
+}
+
+.dark .search-section {
+  background-color: hsl(30, 15%, 15%);
+}
+
+/* Switch component styles */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 30px;
+}
+
+.theme-switch-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .theme-switch-slider {
+  background-color: var(--color-primary);
+}
+
+input:checked + .theme-switch-slider:before {
+  transform: translateX(30px);
+}
+
+.theme-switch-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: #333;
+}
+
+.theme-switch-icon.sun {
+  left: 7px;
+}
+
+.theme-switch-icon.moon {
+  right: 7px;
+}
+
+input:checked ~ .theme-switch-icon.sun {
+  color: white;
+}
+
+input:not(:checked) ~ .theme-switch-icon.moon {
+  color: white;
+}
+
+/* Cart badge styles */
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Discount code input styles */
+.discount-container {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.discount-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.discount-input {
+  flex: 1;
+}
+
+/* User settings styles */
+.user-menu {
+  position: relative;
+}
+
+.user-menu-content {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 200px;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.user-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.user-menu-item:hover {
+  background-color: var(--muted);
+}
+
+.dark .user-menu-content {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}

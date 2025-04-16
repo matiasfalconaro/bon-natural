@@ -1,0 +1,75 @@
+.card {
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.imageContainer {
+  overflow: hidden;
+  display: block;
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.image:hover {
+  transform: scale(1.05);
+}
+
+.content {
+  padding: 1rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.category {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+
+.title {
+  font-weight: 500;
+}
+
+.title:hover {
+  text-decoration: underline;
+}
+
+.price {
+  font-weight: 700;
+}
+
+.footer {
+  padding: 0 1rem 1rem;
+}
+
+.addButton {
+  width: 100%;
+  background-color: var(--color-primary);
+  color: white; /* Ensure text is white for better contrast */
+}
+
+.addButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Dark mode specific styles */
+:global(.dark).card {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+}
+
+:global(.dark).category {
+  color: hsl(215, 20.2%, 75.1%); /* Brighter text in dark mode */
+}

@@ -1,0 +1,141 @@
+.cartDrawer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cartTitle {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.emptyCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  color: var(--muted-foreground);
+}
+
+.cartItems {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.cartItem {
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.itemImage {
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+
+.itemDetails {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.itemTitle {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.itemPrice {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.itemActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quantityControl {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+}
+
+.quantityButton {
+  height: 1.75rem;
+  width: 1.75rem;
+  padding: 0;
+}
+
+.quantity {
+  padding: 0 0.5rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.removeButton {
+  color: var(--muted-foreground);
+}
+
+.removeButton:hover {
+  color: var(--destructive);
+}
+
+.cartFooter {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+
+.subtotal,
+.discount,
+.total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.total {
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin: 1rem 0;
+}
+
+.discount {
+  color: var(--color-accent);
+}
+
+.checkoutButton {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  background-color: var(--color-primary);
+  color: white; /* Ensure text is white for better contrast */
+}
+
+.checkoutButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.clearButton {
+  width: 100%;
+}
+
+/* Dark mode specific styles */
+:global(.dark).emptyCart {
+  color: hsl(215, 20.2%, 75.1%); /* Brighter text in dark mode */
+}
+
+:global(.dark).removeButton {
+  color: hsl(215, 20.2%, 75.1%); /* Brighter icon in dark mode */
+}
+
+:global(.dark).removeButton:hover {
+  color: hsl(0, 84.2%, 70.2%); /* Brighter red in dark mode */
+}
