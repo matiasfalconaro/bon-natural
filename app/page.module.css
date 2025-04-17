@@ -362,9 +362,7 @@
 
 .newsletterInput:focus {
   outline: none;
-  ring: 2px;
-  ring-offset: 2px;
-  ring-color: var(--ring);
+  box-shadow: 0 0 0 2px var(--ring);
 }
 
 .newsletterButton {
