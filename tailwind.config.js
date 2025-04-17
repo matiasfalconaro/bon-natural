@@ -6,6 +6,10 @@ module.exports = {
 	  './components/**/*.{js,ts,jsx,tsx}',
 	  './pages/**/*.{js,ts,jsx,tsx}',
 	],
+	safelist: [
+		'data-[active=true]:bg-[hsl(30,70%,62%)]',
+		'data-[active=true]:text-white',
+	],
 	theme: {
 	  extend: {
 		colors: {

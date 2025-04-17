@@ -139,3 +139,13 @@
 :global(.dark).removeButton:hover {
   color: hsl(0, 84.2%, 70.2%); /* Brighter red in dark mode */
 }
+
+.button:hover {
+  transform: rotate(15deg);
+  transition: transform 0.2s;
+}
+
+.active {
+  background-color: hsl(30, 70%, 62%) !important;
+  color: white !important;
+}

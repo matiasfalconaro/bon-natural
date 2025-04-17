@@ -5,6 +5,7 @@ import { User, Settings, LogOut, LogIn } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/contexts/language-context"
 import { useAuth } from "@/contexts/auth-context"
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import styles from "./user-menu.module.css"
 
@@ -12,6 +13,7 @@ export default function UserMenu() {
   const { t } = useLanguage()
   const { user, logout } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
+  const pathname = usePathname()
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
@@ -21,10 +23,9 @@ export default function UserMenu() {
     logout()
     setIsOpen(false)
   }
-
   return (
     <div className="user-menu">
-      <Button variant="ghost" size="icon" onClick={toggleMenu}>
+      <Button variant="ghost" size="icon" data-active={isOpen || pathname === "/account"} className={`${styles.button} ${styles.active}`} onClick={toggleMenu}>
         <User className="h-5 w-5" />
         <span className="sr-only">User menu</span>
       </Button>

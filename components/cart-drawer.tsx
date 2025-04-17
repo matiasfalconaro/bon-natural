@@ -48,7 +48,7 @@ export default function CartDrawer() {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
+        <Button variant="ghost" size="icon" className={`${styles.button} ${styles.active}`}>
           <ShoppingBag className="h-5 w-5" />
           {itemCount > 0 && <Badge className="cart-badge">{itemCount}</Badge>}
           <span className="sr-only">{t("cart.open")}</span>
