@@ -31,8 +31,7 @@ const translations = {
     "featured.subtitle": "Our most popular natural and organic foods, handpicked for quality and taste.",
     "featured.viewAll": "View All Products",
     "testimonials.title": "What Our Customers Say",
-    "testimonials.subtitle":
-      "Don't just take our word for it. Here's what our customers have to say about our products.",
+    "testimonials.subtitle": "Don't just take our word for it. Here's what our customers have to say about our products.",
     "newsletter.title": "Stay Updated",
     "newsletter.subtitle": "Subscribe to our newsletter for new product announcements, recipes, and exclusive offers.",
     "newsletter.placeholder": "Enter your email",
@@ -119,15 +118,12 @@ const translations = {
     "categories.plantBased": "De Origen Vegetal",
     "categories.allCategories": "Todas las Categorías",
     "featured.title": "Productos Destacados",
-    "featured.subtitle":
-      "Nuestros alimentos naturales y orgánicos más populares, seleccionados por su calidad y sabor.",
+    "featured.subtitle": "Nuestros alimentos naturales y orgánicos más populares, seleccionados por su calidad y sabor.",
     "featured.viewAll": "Ver Todos los Productos",
     "testimonials.title": "Lo Que Dicen Nuestros Clientes",
-    "testimonials.subtitle":
-      "No solo tome nuestra palabra. Esto es lo que nuestros clientes dicen sobre nuestros productos.",
+    "testimonials.subtitle": "No solo tome nuestra palabra. Esto es lo que nuestros clientes dicen sobre nuestros productos.",
     "newsletter.title": "Mantente Actualizado",
-    "newsletter.subtitle":
-      "Suscríbete a nuestro boletín para recibir anuncios de nuevos productos, recetas y ofertas exclusivas.",
+    "newsletter.subtitle": "Suscríbete a nuestro boletín para recibir anuncios de nuevos productos, recetas y ofertas exclusivas.",
     "newsletter.placeholder": "Ingresa tu correo electrónico",
     "newsletter.subscribe": "Suscribirse",
     "newsletter.privacy": "Respetamos tu privacidad. Cancela la suscripción en cualquier momento.",
@@ -212,14 +208,12 @@ const translations = {
     "categories.plantBased": "À Base de Plantes",
     "categories.allCategories": "Toutes les Catégories",
     "featured.title": "Produits Vedettes",
-    "featured.subtitle":
-      "Nos aliments naturels et biologiques les plus populaires, sélectionnés pour leur qualité et leur goût.",
+    "featured.subtitle": "Nos aliments naturels et biologiques les plus populaires, sélectionnés pour leur qualité et leur goût.",
     "featured.viewAll": "Voir Tous les Produits",
     "testimonials.title": "Ce Que Disent Nos Clients",
     "testimonials.subtitle": "Ne prenez pas seulement notre parole. Voici ce que nos clients disent de nos produits.",
     "newsletter.title": "Restez Informé",
-    "newsletter.subtitle":
-      "Abonnez-vous à notre newsletter pour les annonces de nouveaux produits, les recettes et les offres exclusives.",
+    "newsletter.subtitle": "Abonnez-vous à notre newsletter pour les annonces de nouveaux produits, les recettes et les offres exclusives.",
     "newsletter.placeholder": "Entrez votre email",
     "newsletter.subscribe": "S'abonner",
     "newsletter.privacy": "Nous respectons votre vie privée. Désabonnez-vous à tout moment.",
