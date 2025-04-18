@@ -9,6 +9,7 @@ import ThemeSwitcher from "@/components/theme-switcher"
 import CartDrawer from "@/components/cart-drawer"
 import UserMenu from "@/components/user-menu"
 import styles from "./header.module.css"
+import Image from "next/image"
 
 export default function Header() {
   const { t } = useLanguage()
@@ -18,7 +19,7 @@ export default function Header() {
       <div className={styles.container}>
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className={styles.mobileMenuButton}>
+            <Button variant="ghost" size="icon" className={`${styles.mobileMenuButton} ${styles.active}`}>
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle menu</span>
             </Button>
@@ -45,7 +46,15 @@ export default function Header() {
         </Sheet>
 
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoText}>Bon Natural</span>
+        <div className={styles.logoCircle}>
+          <Image
+            src="/logo.png"
+            alt="Bon Natural"
+            width={40}
+            height={40}
+            className={styles.logoImage}
+          />
+        </div>
         </Link>
 
         <nav className={styles.desktopNav}>

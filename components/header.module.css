@@ -18,7 +18,11 @@
 }
 
 .mobileMenuButton {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
   margin-right: 1rem;
 }
 
@@ -100,4 +104,14 @@
 
 :global(.dark).header {
   background-color: rgba(30, 25, 20, 0.8);
+}
+
+.button:hover {
+  transform: rotate(15deg);
+  transition: transform 0.2s;
+}
+
+.active {
+  background-color: hsl(30, 70%, 62%) !important;
+  color: white !important;
 }
