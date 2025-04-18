@@ -1,3 +1,6 @@
+// app/products/[id]/page.tsx
+
+import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react"
@@ -5,61 +8,24 @@ import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProductCard from "@/components/product-card"
+import { allProducts, getProductById } from "@/data/products"
+import ProductDetailsControls from "@/components/product-details-controls"
 
-interface ProductPageProps {
-  params: {
-    id: string
-  }
+// ✅ Fix: mark the params as a Promise and await it
+type ProductPageProps = {
+  params: Promise<{ id: string }>
 }
 
-export default function ProductPage({ params }: ProductPageProps) {
-  // In a real app, this would fetch the product from Shopify API using the ID
-  // For now, we'll use mock data
-  const product = {
-    id: params.id,
-    title: "Organic Raw Honey",
-    price: 12.99,
-    description:
-      "Our raw honey is sourced from local beekeepers who practice sustainable beekeeping. This unfiltered, unpasteurized honey retains all of its natural enzymes, vitamins, and minerals. Perfect for sweetening tea, drizzling over yogurt, or using in baking.",
-    image: "/placeholder.svg?height=600&width=600",
-    category: "Sweeteners",
-    nutritionalInfo: {
-      servingSize: "1 tbsp (21g)",
-      calories: 64,
-      totalFat: "0g",
-      sodium: "0mg",
-      totalCarbs: "17g",
-      sugars: "17g",
-      protein: "0g",
-    },
-    ingredients: "100% Raw, Unfiltered Honey",
-    origin: "Locally sourced from sustainable apiaries",
-  }
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params
 
-  // Related products would also come from the API
-  const relatedProducts = [
-    {
-      id: "2",
-      title: "Maple Syrup",
-      price: 14.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Sweeteners",
-    },
-    {
-      id: "5",
-      title: "Coconut Sugar",
-      price: 6.99,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Sweeteners",
-    },
-    {
-      id: "8",
-      title: "Date Syrup",
-      price: 8.49,
-      image: "/placeholder.svg?height=300&width=300",
-      category: "Sweeteners",
-    },
-  ]
+  const product = getProductById(id)
+  if (!product) return notFound()
+  if (!product) return notFound()
+
+  const relatedProducts = allProducts
+    .filter((p) => p.category === product.category && p.id !== product.id)
+    .slice(0, 4)
 
   return (
     <div className="container px-4 md:px-6 py-8 md:py-12">
@@ -88,22 +54,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
           <p className="text-muted-foreground">{product.description}</p>
 
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center border rounded-md">
-              <Button variant="ghost" size="icon" className="rounded-none">
-                <Minus className="h-4 w-4" />
-              </Button>
-              <span className="w-12 text-center">1</span>
-              <Button variant="ghost" size="icon" className="rounded-none">
-                <Plus className="h-4 w-4" />
-              </Button>
-            </div>
-
-            <Button className="flex-1 bg-[#5a7c5a] hover:bg-[#4a6a4a]">
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              Add to Cart
-            </Button>
-          </div>
+          <ProductDetailsControls product={product} />
 
           <Tabs defaultValue="description">
             <TabsList>
@@ -117,34 +68,20 @@ export default function ProductPage({ params }: ProductPageProps) {
             </TabsContent>
             <TabsContent value="nutrition" className="pt-4">
               <div className="space-y-2">
-                <p>
-                  <strong>Serving Size:</strong> {product.nutritionalInfo.servingSize}
-                </p>
-                <p>
-                  <strong>Calories:</strong> {product.nutritionalInfo.calories}
-                </p>
-                <p>
-                  <strong>Total Fat:</strong> {product.nutritionalInfo.totalFat}
-                </p>
-                <p>
-                  <strong>Sodium:</strong> {product.nutritionalInfo.sodium}
-                </p>
-                <p>
-                  <strong>Total Carbohydrates:</strong> {product.nutritionalInfo.totalCarbs}
-                </p>
-                <p>
-                  <strong>Sugars:</strong> {product.nutritionalInfo.sugars}
-                </p>
-                <p>
-                  <strong>Protein:</strong> {product.nutritionalInfo.protein}
-                </p>
+                <p><strong>Serving Size:</strong> {product.nutritionalInfo?.servingSize || "N/A"}</p>
+                <p><strong>Calories:</strong> {product.nutritionalInfo?.calories || "N/A"}</p>
+                <p><strong>Total Fat:</strong> {product.nutritionalInfo?.totalFat || "N/A"}</p>
+                <p><strong>Sodium:</strong> {product.nutritionalInfo?.sodium || "N/A"}</p>
+                <p><strong>Total Carbs:</strong> {product.nutritionalInfo?.totalCarbs || "N/A"}</p>
+                <p><strong>Sugars:</strong> {product.nutritionalInfo?.sugars || "N/A"}</p>
+                <p><strong>Protein:</strong> {product.nutritionalInfo?.protein || "N/A"}</p>
               </div>
             </TabsContent>
             <TabsContent value="ingredients" className="pt-4">
-              <p>{product.ingredients}</p>
+              <p>{product.ingredients || "N/A"}</p>
             </TabsContent>
             <TabsContent value="origin" className="pt-4">
-              <p>{product.origin}</p>
+              <p>{product.origin || "N/A"}</p>
             </TabsContent>
           </Tabs>
         </div>
@@ -153,8 +90,8 @@ export default function ProductPage({ params }: ProductPageProps) {
       <div className="mt-16">
         <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {relatedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {relatedProducts.map((rp) => (
+            <ProductCard key={rp.id} product={rp} />
           ))}
         </div>
       </div>

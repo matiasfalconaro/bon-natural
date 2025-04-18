@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link"
+import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import ProductCard from "@/components/product-card"
@@ -7,80 +9,21 @@ import ProductFilter from "@/components/product-filter"
 import SearchBar from "@/components/search-bar"
 import { useLanguage } from "@/contexts/language-context"
 import styles from "./page.module.css"
+import { allProducts } from "@/data/products"
+import { categories } from "@/data/categories"
 
-// Mock products data - in a real app, this would come from your API
-const allProducts = [
-  {
-    id: "1",
-    title: "Organic Raw Honey",
-    price: 12.99,
-    image:
-      "https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Sweeteners",
-    dietary: ["Organic", "Gluten-Free"],
-  },
-  {
-    id: "2",
-    title: "Cold-Pressed Olive Oil",
-    price: 18.5,
-    image:
-      "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Oils",
-    dietary: ["Organic", "Vegan", "Gluten-Free"],
-  },
-  {
-    id: "3",
-    title: "Gluten-Free Granola",
-    price: 8.99,
-    image:
-      "https://images.unsplash.com/photo-1517093157656-b9eccef91cb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Breakfast",
-    dietary: ["Gluten-Free", "Vegan"],
-  },
-  {
-    id: "4",
-    title: "Organic Quinoa",
-    price: 6.75,
-    image:
-      "https://images.unsplash.com/photo-1586201375761-83865001e8ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Grains",
-    dietary: ["Organic", "Gluten-Free", "Vegan"],
-  },
-  {
-    id: "5",
-    title: "Almond Butter",
-    price: 9.99,
-    image:
-      "https://images.unsplash.com/photo-1612540943771-0f492a7b73d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Spreads",
-    dietary: ["Organic", "Vegan", "Gluten-Free"],
-  },
-  {
-    id: "6",
-    title: "Coconut Yogurt",
-    price: 5.49,
-    image:
-      "https://images.unsplash.com/photo-1615405986729-1b74fd67e6a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Dairy Alternatives",
-    dietary: ["Vegan", "Gluten-Free"],
-  },
-  {
-    id: "7",
-    title: "Organic Chia Seeds",
-    price: 7.25,
-    image: "https://images.unsplash.com/photo-1563636619-e9143da7973b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Superfoods",
-    dietary: ["Organic", "Vegan", "Gluten-Free"],
-  },
-  {
-    id: "8",
-    title: "Kombucha",
-    price: 4.99,
-    image: "https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    category: "Beverages",
-    dietary: ["Organic", "Vegan", "Gluten-Free"],
-  },
-]
+// Future API
+export async function fetchProducts() {
+  const res = await fetch("/api/products")
+  return await res.json()
+}
+
+categories.map((category) => (
+  <Link key={category.slug} href={`/categories/${category.slug}`}>
+    <Image src={category.image} alt={category.name} width={200} height={200} className={styles.categoryImage}/>
+    <p>{category.name}</p>
+  </Link>
+))
 
 export default function ProductsPage() {
   const { t } = useLanguage()
