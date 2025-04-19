@@ -21,6 +21,8 @@ export default function Home() {
   // Featured products (slice as needed)
   const featuredProducts = allProducts.slice(0, 4)
 
+  const { language } = useLanguage()
+
   return (
     <div className={styles.container}>
       {/* Hero Section */}
@@ -82,13 +84,13 @@ export default function Home() {
               >
                 <Image
                   src={category.image}
-                  alt={category.name}
+                  alt={category.name[language]}
                   width={200}
                   height={200}
                   className={styles.categoryImage}
                 />
                 <div className={styles.categoryOverlay}>
-                  <h3 className={styles.categoryTitle}>{category.name}</h3>
+                  <h3 className={styles.categoryTitle}>{category.name[language]}</h3>
                 </div>
               </Link>
             ))}

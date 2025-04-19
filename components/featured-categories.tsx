@@ -7,6 +7,8 @@ import { useLanguage } from "@/contexts/language-context"
 export default function FeaturedCategories() {
   const { t } = useLanguage()
 
+  const { language } = useLanguage()
+
   const categories = [
     {
       name: t("categories.organicProduce"),

@@ -1,30 +1,67 @@
-// app/products/[id]/page.tsx
+"use client"
 
-import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
+import { ArrowLeft } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import ProductCard from "@/components/product-card"
-import { allProducts, getProductById } from "@/data/products"
+import { Button } from "@/components/ui/button"
 import ProductDetailsControls from "@/components/product-details-controls"
+import ProductCard from "@/components/product-card"
+import { allProducts } from "@/data/products"
 
-// ✅ Fix: mark the params as a Promise and await it
-type ProductPageProps = {
-  params: Promise<{ id: string }>
+interface LocalizedString {
+  en: string
+  es: string
+  fr: string
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = await params
+interface Product {
+  id: string
+  title: LocalizedString
+  price: number
+  image: string
+  category: LocalizedString
+  dietary: string[]
+  description: LocalizedString
+  ingredients: LocalizedString
+  origin: LocalizedString
+  nutritionalInfo?: {
+    servingSize: string
+    calories: number
+    totalFat: string
+    sodium: string
+    totalCarbs: string
+    sugars: string
+    protein: string
+  }
+}
 
-  const product = getProductById(id)
-  if (!product) return notFound()
-  if (!product) return notFound()
+const getLocalized = (field: LocalizedString | undefined, lang: string): string => {
+  return field?.[lang as keyof LocalizedString] || "N/A"
+}
+
+export default function ProductPageClient({ product }: { product: Product | null }) {
+  const { language } = useLanguage()
+
+  if (!product || !product.id) {
+    return (
+      <div className="container px-4 py-8">
+        <h2 className="text-lg font-bold text-red-500">Product not found</h2>
+        <Link href="/products" className="mt-4 inline-block text-blue-600 underline">
+          ← Back to all products
+        </Link>
+      </div>
+    )
+  }
+
+  const categoryName = getLocalized(product.category, language)
 
   const relatedProducts = allProducts
-    .filter((p) => p.category === product.category && p.id !== product.id)
+    .filter((p) => {
+      const currentCategory = getLocalized(p.category, language)
+      return currentCategory === categoryName && p.id !== product.id
+    })
     .slice(0, 4)
 
   return (
@@ -38,7 +75,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="bg-[#f8f5f0] rounded-lg p-6 flex items-center justify-center">
           <Image
             src={product.image || "/placeholder.svg"}
-            alt={product.title}
+            alt={getLocalized(product.title, language)}
             width={600}
             height={600}
             className="max-w-full h-auto"
@@ -47,12 +84,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         <div className="space-y-6">
           <div>
-            <p className="text-sm text-muted-foreground">{product.category}</p>
-            <h1 className="text-3xl font-bold mt-1">{product.title}</h1>
+            <p className="text-sm text-muted-foreground">{categoryName}</p>
+            <h1 className="text-3xl font-bold mt-1">{getLocalized(product.title, language)}</h1>
             <p className="text-2xl font-bold mt-2">${product.price.toFixed(2)}</p>
           </div>
 
-          <p className="text-muted-foreground">{product.description}</p>
+          <p className="text-muted-foreground">{getLocalized(product.description, language)}</p>
 
           <ProductDetailsControls product={product} />
 
@@ -64,7 +101,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <TabsTrigger value="origin">Origin</TabsTrigger>
             </TabsList>
             <TabsContent value="description" className="pt-4">
-              <p>{product.description}</p>
+              <p>{getLocalized(product.description, language)}</p>
             </TabsContent>
             <TabsContent value="nutrition" className="pt-4">
               <div className="space-y-2">
@@ -78,10 +115,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
               </div>
             </TabsContent>
             <TabsContent value="ingredients" className="pt-4">
-              <p>{product.ingredients || "N/A"}</p>
+              <p>{getLocalized(product.ingredients, language)}</p>
             </TabsContent>
             <TabsContent value="origin" className="pt-4">
-              <p>{product.origin || "N/A"}</p>
+              <p>{getLocalized(product.origin, language)}</p>
             </TabsContent>
           </Tabs>
         </div>

@@ -10,35 +10,55 @@ import styles from "./page.module.css"
 import { allProducts } from "@/data/products"
 import { CATEGORY_MAP } from "@/data/category-map"
 
-type Product = {
+// Localized string extractor
+const getLocalized = (
+  localized: { en: string; es: string; fr: string },
+  lang: string
+): string => {
+  return localized[lang as keyof typeof localized] || ""
+}
+
+type SupportedLanguage = "en" | "es" | "fr"
+
+interface LocalizedString {
+  en: string
+  es: string
+  fr: string
+}
+
+interface Product {
   id: string
-  title: string
+  slug: string
+  title: LocalizedString
   price: number
   image: string
-  category: string
+  category: LocalizedString
   dietary: string[]
 }
 
 export default function CategoryPageClient({ slug }: { slug: string }) {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   const [products, setProducts] = useState<Product[]>([])
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
-  const [categoryName, setCategoryName] = useState("")
+  const [categoryName, setCategoryName] = useState<string>("")
 
   useEffect(() => {
-    const resolvedName = CATEGORY_MAP[slug] || slug.replace(/-/g, " ")
-    setCategoryName(resolvedName)
+    const resolvedName = CATEGORY_MAP[slug] || {
+      en: slug.replace(/-/g, " "),
+      es: slug.replace(/-/g, " "),
+      fr: slug.replace(/-/g, " "),
+    }
+
+    setCategoryName(getLocalized(resolvedName, language))
 
     const categoryProducts =
       slug === "all"
         ? allProducts
-        : allProducts.filter(
-            (product) => product.category.toLowerCase() === resolvedName.toLowerCase()
-          )
+        : allProducts.filter((product) => product.slug === slug)
 
     setProducts(categoryProducts)
     setFilteredProducts(categoryProducts)
-  }, [slug])
+  }, [slug, language])
 
   const handleFilter = useCallback(
     (filters: {
@@ -51,7 +71,8 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
 
       filtered = filtered.filter(
         (product) =>
-          product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
+          product.price >= filters.priceRange[0] &&
+          product.price <= filters.priceRange[1]
       )
 
       if (filters.dietary.length > 0) {
@@ -64,14 +85,14 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
         const searchLower = filters.searchTerm.toLowerCase()
         filtered = filtered.filter(
           (product) =>
-            product.title.toLowerCase().includes(searchLower) ||
-            product.category.toLowerCase().includes(searchLower)
+            getLocalized(product.title, language).toLowerCase().includes(searchLower) ||
+            getLocalized(product.category, language).toLowerCase().includes(searchLower)
         )
       }
 
       setFilteredProducts(filtered)
     },
-    [products]
+    [products, language]
   )
 
   return (

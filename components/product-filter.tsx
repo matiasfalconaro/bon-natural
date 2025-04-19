@@ -47,7 +47,6 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
 
   // Set initial search term when component mounts or when initialSearchTerm changes
   useEffect(() => {
-    // Only update if initialSearchTerm has changed
     if (!initialized.current || prevInitialSearchTerm.current !== initialSearchTerm) {
       setSearchTerm(initialSearchTerm)
       prevInitialSearchTerm.current = initialSearchTerm

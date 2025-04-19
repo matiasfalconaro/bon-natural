@@ -41,7 +41,7 @@ export default function CartDrawer() {
   const total = subtotal - subtotal * (discount / 100)
 
   const handleCheckout = () => {
-    // In a real app, this would redirect to a checkout page or open a payment modal
+    // TODO: In a real app, this would redirect to a checkout page or open a payment modal
     alert(`Proceeding to checkout with total: $${total.toFixed(2)}`)
   }
 

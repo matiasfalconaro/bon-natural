@@ -10,29 +10,38 @@ import { useCart } from "@/contexts/cart-context"
 import { toast } from "@/hooks/use-toast"
 import styles from "./product-card.module.css"
 
+interface LocalizedString {
+  en: string
+  es: string
+  fr: string
+}
+
 interface Product {
   id: string
-  title: string
+  title: LocalizedString
   price: number
   image: string
-  category: string
+  category: LocalizedString
 }
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   const { addItem } = useCart()
+
+  const title = product.title[language as keyof LocalizedString]
+  const category = product.category[language as keyof LocalizedString]
 
   const handleAddToCart = () => {
     addItem({
       id: product.id,
-      title: product.title,
+      title,
       price: product.price,
       image: product.image,
     })
 
     toast({
       title: t("cart.added"),
-      description: `${product.title} ${t("cart.addedToCart")}`,
+      description: `${title} ${t("cart.addedToCart")}`,
     })
   }
 
@@ -41,7 +50,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link href={`/products/${product.id}`} className={styles.imageContainer}>
         <Image
           src={product.image || "/placeholder.svg"}
-          alt={product.title}
+          alt={title}
           width={300}
           height={300}
           className={styles.image}
@@ -49,9 +58,9 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
       <CardContent className={styles.content}>
         <div className={styles.details}>
-          <p className={styles.category}>{product.category}</p>
+          <p className={styles.category}>{category}</p>
           <Link href={`/products/${product.id}`} className={styles.title}>
-            {product.title}
+            {title}
           </Link>
           <p className={styles.price}>${product.price.toFixed(2)}</p>
         </div>
