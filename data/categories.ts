@@ -15,9 +15,9 @@ export const categories: Category[] = [
   {
     slug: "natural-sweeteners",
     name: {
-      en: "Sweeteners",
-      es: "Endulzantes",
-      fr: "Édulcorants"
+      en: "Natural Sweeteners",
+      es: "Endulzantes Naturales",
+      fr: "Édulcorants NAtural"
     },
     image: "/images/products/photo-1587049352851-8d4e89133924.avif",
     description: {
@@ -29,9 +29,9 @@ export const categories: Category[] = [
   {
     slug: "oils-vinegars",
     name: {
-      en: "Oils",
-      es: "Aceites",
-      fr: "Huiles"
+      en: "Oils & Vinegars",
+      es: "Aceites & Vinagres",
+      fr: "Huiles & Vinaigres"
     },
     image: "/images/products/photo-1474979266404-7eaacbcd87c5.avif",
     description: {
@@ -57,9 +57,9 @@ export const categories: Category[] = [
   {
     slug: "grains-legumes",
     name: {
-      en: "Grains",
-      es: "Granos",
-      fr: "Céréales"
+      en: "Grains & Legumes",
+      es: "Granos & Legumbres",
+      fr: "Céréales & Légumineuses"
     },
     image: "/images/products/premium_photo-1705207702015-0c1f567a14df.avif",
     description: {
@@ -71,9 +71,9 @@ export const categories: Category[] = [
   {
     slug: "nuts-seeds",
     name: {
-      en: "Spreads",
-      es: "Untables",
-      fr: "Tartinades"
+      en: "Nuts & Seeds",
+      es: "Frutos Secos & Semillas",
+      fr: "Fruits secs & graines"
     },
     image: "/images/products/photo-1615110250484-e8c3b151b957.avif",
     description: {

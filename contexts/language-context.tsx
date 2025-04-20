@@ -20,29 +20,32 @@ const translations = {
     "hero.subtitle": "Discover our curated selection of organic, sustainable, and locally-sourced natural foods.",
     "hero.shopNow": "Shop Now",
     "hero.learnMore": "Learn More",
+
     "categories.title": "Shop by Category",
     "categories.subtitle": "Explore our wide range of natural food categories.",
-    "categories.organicProduce": "Organic Produce",
-    "categories.superfoods": "Superfoods",
-    "categories.glutenFree": "Gluten-Free",
-    "categories.plantBased": "Plant-Based",
     "categories.allCategories": "All Categories",
+
     "featured.title": "Featured Products",
     "featured.subtitle": "Our most popular natural and organic foods, handpicked for quality and taste.",
     "featured.viewAll": "View All Products",
+
     "testimonials.title": "What Our Customers Say",
     "testimonials.subtitle": "Don't just take our word for it. Here's what our customers have to say about our products.",
+
     "newsletter.title": "Stay Updated",
     "newsletter.subtitle": "Subscribe to our newsletter for new product announcements, recipes, and exclusive offers.",
     "newsletter.placeholder": "Enter your email",
     "newsletter.subscribe": "Subscribe",
     "newsletter.privacy": "We respect your privacy. Unsubscribe at any time.",
+
     "nav.home": "Home",
     "nav.products": "All Products",
     "nav.categories": "Categories",
     "nav.about": "About Us",
     "nav.contact": "Contact",
+
     "product.addToCart": "Add to Cart",
+
     "footer.copyright": "All rights reserved.",
     "footer.description": "Providing organic, sustainable, and locally-sourced natural foods since 2010.",
     "footer.shop": "Shop",
@@ -57,12 +60,14 @@ const translations = {
     "footer.faq": "FAQ",
     "footer.privacyPolicy": "Privacy Policy",
     "footer.termsOfService": "Terms of Service",
+
     "search.title": "Find Your Natural Products",
     "search.subtitle": "Search for organic, sustainable, and locally-sourced natural foods",
     "search.placeholder": "Search products, categories, or dietary preferences...",
     "search.button": "Search",
     "search.recent": "Recent Searches",
     "search.popular": "Popular Searches",
+
     "cart.title": "Your Cart",
     "cart.empty": "Your cart is empty",
     "cart.subtotal": "Subtotal",
@@ -76,19 +81,24 @@ const translations = {
     "cart.discountCode": "Discount Code",
     "cart.apply": "Apply",
     "cart.discountApplied": "discount applied",
+
     "filters.title": "Filters",
     "filters.reset": "Reset",
     "filters.priceRange": "Price Range",
     "filters.categories": "Categories",
     "filters.dietaryPreferences": "Dietary Preferences",
+
     "products.allProducts": "All Products",
     "products.searchResults": "Search Results",
     "products.noResults": "No products found. Try adjusting your filters.",
+    "products.relatedProducts": "You may also like",
+
     "about.title": "About Us",
     "about.subtitle": "Learn about our mission, values, and the team behind Bon Natural.",
     "about.ourStory": "Our Story",
     "about.ourValues": "Our Values",
     "about.ourTeam": "Our Team",
+
     "contact.title": "Contact Us",
     "contact.subtitle": "Have questions or feedback? We'd love to hear from you.",
     "contact.getInTouch": "Get in Touch",
@@ -103,10 +113,12 @@ const translations = {
     "contact.form.message": "Message",
     "contact.form.send": "Send Message",
     "contact.form.sending": "Sending...",
+
     "user.login": "Log In",
     "user.register": "Register",
     "user.logout": "Log Out",
     "user.settings": "Settings",
+
     "login.title": "Log In",
     "login.subtitle": "Welcome back! Please log in to your account.",
     "login.email": "Email",
@@ -123,33 +135,37 @@ const translations = {
     "hero.subtitle": "Descubre nuestra selección de alimentos orgánicos, sostenibles y de origen local.",
     "hero.shopNow": "Comprar Ahora",
     "hero.learnMore": "Más Información",
+
     "categories.title": "Comprar por Categoría",
     "categories.subtitle": "Explora nuestra amplia gama de categorías de alimentos naturales.",
-    "categories.organicProduce": "Productos Orgánicos",
-    "categories.superfoods": "Superalimentos",
-    "categories.glutenFree": "Sin Gluten",
-    "categories.plantBased": "De Origen Vegetal",
     "categories.allCategories": "Todas las Categorías",
+
     "featured.title": "Productos Destacados",
     "featured.subtitle": "Nuestros alimentos naturales y orgánicos más populares, seleccionados por su calidad y sabor.",
     "featured.viewAll": "Ver Todos los Productos",
+
     "testimonials.title": "Lo Que Dicen Nuestros Clientes",
     "testimonials.subtitle": "No solo tome nuestra palabra. Esto es lo que nuestros clientes dicen sobre nuestros productos.",
+
     "newsletter.title": "Mantente Actualizado",
     "newsletter.subtitle": "Suscríbete a nuestro boletín para recibir anuncios de nuevos productos, recetas y ofertas exclusivas.",
     "newsletter.placeholder": "Ingresa tu correo electrónico",
     "newsletter.subscribe": "Suscribirse",
     "newsletter.privacy": "Respetamos tu privacidad. Cancela la suscripción en cualquier momento.",
+
     "nav.home": "Inicio",
     "nav.products": "Todos los Productos",
     "nav.categories": "Categorías",
     "nav.about": "Sobre Nosotros",
     "nav.contact": "Contacto",
+
     "product.addToCart": "Añadir al Carrito",
     "footer.copyright": "Todos los derechos reservados.",
     "footer.description": "Proporcionando alimentos naturales orgánicos, sostenibles y de origen local desde 2010.",
     "footer.shop": "Tienda",
+
     "footer.allProducts": "Todos los Productos",
+
     "footer.company": "Empresa",
     "footer.aboutUs": "Sobre Nosotros",
     "footer.contactUs": "Contáctanos",
@@ -160,12 +176,14 @@ const translations = {
     "footer.faq": "Preguntas Frecuentes",
     "footer.privacyPolicy": "Política de Privacidad",
     "footer.termsOfService": "Términos del Servicio",
+
     "search.title": "Encuentra Tus Productos Naturales",
     "search.subtitle": "Busca alimentos orgánicos, sostenibles y de origen local",
     "search.placeholder": "Buscar productos, categorías o preferencias dietéticas...",
     "search.button": "Buscar",
     "search.recent": "Búsquedas Recientes",
     "search.popular": "Búsquedas Populares",
+
     "cart.title": "Tu Carrito",
     "cart.empty": "Tu carrito está vacío",
     "cart.subtotal": "Subtotal",
@@ -179,19 +197,24 @@ const translations = {
     "cart.discountCode": "Código de Descuento",
     "cart.apply": "Aplicar",
     "cart.discountApplied": "descuento aplicado",
+
     "filters.title": "Filtros",
     "filters.reset": "Restablecer",
     "filters.priceRange": "Rango de Precio",
     "filters.categories": "Categorías",
     "filters.dietaryPreferences": "Preferencias Dietéticas",
+
     "products.allProducts": "Todos los Productos",
     "products.searchResults": "Resultados de Búsqueda",
     "products.noResults": "No se encontraron productos. Intenta ajustar tus filtros.",
+    "products.relatedProducts": "También te puede interesar",
+
     "about.title": "Sobre Nosotros",
     "about.subtitle": "Conoce nuestra misión, valores y el equipo detrás de Bon Natural.",
     "about.ourStory": "Nuestra Historia",
     "about.ourValues": "Nuestros Valores",
     "about.ourTeam": "Nuestro Equipo",
+
     "contact.title": "Contáctanos",
     "contact.subtitle": "¿Tienes preguntas o comentarios? Nos encantaría saber de ti.",
     "contact.getInTouch": "Ponte en Contacto",
@@ -206,10 +229,12 @@ const translations = {
     "contact.form.message": "Mensaje",
     "contact.form.send": "Enviar Mensaje",
     "contact.form.sending": "Enviando...",
+
     "user.login": "Iniciar Sesión",
     "user.register": "Registrarse",
     "user.logout": "Cerrar Sesión",
     "user.settings": "Configuración",
+
     "login.title": "Iniciar Sesión",
     "login.subtitle": "¡Bienvenido de nuevo! Por favor, inicia sesión en tu cuenta.",
     "login.email": "Correo Electrónico",
@@ -226,29 +251,30 @@ const translations = {
     "hero.subtitle": "Découvrez notre sélection d'aliments biologiques, durables et d'origine locale.",
     "hero.shopNow": "Acheter Maintenant",
     "hero.learnMore": "En Savoir Plus",
+
     "categories.title": "Acheter par Catégorie",
     "categories.subtitle": "Explorez notre large gamme de catégories d'aliments naturels.",
-    "categories.organicProduce": "Produits Biologiques",
-    "categories.superfoods": "Superaliments",
-    "categories.glutenFree": "Sans Gluten",
-    "categories.plantBased": "À Base de Plantes",
     "categories.allCategories": "Toutes les Catégories",
+
     "featured.title": "Produits Vedettes",
     "featured.subtitle": "Nos aliments naturels et biologiques les plus populaires, sélectionnés pour leur qualité et leur goût.",
     "featured.viewAll": "Voir Tous les Produits",
+
     "testimonials.title": "Ce Que Disent Nos Clients",
     "testimonials.subtitle": "Ne prenez pas seulement notre parole. Voici ce que nos clients disent de nos produits.",
+
     "newsletter.title": "Restez Informé",
     "newsletter.subtitle": "Abonnez-vous à notre newsletter pour les annonces de nouveaux produits, les recettes et les offres exclusives.",
     "newsletter.placeholder": "Entrez votre email",
     "newsletter.subscribe": "S'abonner",
     "newsletter.privacy": "Nous respectons votre vie privée. Désabonnez-vous à tout moment.",
+
     "nav.home": "Accueil",
     "nav.products": "Tous les Produits",
     "nav.categories": "Catégories",
     "nav.about": "À Propos",
     "nav.contact": "Contact",
-    "product.addToCart": "Ajouter au Panier",
+
     "footer.copyright": "Tous droits réservés.",
     "footer.description": "Fournir des aliments naturels biologiques, durables et locaux depuis 2010.",
     "footer.shop": "Boutique",
@@ -263,12 +289,14 @@ const translations = {
     "footer.faq": "FAQ",
     "footer.privacyPolicy": "Politique de Confidentialité",
     "footer.termsOfService": "Conditions d’Utilisation",
+
     "search.title": "Trouvez Vos Produits Naturels",
     "search.subtitle": "Recherchez des aliments biologiques, durables et d'origine locale",
     "search.placeholder": "Rechercher produits, catégories ou préférences alimentaires...",
     "search.button": "Rechercher",
     "search.recent": "Recherches Récentes",
     "search.popular": "Recherches Populaires",
+
     "cart.title": "Votre Panier",
     "cart.empty": "Votre panier est vide",
     "cart.subtotal": "Sous-total",
@@ -282,19 +310,24 @@ const translations = {
     "cart.discountCode": "Code de Réduction",
     "cart.apply": "Appliquer",
     "cart.discountApplied": "réduction appliquée",
+
     "filters.title": "Filtres",
     "filters.reset": "Réinitialiser",
     "filters.priceRange": "Gamme de Prix",
     "filters.categories": "Catégories",
     "filters.dietaryPreferences": "Préférences Alimentaires",
-    "products.allProducts": "Tous les Produits",
-    "products.searchResults": "Résultats de Recherche",
-    "products.noResults": "Aucun produit trouvé. Essayez d'ajuster vos filtres.",
+
+    "products.allProducts": "Tous les produits",
+    "products.searchResults": "Résultats de recherche",
+    "products.noResults": "Aucun produit trouvé. Essayez de modifier vos filtres.",
+    "products.relatedProducts": "Vous pourriez aussi aimer",
+
     "about.title": "À Propos de Nous",
     "about.subtitle": "Découvrez notre mission, nos valeurs et l'équipe derrière Bon Natural.",
     "about.ourStory": "Notre Histoire",
     "about.ourValues": "Nos Valeurs",
     "about.ourTeam": "Notre Équipe",
+
     "contact.title": "Contactez-Nous",
     "contact.subtitle": "Vous avez des questions ou des commentaires? Nous aimerions vous entendre.",
     "contact.getInTouch": "Entrer en Contact",
@@ -309,10 +342,12 @@ const translations = {
     "contact.form.message": "Message",
     "contact.form.send": "Envoyer le Message",
     "contact.form.sending": "Envoi en cours...",
+
     "user.login": "Se Connecter",
     "user.register": "S'inscrire",
     "user.logout": "Se Déconnecter",
     "user.settings": "Paramètres",
+
     "login.title": "Se Connecter",
     "login.subtitle": "Bienvenue! Veuillez vous connecter à votre compte.",
     "login.email": "Email",

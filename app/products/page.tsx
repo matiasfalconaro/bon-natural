@@ -22,6 +22,7 @@ interface LocalizedString {
 
 interface Product {
   id: string
+  slug: string
   title: LocalizedString
   category: LocalizedString
   dietary: string[]
@@ -105,24 +106,29 @@ export default function ProductsPage() {
         <SearchBar />
       </div>
 
-      <h1 className={styles.title}>
-        {searchTerm ? `${t("products.searchResults")}: "${searchTerm}"` : t("products.allProducts")}
-      </h1>
-
-      <div className={styles.categoriesGrid}>
-        {(rawCategories as Category[]).map((category) => (
-          <Link key={category.slug} href={`/categories/${category.slug}`} className={styles.categoryCard}>
-            <Image
-              src={category.image}
-              alt={category.name[lang]}
-              width={200}
-              height={200}
-              className={styles.categoryImage}
-            />
-            <p>{category.name[lang]}</p>
-          </Link>
-        ))}
-      </div>
+      {/* Search by category in /products endpoint optional */}
+      {/*
+      {!searchTerm && (
+        <section className={styles.categoriesSection}>
+          <h2 className={styles.subTitle}>{t("categories.title")}</h2>
+          <p className={styles.subText}>{t("categories.subtitle")}</p>
+          <div className={styles.categoriesGrid}>
+            {rawCategories.map((category) => (
+              <Link key={category.slug} href={`/categories/${category.slug}`} className={styles.categoryCard}>
+                <Image
+                  src={category.image}
+                  alt={category.name[lang]}
+                  width={200}
+                  height={200}
+                  className={styles.categoryImage}
+                />
+                <p>{category.name[lang]}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+      */}
 
       <div className={styles.content}>
         <div className={styles.sidebar}>
@@ -136,7 +142,7 @@ export default function ProductsPage() {
           ) : (
             <div className={styles.productsGrid}>
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.slug} product={product} />
               ))}
             </div>
           )}

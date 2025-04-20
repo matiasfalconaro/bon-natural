@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import ProductDetailsControls from "@/components/product-details-controls"
 import ProductCard from "@/components/product-card"
 import { allProducts } from "@/data/products"
+import { getRelatedProducts } from "@/data/products"
 
 interface LocalizedString {
   en: string
@@ -18,6 +19,8 @@ interface LocalizedString {
 
 interface Product {
   id: string
+  slug: string
+  categorySlug: string
   title: LocalizedString
   price: number
   image: string
@@ -42,9 +45,9 @@ const getLocalized = (field: LocalizedString | undefined, lang: string): string 
 }
 
 export default function ProductPageClient({ product }: { product: Product | null }) {
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
 
-  if (!product || !product.id) {
+  if (!product || !product.slug) {
     return (
       <div className="container px-4 py-8">
         <h2 className="text-lg font-bold text-red-500">Product not found</h2>
@@ -57,12 +60,7 @@ export default function ProductPageClient({ product }: { product: Product | null
 
   const categoryName = getLocalized(product.category, language)
 
-  const relatedProducts = allProducts
-    .filter((p) => {
-      const currentCategory = getLocalized(p.category, language)
-      return currentCategory === categoryName && p.id !== product.id
-    })
-    .slice(0, 4)
+  const relatedProducts = getRelatedProducts(product.categorySlug, product.slug)
 
   return (
     <div className="container px-4 md:px-6 py-8 md:py-12">
@@ -84,7 +82,7 @@ export default function ProductPageClient({ product }: { product: Product | null
 
         <div className="space-y-6">
           <div>
-            <p className="text-sm text-muted-foreground">{categoryName}</p>
+          <p className="text-sm text-muted-foreground">{getLocalized(product.category, language)}</p>
             <h1 className="text-3xl font-bold mt-1">{getLocalized(product.title, language)}</h1>
             <p className="text-2xl font-bold mt-2">${product.price.toFixed(2)}</p>
           </div>
@@ -125,10 +123,10 @@ export default function ProductPageClient({ product }: { product: Product | null
       </div>
 
       <div className="mt-16">
-        <h2 className="text-2xl font-bold mb-6">You May Also Like</h2>
+        <h2 className="text-2xl font-bold mb-6">{t("products.relatedProducts")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {relatedProducts.map((rp) => (
-            <ProductCard key={rp.id} product={rp} />
+            <ProductCard key={rp.slug} product={rp} />
           ))}
         </div>
       </div>

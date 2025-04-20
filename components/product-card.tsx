@@ -18,6 +18,7 @@ interface LocalizedString {
 
 interface Product {
   id: string
+  slug: string
   title: LocalizedString
   price: number
   image: string
@@ -33,7 +34,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   const handleAddToCart = () => {
     addItem({
-      id: product.id,
+      id: product.slug,
       title,
       price: product.price,
       image: product.image,
@@ -47,7 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <Card className={styles.card}>
-      <Link href={`/products/${product.id}`} className={styles.imageContainer}>
+      <Link href={`/products/${product.slug}`} className={styles.imageContainer}>
         <Image
           src={product.image || "/placeholder.svg"}
           alt={title}
@@ -59,7 +60,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <CardContent className={styles.content}>
         <div className={styles.details}>
           <p className={styles.category}>{category}</p>
-          <Link href={`/products/${product.id}`} className={styles.title}>
+          <Link href={`/products/${product.slug}`} className={styles.title}>
             {title}
           </Link>
           <p className={styles.price}>${product.price.toFixed(2)}</p>

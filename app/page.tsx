@@ -107,7 +107,7 @@ export default function Home() {
           </div>
           <div className={styles.productsGrid}>
             {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.slug} product={product} />
             ))}
           </div>
           <div className={styles.viewAllContainer}>

@@ -3,10 +3,11 @@
 import Link from "next/link"
 import { Facebook, Instagram, Twitter } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
+import { categories } from "@/data/categories"
 import styles from "./footer.module.css"
 
 export default function Footer() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   return (
     <footer className={styles.footer}>
@@ -36,11 +37,18 @@ export default function Footer() {
           <div className={styles.column}>
             <h3 className={styles.title}>{t("footer.shop")}</h3>
             <ul className={styles.links}>
-              <li><Link href="/products" className={styles.link}>{t("footer.allProducts")}</Link></li>
-              <li><Link href="/categories/organic-produce" className={styles.link}>{t("categories.organicProduce")}</Link></li>
-              <li><Link href="/categories/superfoods" className={styles.link}>{t("categories.superfoods")}</Link></li>
-              <li><Link href="/categories/gluten-free" className={styles.link}>{t("categories.glutenFree")}</Link></li>
-              <li><Link href="/categories/plant-based" className={styles.link}>{t("categories.plantBased")}</Link></li>
+              <li>
+                <Link href="/products" className={styles.link}>
+                  {t("footer.allProducts")}
+                </Link>
+              </li>
+              {categories.slice(0, 4).map((category) => (
+                <li key={category.slug}>
+                  <Link href={`/categories/${category.slug}`} className={styles.link}>
+                    {category.name[language]}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

@@ -6,13 +6,14 @@ export interface LocalizedString {
   fr: string
 }
 
-export interface Product {
+interface Product {
   id: string
   slug: string
   title: LocalizedString
   price: number
   image: string
   category: LocalizedString
+  categorySlug: string
   dietary: string[]
   description: LocalizedString
   ingredients: LocalizedString
@@ -31,7 +32,8 @@ export interface Product {
 export const allProducts: Product[] = [
     {
       id: "1",
-      slug: "natural-sweeteners",
+      slug: "organic-raw-honey",
+      categorySlug: "natural-sweeteners",
       image: "/images/products/photo-1587049352851-8d4e89133924.avif",
       price: 12.99,
       category: {
@@ -71,8 +73,51 @@ export const allProducts: Product[] = [
       },
     },
     {
+      id: "9",
+      slug: "organic-stevia",
+      categorySlug: "natural-sweeteners",
+      image: "/images/products/photo-1610219171189-286769cc9b20.avif",
+      price: 6.49,
+      category: {
+        en: "Sweeteners",
+        es: "Endulzantes",
+        fr: "Édulcorants",
+      },
+      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      title: {
+        en: "Organic Stevia Extract",
+        es: "Extracto de Stevia Orgánica",
+        fr: "Extrait de Stévia Biologique",
+      },
+      description: {
+        en: "Pure organic stevia extract, a natural sugar substitute with zero calories. Perfect for drinks, baking, and cooking.",
+        es: "Extracto puro de stevia orgánica, un sustituto natural del azúcar sin calorías. Perfecto para bebidas, repostería y cocina.",
+        fr: "Extrait pur de stévia biologique, un substitut naturel du sucre sans calories. Parfait pour les boissons, les pâtisseries et la cuisine.",
+      },
+      ingredients: {
+        en: "100% Organic Stevia Extract",
+        es: "100% Extracto de Stevia Orgánica",
+        fr: "100% Extrait de Stévia Biologique",
+      },
+      origin: {
+        en: "Paraguay",
+        es: "Paraguay",
+        fr: "Paraguay",
+      },
+      nutritionalInfo: {
+        servingSize: "1/8 tsp (0.5g)",
+        calories: 0,
+        totalFat: "0g",
+        sodium: "0mg",
+        totalCarbs: "0g",
+        sugars: "0g",
+        protein: "0g",
+      },
+    },
+    {
       id: "2",
-      slug: "oils-vinegars",
+      slug: "olive-oil",
+      categorySlug: "oils-vinegars",
       title: {
         en: "Cold-Pressed Olive Oil",
         es: "Aceite de Oliva Prensado en Frío",
@@ -112,8 +157,51 @@ export const allProducts: Product[] = [
       },
     },
     {
+      id: "11",
+      slug: "organic-rice-vinegar",
+      categorySlug: "oils-vinegars",
+      title: {
+        en: "Organic Rice Vinegar",
+        es: "Vinagre de Arroz Orgánico",
+        fr: "Vinaigre de Riz Biologique",
+      },
+      price: 6.75,
+      image: "/images/products/rice-vinegar.png",
+      category: {
+        en: "Oils",
+        es: "Aceites",
+        fr: "Huiles",
+      },
+      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      description: {
+        en: "Mild and tangy organic rice vinegar, naturally brewed and perfect for dressings, marinades, and sushi rice.",
+        es: "Vinagre de arroz orgánico suave y ácido, naturalmente fermentado. Ideal para aderezos, marinados y arroz para sushi.",
+        fr: "Vinaigre de riz biologique doux et acidulé, naturellement fermenté. Parfait pour les vinaigrettes, les marinades et le riz à sushi.",
+      },
+      ingredients: {
+        en: "Organic rice, water",
+        es: "Arroz orgánico, agua",
+        fr: "Riz biologique, eau",
+      },
+      origin: {
+        en: "Japan",
+        es: "Japón",
+        fr: "Japon",
+      },
+      nutritionalInfo: {
+        servingSize: "1 tbsp (15ml)",
+        calories: 5,
+        totalFat: "0g",
+        sodium: "0mg",
+        totalCarbs: "1g",
+        sugars: "0g",
+        protein: "0g",
+      },
+    },    
+    {
       id: "3",
-      slug: "breakfast",
+      slug: "granola",
+      categorySlug: "breakfast",
       title: {
         en: "Gluten-Free Granola",
         es: "Granola Sin Gluten",
@@ -153,8 +241,51 @@ export const allProducts: Product[] = [
       },
     },
     {
+      id: "12",
+      slug: "integral-cereal-bars",
+      categorySlug: "breakfast",
+      title: {
+        en: "Integral Cereal Bars",
+        es: "Barras de Cereal Integral",
+        fr: "Barres de Céréales Complètes",
+      },
+      price: 5.25,
+      image: "/images/products/premium_photo-1726490292042-7587d23d52de.avif",
+      category: {
+        en: "Breakfast",
+        es: "Desayuno",
+        fr: "Petit Déjeuner",
+      },
+      dietary: ["Whole Grain", "Vegan"],
+      description: {
+        en: "Wholesome cereal bars made with whole grains, seeds, and natural sweeteners. Ideal for a quick and healthy breakfast on the go.",
+        es: "Barras de cereal integrales hechas con granos enteros, semillas y endulzantes naturales. Ideales para un desayuno rápido y saludable.",
+        fr: "Barres de céréales complètes à base de grains entiers, de graines et d’édulcorants naturels. Parfaites pour un petit déjeuner rapide et sain.",
+      },
+      ingredients: {
+        en: "Whole grain oats, sunflower seeds, agave syrup, dried berries",
+        es: "Avena integral, semillas de girasol, jarabe de agave, frutos secos",
+        fr: "Flocons d’avoine complets, graines de tournesol, sirop d’agave, fruits secs",
+      },
+      origin: {
+        en: "Canada",
+        es: "Canadá",
+        fr: "Canada",
+      },
+      nutritionalInfo: {
+        servingSize: "1 bar (35g)",
+        calories: 140,
+        totalFat: "5g",
+        sodium: "30mg",
+        totalCarbs: "22g",
+        sugars: "7g",
+        protein: "3g",
+      },
+    },
+    {
       id: "4",
-      slug: "grains-legumes",
+      slug: "quinoa",
+      categorySlug: "grains-legumes",
       title: {
         en: "Organic Quinoa",
         es: "Quinua Orgánica",
@@ -194,8 +325,51 @@ export const allProducts: Product[] = [
       },
     },
     {
+      id: "13",
+      slug: "organic-red-lentils",
+      categorySlug: "grains-legumes",
+      title: {
+        en: "Organic Red Lentils",
+        es: "Lentejas Rojas Orgánicas",
+        fr: "Lentilles Rouges Biologiques",
+      },
+      price: 4.95,
+      image: "/images/products/premium_photo-1700842181817-e7f4c9fa828a.avif",
+      category: {
+        en: "Grains",
+        es: "Granos",
+        fr: "Céréales",
+      },
+      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      description: {
+        en: "Fast-cooking red lentils rich in protein and iron. Ideal for soups, stews, and curries.",
+        es: "Lentejas rojas de cocción rápida ricas en proteínas y hierro. Ideales para sopas, guisos y curries.",
+        fr: "Lentilles rouges à cuisson rapide riches en protéines et en fer. Idéales pour les soupes, ragoûts et currys.",
+      },
+      ingredients: {
+        en: "100% Organic Red Lentils",
+        es: "100% Lentejas Rojas Orgánicas",
+        fr: "100% Lentilles Rouges Biologiques",
+      },
+      origin: {
+        en: "India",
+        es: "India",
+        fr: "Inde",
+      },
+      nutritionalInfo: {
+        servingSize: "1/4 cup dry (35g)",
+        calories: 130,
+        totalFat: "0.5g",
+        sodium: "0mg",
+        totalCarbs: "23g",
+        sugars: "1g",
+        protein: "9g",
+      },
+    },    
+    {
       id: "5",
-      slug: "nuts-seeds",
+      slug: "almond-butter",
+      categorySlug: "nuts-seeds",
       title: {
         en: "Almond Butter",
         es: "Mantequilla de Almendras",
@@ -235,8 +409,51 @@ export const allProducts: Product[] = [
       },
     },
     {
+      id: "14",
+      slug: "pumpkin-seeds",
+      categorySlug: "nuts-seeds",
+      title: {
+        en: "Organic Pumpkin Seeds",
+        es: "Semillas de Calabaza Orgánicas",
+        fr: "Graines de Citrouille Biologiques",
+      },
+      price: 5.25,
+      image: "/images/products/photo-1515670112266-c6d33ec59d6b.avif",
+      category: {
+        en: "Spreads",
+        es: "Untables",
+        fr: "Tartinades",
+      },
+      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      description: {
+        en: "Crunchy and nutrient-rich organic pumpkin seeds, great for snacking or as a salad topping.",
+        es: "Semillas de calabaza orgánicas crujientes y ricas en nutrientes, ideales como snack o para ensaladas.",
+        fr: "Graines de citrouille biologiques croquantes et riches en nutriments, parfaites en collation ou sur des salades.",
+      },
+      ingredients: {
+        en: "100% Organic Pumpkin Seeds",
+        es: "100% Semillas de Calabaza Orgánicas",
+        fr: "100% Graines de Citrouille Biologiques",
+      },
+      origin: {
+        en: "Mexico",
+        es: "México",
+        fr: "Mexique",
+      },
+      nutritionalInfo: {
+        servingSize: "1 oz (28g)",
+        calories: 160,
+        totalFat: "13g",
+        sodium: "0mg",
+        totalCarbs: "4g",
+        sugars: "0g",
+        protein: "8g",
+      },
+    },    
+    {
       id: "6",
-      slug: "dairy alternatives",
+      slug: "coconut-yogurt",
+      categorySlug: "dairy-alternatives",
       title: {
         en: "Coconut Yogurt",
         es: "Yogur de Coco",
@@ -276,8 +493,51 @@ export const allProducts: Product[] = [
       },
     },
     {
+      id: "15",
+      slug: "cashew-milk",
+      categorySlug: "dairy-alternatives",
+      title: {
+        en: "Creamy Cashew Milk",
+        es: "Leche de Castañas de Cajú Cremosa",
+        fr: "Lait de Cajou Crémeux",
+      },
+      price: 4.99,
+      image: "/images/products/photo-1680901106907-3374ffaa25c6.avif",
+      category: {
+        en: "Dairy Alternatives",
+        es: "Alternativas Lácteas",
+        fr: "Substituts Laitiers",
+      },
+      dietary: ["Vegan", "Gluten-Free"],
+      description: {
+        en: "Smooth and creamy plant-based milk made from organic cashews. A perfect alternative for coffee, cereal, or baking.",
+        es: "Leche vegetal suave y cremosa hecha con anacardos orgánicos. Una alternativa perfecta para café, cereales o repostería.",
+        fr: "Lait végétal onctueux et crémeux à base de noix de cajou biologiques. Parfait pour le café, les céréales ou la pâtisserie.",
+      },
+      ingredients: {
+        en: "Filtered water, organic cashews, sea salt",
+        es: "Agua filtrada, anacardos orgánicos, sal marina",
+        fr: "Eau filtrée, noix de cajou biologiques, sel marin",
+      },
+      origin: {
+        en: "Vietnam",
+        es: "Vietnam",
+        fr: "Vietnam",
+      },
+      nutritionalInfo: {
+        servingSize: "1 cup (240ml)",
+        calories: 70,
+        totalFat: "4g",
+        sodium: "80mg",
+        totalCarbs: "8g",
+        sugars: "1g",
+        protein: "3g",
+      },
+    },    
+    {
       id: "7",
-      slug: "superfoods",
+      slug: "chia-seeds",
+      categorySlug: "superfoods",
       title: {
         en: "Organic Chia Seeds",
         es: "Semillas de Chía Orgánicas",
@@ -317,8 +577,51 @@ export const allProducts: Product[] = [
       },
     },
     {
+      id: "16",
+      slug: "spirulina-powder",
+      categorySlug: "superfoods",
+      title: {
+        en: "Organic Spirulina Powder",
+        es: "Polvo de Espirulina Orgánica",
+        fr: "Poudre de Spiruline Biologique",
+      },
+      price: 9.5,
+      image: "/images/products/photo-1664956618676-9e65fe31a165.avif",
+      category: {
+        en: "Superfoods",
+        es: "Superalimentos",
+        fr: "Superaliments",
+      },
+      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      description: {
+        en: "A nutrient-dense blue-green algae rich in protein, iron, and antioxidants. Great for smoothies and detox blends.",
+        es: "Un alga verde azul rica en nutrientes, proteínas, hierro y antioxidantes. Ideal para batidos y mezclas detox.",
+        fr: "Une algue bleu-vert riche en protéines, fer et antioxydants. Idéale pour les smoothies et mélanges détox.",
+      },
+      ingredients: {
+        en: "100% Organic Spirulina Powder",
+        es: "100% Polvo de Espirulina Orgánica",
+        fr: "100% Poudre de Spiruline Biologique",
+      },
+      origin: {
+        en: "India",
+        es: "India",
+        fr: "Inde",
+      },
+      nutritionalInfo: {
+        servingSize: "1 tsp (5g)",
+        calories: 20,
+        totalFat: "0.5g",
+        sodium: "40mg",
+        totalCarbs: "1g",
+        sugars: "0g",
+        protein: "4g",
+      },
+    },    
+    {
       id: "8",
-      slug: "beverages",
+      slug: "kombucha",
+      categorySlug: "beverages",
       title: {
         en: "Kombucha",
         es: "Kombucha",
@@ -357,18 +660,67 @@ export const allProducts: Product[] = [
         protein: "0g",
       },
     },
+    {
+      id: "17",
+      slug: "matcha-green-tea",
+      categorySlug: "beverages",
+      title: {
+        en: "Matcha Green Tea",
+        es: "Té Verde Matcha",
+        fr: "Thé Vert Matcha",
+      },
+      price: 3.75,
+      image: "/images/products/photo-1565117661210-fd54898de423.avif",
+      category: {
+        en: "Beverages",
+        es: "Bebidas",
+        fr: "Boissons",
+      },
+      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      description: {
+        en: "Refreshing organic matcha green tea, lightly sweetened and packed with antioxidants. Perfect for a natural energy boost.",
+        es: "Refrescante té verde matcha orgánico, ligeramente endulzado y lleno de antioxidantes. Perfecto para un impulso natural de energía.",
+        fr: "Thé vert matcha biologique rafraîchissant, légèrement sucré et riche en antioxydants. Parfait pour un regain d’énergie naturel.",
+      },
+      ingredients: {
+        en: "Filtered water, organic matcha powder, organic cane sugar",
+        es: "Agua filtrada, polvo de matcha orgánico, azúcar de caña orgánica",
+        fr: "Eau filtrée, poudre de matcha biologique, sucre de canne biologique",
+      },
+      origin: {
+        en: "Japan",
+        es: "Japón",
+        fr: "Japon",
+      },
+      nutritionalInfo: {
+        servingSize: "1 bottle (330ml)",
+        calories: 45,
+        totalFat: "0g",
+        sodium: "0mg",
+        totalCarbs: "10g",
+        sugars: "8g",
+        protein: "1g",
+      },
+    }
+    
   ]
 
 export function getProductById(id: string) {
 return allProducts.find((p) => p.id === id) || null
 }
 
+export function getProductBySlug(slug: string) {
+  return allProducts.find((p) => p.slug === slug) || null
+}
+
 export function getRelatedProducts(
-  categoryValue: string,
-  excludeId: string,
-  language: "en" | "es" | "fr"
+  categorySlug: string,
+  excludeSlug: string
 ) {
   return allProducts
-    .filter((p) => p.category[language] === categoryValue && p.id !== excludeId)
+    .filter((p) => 
+      p.categorySlug === categorySlug &&
+      p.slug !== excludeSlug
+    )
     .slice(0, 4)
 }

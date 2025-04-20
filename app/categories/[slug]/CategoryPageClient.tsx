@@ -48,14 +48,16 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
       es: slug.replace(/-/g, " "),
       fr: slug.replace(/-/g, " "),
     }
-
+  
     setCategoryName(getLocalized(resolvedName, language))
-
+  
+    const categoryName = getLocalized(resolvedName, language)
+  
     const categoryProducts =
-      slug === "all"
-        ? allProducts
-        : allProducts.filter((product) => product.slug === slug)
-
+    slug === "all"
+      ? allProducts
+      : allProducts.filter((product) => product.categorySlug === slug)
+  
     setProducts(categoryProducts)
     setFilteredProducts(categoryProducts)
   }, [slug, language])
@@ -117,7 +119,7 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
           ) : (
             <div className={styles.productsGrid}>
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.slug} product={product} />
               ))}
             </div>
           )}
