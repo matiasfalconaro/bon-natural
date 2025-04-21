@@ -41,15 +41,15 @@ export const categories: Category[] = [
     }
   },
   {
-    slug: "breakfast",
+    slug: "wholefood",
     name: {
-      en: "Breakfast",
-      es: "Desayuno",
-      fr: "Petit Déjeuner"
+      en: "Wholefood",
+      es: "Mezclas Integrales",
+      fr: "Mélanges Complets"
     },
     image: "/images/products/photo-1724441980123-aca7911329d0.avif",
     description: {
-      en: "Start your day right with delicious and nutritious breakfast options.",
+      en: "Start your day right with delicious and nutritious wholefood options.",
       es: "Comienza tu día con opciones de desayuno deliciosas y nutritivas.",
       fr: "Commencez votre journée avec des options de petit déjeuner délicieuses et nutritives."
     }

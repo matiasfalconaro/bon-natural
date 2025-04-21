@@ -114,7 +114,7 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
         <div className={styles.products}>
           {filteredProducts.length === 0 ? (
             <div className={styles.noResults}>
-              <p>{t("products.noResults")}</p>
+              <p>{t("product.noResults")}</p>
             </div>
           ) : (
             <div className={styles.productsGrid}>

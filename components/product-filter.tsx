@@ -34,7 +34,7 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
 
   const categories = [
     { label: "Beverages", slug: "beverages" },
-    { label: "Breakfast", slug: "breakfast" },
+    { label: "Wholefood", slug: "wholefood" },
     { label: "Dairy Alternatives", slug: "dairy-alternatives" },
     { label: "Grains & Legumes", slug: "grains-legumes" },
     { label: "Oils & Vinegars", slug: "oils-vinegars" },

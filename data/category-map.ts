@@ -52,10 +52,10 @@ export const CATEGORY_MAP: Record<string, LocalizedString> = {
     es: "Bebidas",
     fr: "Boissons",
   },
-  "breakfast": {
-    en: "Breakfast",
-    es: "Desayuno",
-    fr: "Petit Déjeuner",
+  "wholefood": {
+    en: "Wholefood",
+    es: "Mezclas Integrales",
+    fr: "Mélanges Complets",
   },
   "dairy-alternatives": {
     en: "Dairy Alternatives",

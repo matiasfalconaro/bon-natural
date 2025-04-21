@@ -79,8 +79,8 @@ export const allProducts: Product[] = [
       image: "/images/products/photo-1610219171189-286769cc9b20.avif",
       price: 6.49,
       category: {
-        en: "NAtural Sweeteners",
-        es: "Endulzantes NAturales",
+        en: "Natural Sweeteners",
+        es: "Endulzantes Naturales",
         fr: "Édulcorants Natural",
       },
       dietary: ["Organic", "Vegan", "Gluten-Free"],
@@ -201,7 +201,7 @@ export const allProducts: Product[] = [
     {
       id: "3",
       slug: "granola",
-      categorySlug: "breakfast",
+      categorySlug: "wholefood",
       title: {
         en: "Gluten-Free Granola",
         es: "Granola Sin Gluten",
@@ -210,9 +210,9 @@ export const allProducts: Product[] = [
       price: 8.99,
       image: "/images/products/photo-1724441980123-aca7911329d0.avif",
       category: {
-        en: "Breakfast",
-        es: "Desayuno",
-        fr: "Petit Déjeuner",
+        en: "Wholefood",
+        es: "Mezclas Integrales",
+        fr: "Mélanges Complets",
       },
       dietary: ["Gluten-Free", "Vegan"],
       description: {
@@ -243,7 +243,7 @@ export const allProducts: Product[] = [
     {
       id: "12",
       slug: "integral-cereal-bars",
-      categorySlug: "breakfast",
+      categorySlug: "wholefood",
       title: {
         en: "Integral Cereal Bars",
         es: "Barras de Cereal Integral",
@@ -252,9 +252,9 @@ export const allProducts: Product[] = [
       price: 5.25,
       image: "/images/products/premium_photo-1726490292042-7587d23d52de.avif",
       category: {
-        en: "Breakfast",
-        es: "Desayuno",
-        fr: "Petit Déjeuner",
+        en: "Wholefood",
+        es: "Mezclas Integrales",
+        fr: "Mélanges Complets",
       },
       dietary: ["Whole Grain", "Vegan"],
       description: {
