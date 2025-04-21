@@ -43,7 +43,7 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
     { label: "Natural Sweeteners", slug: "natural-sweeteners" },
   ]
 
-  const dietaryPreferences = ["Gluten-Free", "Organic", "Vegan", "Non-GMO", "Sugar-Free", "Paleo"]
+  const dietaryPreferences = ["Gluten-Free", "Organic", "Vegan", "Non-GMO", "Sugar-Free", "Paleo", "Whole Grain"]
 
   // Set initial search term when component mounts or when initialSearchTerm changes
   useEffect(() => {

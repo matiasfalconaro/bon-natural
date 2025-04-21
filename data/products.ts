@@ -41,7 +41,7 @@ export const allProducts: Product[] = [
         es: "Endulzantes Naturales",
         fr: "Édulcorants Naturals",
       },
-      dietary: ["Organic", "Gluten-Free"],
+      dietary: ["Organic", "Gluten-Free", "Paleo", "Non-GMO"],
       title: {
         en: "Organic Raw Honey",
         es: "Miel Cruda Orgánica",
@@ -83,7 +83,7 @@ export const allProducts: Product[] = [
         es: "Endulzantes Naturales",
         fr: "Édulcorants Natural",
       },
-      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      dietary: ["Organic", "Vegan", "Gluten-Free", "Sugar-Free", "Gluten-Free"],
       title: {
         en: "Organic Stevia Extract",
         es: "Extracto de Stevia Orgánica",
@@ -130,7 +130,7 @@ export const allProducts: Product[] = [
         es: "Aceites & Vinagres",
         fr: "Huiles & Vinaigres",
       },
-      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      dietary: ["Organic", "Vegan", "Gluten-Free", "Non-GMO", "Paleo", "Sugar-Free"],
       description: {
         en: "Extra virgin olive oil made from handpicked olives, cold-pressed for superior flavor and nutrients. Ideal for cooking or dressings.",
         es: "Aceite de oliva virgen extra elaborado con aceitunas recolectadas a mano y prensado en frío para un sabor y nutrientes superiores. Ideal para cocinar o aderezar.",
@@ -256,7 +256,7 @@ export const allProducts: Product[] = [
         es: "Mezclas Integrales",
         fr: "Mélanges Complets",
       },
-      dietary: ["Whole Grain", "Vegan"],
+      dietary: ["Whole Grain", "Vegan", "Non-GMO"],
       description: {
         en: "Wholesome cereal bars made with whole grains, seeds, and natural sweeteners. Ideal for a quick and healthy breakfast on the go.",
         es: "Barras de cereal integrales hechas con granos enteros, semillas y endulzantes naturales. Ideales para un desayuno rápido y saludable.",
@@ -340,7 +340,7 @@ export const allProducts: Product[] = [
         es: "Granos & Legumbres",
         fr: "Céréales & Légumineuses",
       },
-      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      dietary: ["Organic", "Vegan", "Gluten-Free", "Paleo", "Whole Grain"],
       description: {
         en: "Fast-cooking red lentils rich in protein and iron. Ideal for soups, stews, and curries.",
         es: "Lentejas rojas de cocción rápida ricas en proteínas y hierro. Ideales para sopas, guisos y curries.",
@@ -382,7 +382,7 @@ export const allProducts: Product[] = [
         es: "Frutos Secos y Semillas",
         fr: "Fruits Secs & Graines",
       },
-      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      dietary: ["Organic", "Vegan", "Gluten-Free", "Sugar-Free"],
       description: {
         en: "Creamy almond butter made from roasted organic almonds. No additives or preservatives.",
         es: "Mantequilla cremosa de almendras elaborada con almendras orgánicas tostadas. Sin aditivos ni conservantes.",
@@ -424,7 +424,7 @@ export const allProducts: Product[] = [
         es: "Nuts & Seeds",
         fr: "Fruits Secs & Graines",
       },
-      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      dietary: ["Organic", "Vegan", "Gluten-Free", "Whole Grain", "Paleo"],
       description: {
         en: "Crunchy and nutrient-rich organic pumpkin seeds, great for snacking or as a salad topping.",
         es: "Semillas de calabaza orgánicas crujientes y ricas en nutrientes, ideales como snack o para ensaladas.",
@@ -550,7 +550,7 @@ export const allProducts: Product[] = [
         es: "Superalimentos",
         fr: "Superaliments",
       },
-      dietary: ["Organic", "Vegan", "Gluten-Free"],
+      dietary: ["Organic", "Vegan", "Gluten-Free", "Whole Grain", "Paleo"],
       description: {
         en: "Packed with omega-3s, protein, and fiber. Perfect for smoothies, puddings, or baking.",
         es: "Ricas en omega-3, proteínas y fibra. Perfectas para batidos, puddings o repostería.",
