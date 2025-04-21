@@ -44,8 +44,6 @@ const translations = {
     "nav.about": "About Us",
     "nav.contact": "Contact",
 
-    "product.addToCart": "Add to Cart",
-
     "footer.copyright": "All rights reserved.",
     "footer.description": "Providing organic, sustainable, and locally-sourced natural foods since 2010.",
     "footer.shop": "Shop",
@@ -88,10 +86,13 @@ const translations = {
     "filters.categories": "Categories",
     "filters.dietaryPreferences": "Dietary Preferences",
 
-    "products.allProducts": "All Products",
-    "products.searchResults": "Search Results",
-    "products.noResults": "No products found. Try adjusting your filters.",
-    "products.relatedProducts": "You may also like",
+    "product.addToCart": "Add to Cart",
+    "product.allProducts": "All Products",
+    "product.searchResults": "Search Results",
+    "product.noResults": "No products found. Try adjusting your filters.",
+    "product.relatedProducts": "You may also like",
+    "product.backToAll" : "Back to Product",
+    "product.backToProducts": "Back to All Products",
 
     "about.title": "About Us",
     "about.subtitle": "Learn about our mission, values, and the team behind Bon Natural.",
@@ -159,7 +160,6 @@ const translations = {
     "nav.about": "Sobre Nosotros",
     "nav.contact": "Contacto",
 
-    "product.addToCart": "Añadir al Carrito",
     "footer.copyright": "Todos los derechos reservados.",
     "footer.description": "Proporcionando alimentos naturales orgánicos, sostenibles y de origen local desde 2010.",
     "footer.shop": "Tienda",
@@ -204,10 +204,13 @@ const translations = {
     "filters.categories": "Categorías",
     "filters.dietaryPreferences": "Preferencias Dietéticas",
 
-    "products.allProducts": "Todos los Productos",
-    "products.searchResults": "Resultados de Búsqueda",
-    "products.noResults": "No se encontraron productos. Intenta ajustar tus filtros.",
-    "products.relatedProducts": "También te puede interesar",
+    "product.addToCart": "Añadir al Carrito",
+    "product.allProducts": "Todos los Productos",
+    "product.searchResults": "Resultados de Búsqueda",
+    "product.noResults": "No se encontraron productos. Intenta ajustar tus filtros.",
+    "product.relatedProducts": "También te puede interesar",
+    "product.backToAll" : "Volver a Productos",
+    "product.backToProducts": "Volver a todos los Productos",
 
     "about.title": "Sobre Nosotros",
     "about.subtitle": "Conoce nuestra misión, valores y el equipo detrás de Bon Natural.",
@@ -317,10 +320,14 @@ const translations = {
     "filters.categories": "Catégories",
     "filters.dietaryPreferences": "Préférences Alimentaires",
 
-    "products.allProducts": "Tous les produits",
-    "products.searchResults": "Résultats de recherche",
-    "products.noResults": "Aucun produit trouvé. Essayez de modifier vos filtres.",
-    "products.relatedProducts": "Vous pourriez aussi aimer",
+    "product.addToCart": "Ajouter au Panier",
+    "product.allProducts": "Tous les produits",
+    "product.searchResults": "Résultats de recherche",
+    "product.noResults": "Aucun produit trouvé. Essayez de modifier vos filtres.",
+    "product.relatedProducts": "Vous pourriez aussi aimer",
+    "product.backToAll" : "Retour aux Produits",
+    "product.backToProducts": "Retour à tous les produits",
+
 
     "about.title": "À Propos de Nous",
     "about.subtitle": "Découvrez notre mission, nos valeurs et l'équipe derrière Bon Natural.",

@@ -11,6 +11,7 @@ import ProductCard from "@/components/product-card"
 import { allProducts } from "@/data/products"
 import { getRelatedProducts } from "@/data/products"
 
+
 interface LocalizedString {
   en: string
   es: string
@@ -52,7 +53,8 @@ export default function ProductPageClient({ product }: { product: Product | null
       <div className="container px-4 py-8">
         <h2 className="text-lg font-bold text-red-500">Product not found</h2>
         <Link href="/products" className="mt-4 inline-block text-blue-600 underline">
-          ← Back to all products
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          {t("product.backToAll")}
         </Link>
       </div>
     )
@@ -66,7 +68,7 @@ export default function ProductPageClient({ product }: { product: Product | null
     <div className="container px-4 md:px-6 py-8 md:py-12">
       <Link href="/products" className="flex items-center text-sm mb-6 hover:underline">
         <ArrowLeft className="mr-2 h-4 w-4" />
-        Back to Products
+        {t("product.backToProducts")}
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
