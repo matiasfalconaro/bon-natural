@@ -73,7 +73,7 @@ export const categories: Category[] = [
     name: {
       en: "Nuts & Seeds",
       es: "Frutos Secos & Semillas",
-      fr: "Fruits secs & graines"
+      fr: "Fruits Secs & Graines"
     },
     image: "/images/products/photo-1615110250484-e8c3b151b957.avif",
     description: {

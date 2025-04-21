@@ -34,6 +34,7 @@ interface Product {
   image: string
   category: LocalizedString
   dietary: string[]
+  categorySlug: string
 }
 
 export default function CategoryPageClient({ slug }: { slug: string }) {
@@ -43,21 +44,20 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
   const [categoryName, setCategoryName] = useState<string>("")
 
   useEffect(() => {
-    const resolvedName = CATEGORY_MAP[slug] || {
+    const resolvedCategory = CATEGORY_MAP[slug] || {
       en: slug.replace(/-/g, " "),
       es: slug.replace(/-/g, " "),
       fr: slug.replace(/-/g, " "),
     }
-  
-    setCategoryName(getLocalized(resolvedName, language))
-  
-    const categoryName = getLocalized(resolvedName, language)
-  
+
+    const displayName = getLocalized(resolvedCategory, language)
+    setCategoryName(displayName)
+
     const categoryProducts =
-    slug === "all"
-      ? allProducts
-      : allProducts.filter((product) => product.categorySlug === slug)
-  
+      slug === "all"
+        ? allProducts
+        : allProducts.filter((product) => product.categorySlug === slug)
+
     setProducts(categoryProducts)
     setFilteredProducts(categoryProducts)
   }, [slug, language])
@@ -69,7 +69,7 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
       dietary: string[]
       searchTerm: string
     }) => {
-      let filtered = [...products]
+      let filtered = slug === "all" ? [...allProducts] : [...products]
 
       filtered = filtered.filter(
         (product) =>

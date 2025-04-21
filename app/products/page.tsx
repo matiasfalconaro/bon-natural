@@ -74,7 +74,7 @@ export default function ProductsPage() {
 
     if (filters.categories.length > 0) {
       filtered = filtered.filter((product) =>
-        filters.categories.includes(product.category[lang])
+        filters.categories.includes(product.categorySlug)
       )
     }
 

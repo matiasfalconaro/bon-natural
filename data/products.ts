@@ -37,9 +37,9 @@ export const allProducts: Product[] = [
       image: "/images/products/photo-1587049352851-8d4e89133924.avif",
       price: 12.99,
       category: {
-        en: "Sweeteners",
-        es: "Endulzantes",
-        fr: "Édulcorants",
+        en: "Natural Sweeteners",
+        es: "Endulzantes Naturales",
+        fr: "Édulcorants Naturals",
       },
       dietary: ["Organic", "Gluten-Free"],
       title: {
@@ -79,9 +79,9 @@ export const allProducts: Product[] = [
       image: "/images/products/photo-1610219171189-286769cc9b20.avif",
       price: 6.49,
       category: {
-        en: "Sweeteners",
-        es: "Endulzantes",
-        fr: "Édulcorants",
+        en: "NAtural Sweeteners",
+        es: "Endulzantes NAturales",
+        fr: "Édulcorants Natural",
       },
       dietary: ["Organic", "Vegan", "Gluten-Free"],
       title: {
@@ -126,9 +126,9 @@ export const allProducts: Product[] = [
       price: 18.5,
       image: "/images/products/photo-1474979266404-7eaacbcd87c5.avif",
       category: {
-        en: "Oils",
-        es: "Aceites",
-        fr: "Huiles",
+        en: "Oils & Vinegars",
+        es: "Aceites & Vinagres",
+        fr: "Huiles & Vinaigres",
       },
       dietary: ["Organic", "Vegan", "Gluten-Free"],
       description: {
@@ -168,9 +168,9 @@ export const allProducts: Product[] = [
       price: 6.75,
       image: "/images/products/rice-vinegar.png",
       category: {
-        en: "Oils",
-        es: "Aceites",
-        fr: "Huiles",
+        en: "Oils & Vinegars",
+        es: "Aceites & Vinagres",
+        fr: "Huiles & Vinaigres",
       },
       dietary: ["Organic", "Vegan", "Gluten-Free"],
       description: {
@@ -294,9 +294,9 @@ export const allProducts: Product[] = [
       price: 6.75,
       image: "/images/products/premium_photo-1705207702015-0c1f567a14df.avif",
       category: {
-        en: "Grains",
-        es: "Granos",
-        fr: "Céréales",
+        en: "Grains & Legumes",
+        es: "Granos & Legumbres",
+        fr: "Céréales & Légumineuses",
       },
       dietary: ["Organic", "Gluten-Free", "Vegan"],
       description: {
@@ -336,9 +336,9 @@ export const allProducts: Product[] = [
       price: 4.95,
       image: "/images/products/premium_photo-1700842181817-e7f4c9fa828a.avif",
       category: {
-        en: "Grains",
-        es: "Granos",
-        fr: "Céréales",
+        en: "Grains & Legumes",
+        es: "Granos & Legumbres",
+        fr: "Céréales & Légumineuses",
       },
       dietary: ["Organic", "Vegan", "Gluten-Free"],
       description: {
@@ -378,9 +378,9 @@ export const allProducts: Product[] = [
       price: 9.99,
       image: "/images/products/photo-1615110250484-e8c3b151b957.avif",
       category: {
-        en: "Spreads",
-        es: "Untables",
-        fr: "Tartinades",
+        en: "Nuts & Seeds",
+        es: "Frutos Secos y Semillas",
+        fr: "Fruits Secs & Graines",
       },
       dietary: ["Organic", "Vegan", "Gluten-Free"],
       description: {
@@ -420,9 +420,9 @@ export const allProducts: Product[] = [
       price: 5.25,
       image: "/images/products/photo-1515670112266-c6d33ec59d6b.avif",
       category: {
-        en: "Spreads",
-        es: "Untables",
-        fr: "Tartinades",
+        en: "Frutos Secos & Semillas",
+        es: "Nuts & Seeds",
+        fr: "Fruits Secs & Graines",
       },
       dietary: ["Organic", "Vegan", "Gluten-Free"],
       description: {
