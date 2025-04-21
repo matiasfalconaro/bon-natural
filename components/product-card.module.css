@@ -9,8 +9,10 @@
 }
 
 .imageContainer {
-  overflow: hidden;
+  position: relative;
   display: block;
+  border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .image {
@@ -72,4 +74,18 @@
 
 :global(.dark).category {
   color: hsl(215, 20.2%, 75.1%); /* Brighter text in dark mode */
+}
+
+.discountBadge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: #ffe600;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }

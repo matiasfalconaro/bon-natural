@@ -23,6 +23,8 @@ interface Product {
   price: number
   image: string
   category: LocalizedString
+  promoPercentage?: number | null
+  isComboo?: boolean 
 }
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -32,11 +34,16 @@ export default function ProductCard({ product }: { product: Product }) {
   const title = product.title[language as keyof LocalizedString]
   const category = product.category[language as keyof LocalizedString]
 
+  const isDiscounted = typeof product.promoPercentage === "number" && product.promoPercentage > 0
+  const discountedPrice = isDiscounted
+    ? product.price * (1 - product.promoPercentage! / 100)
+    : product.price
+
   const handleAddToCart = () => {
     addItem({
       id: product.slug,
       title,
-      price: product.price,
+      price: discountedPrice,
       image: product.image,
     })
 
@@ -49,6 +56,11 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <Card className={styles.card}>
       <Link href={`/products/${product.slug}`} className={styles.imageContainer}>
+        {isDiscounted && (
+          <div className={styles.discountBadge}>
+            {product.promoPercentage}% OFF
+          </div>
+        )}
         <Image
           src={product.image || "/placeholder.svg"}
           alt={title}
@@ -63,7 +75,16 @@ export default function ProductCard({ product }: { product: Product }) {
           <Link href={`/products/${product.slug}`} className={styles.title}>
             {title}
           </Link>
-          <p className={styles.price}>${product.price.toFixed(2)}</p>
+          {isDiscounted ? (
+            <div>
+              <span className={styles.price} style={{ textDecoration: "line-through", color: "#888", marginRight: "0.5rem" }}>
+                ${product.price.toFixed(2)}
+              </span>
+              <span className={styles.price}>${discountedPrice.toFixed(2)}</span>
+            </div>
+          ) : (
+            <p className={styles.price}>${product.price.toFixed(2)}</p>
+          )}
         </div>
       </CardContent>
       <CardFooter className={styles.footer}>

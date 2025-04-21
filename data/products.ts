@@ -11,6 +11,7 @@ interface Product {
   slug: string
   title: LocalizedString
   price: number
+  promoPercentage?: number | null
   image: string
   category: LocalizedString
   categorySlug: string
@@ -36,6 +37,7 @@ export const allProducts: Product[] = [
       categorySlug: "natural-sweeteners",
       image: "/images/products/photo-1587049352851-8d4e89133924.avif",
       price: 12.99,
+      promoPercentage: null,
       category: {
         en: "Natural Sweeteners",
         es: "Endulzantes Naturales",
@@ -78,6 +80,7 @@ export const allProducts: Product[] = [
       categorySlug: "natural-sweeteners",
       image: "/images/products/photo-1610219171189-286769cc9b20.avif",
       price: 6.49,
+      promoPercentage: 25,
       category: {
         en: "Natural Sweeteners",
         es: "Endulzantes Naturales",
@@ -124,6 +127,7 @@ export const allProducts: Product[] = [
         fr: "Huile d'Olive Pressée à Froid",
       },
       price: 18.5,
+      promoPercentage: null,
       image: "/images/products/photo-1474979266404-7eaacbcd87c5.avif",
       category: {
         en: "Oils & Vinegars",
@@ -166,6 +170,7 @@ export const allProducts: Product[] = [
         fr: "Vinaigre de Riz Biologique",
       },
       price: 6.75,
+      promoPercentage: 15,
       image: "/images/products/rice-vinegar.png",
       category: {
         en: "Oils & Vinegars",
@@ -208,6 +213,7 @@ export const allProducts: Product[] = [
         fr: "Granola Sans Gluten",
       },
       price: 8.99,
+      promoPercentage: null,
       image: "/images/products/photo-1724441980123-aca7911329d0.avif",
       category: {
         en: "Wholefood",
@@ -250,6 +256,7 @@ export const allProducts: Product[] = [
         fr: "Barres de Céréales Complètes",
       },
       price: 5.25,
+      promoPercentage: null,
       image: "/images/products/premium_photo-1726490292042-7587d23d52de.avif",
       category: {
         en: "Wholefood",
@@ -292,6 +299,7 @@ export const allProducts: Product[] = [
         fr: "Quinoa Biologique",
       },
       price: 6.75,
+      promoPercentage: null,
       image: "/images/products/premium_photo-1705207702015-0c1f567a14df.avif",
       category: {
         en: "Grains & Legumes",
@@ -334,6 +342,7 @@ export const allProducts: Product[] = [
         fr: "Lentilles Rouges Biologiques",
       },
       price: 4.95,
+      promoPercentage: null,
       image: "/images/products/premium_photo-1700842181817-e7f4c9fa828a.avif",
       category: {
         en: "Grains & Legumes",
@@ -376,6 +385,7 @@ export const allProducts: Product[] = [
         fr: "Beurre d'Amandes",
       },
       price: 9.99,
+      promoPercentage: null,
       image: "/images/products/photo-1615110250484-e8c3b151b957.avif",
       category: {
         en: "Nuts & Seeds",
@@ -418,6 +428,7 @@ export const allProducts: Product[] = [
         fr: "Graines de Citrouille Biologiques",
       },
       price: 5.25,
+      promoPercentage: null,
       image: "/images/products/photo-1515670112266-c6d33ec59d6b.avif",
       category: {
         en: "Frutos Secos & Semillas",
@@ -460,6 +471,7 @@ export const allProducts: Product[] = [
         fr: "Yaourt à la Noix de Coco",
       },
       price: 5.49,
+      promoPercentage: null,
       image: "/images/products/photo-1588413335367-e49d32c5b50b.avif",
       category: {
         en: "Dairy Alternatives",
@@ -502,6 +514,7 @@ export const allProducts: Product[] = [
         fr: "Lait de Cajou Crémeux",
       },
       price: 4.99,
+      promoPercentage: null,
       image: "/images/products/photo-1680901106907-3374ffaa25c6.avif",
       category: {
         en: "Dairy Alternatives",
@@ -544,6 +557,7 @@ export const allProducts: Product[] = [
         fr: "Graines de Chia Biologiques",
       },
       price: 7.25,
+      promoPercentage: null,
       image: "/images/products/photo-1604768802835-899055f0e245.avif",
       category: {
         en: "Superfoods",
@@ -586,6 +600,7 @@ export const allProducts: Product[] = [
         fr: "Poudre de Spiruline Biologique",
       },
       price: 9.5,
+      promoPercentage: null,
       image: "/images/products/photo-1664956618676-9e65fe31a165.avif",
       category: {
         en: "Superfoods",
@@ -628,6 +643,7 @@ export const allProducts: Product[] = [
         fr: "Kombucha",
       },
       price: 4.99,
+      promoPercentage: null,
       image: "/images/products/photo-1573812914274-226dc19fbe17.avif",
       category: {
         en: "Beverages",
@@ -670,6 +686,7 @@ export const allProducts: Product[] = [
         fr: "Thé Vert Matcha",
       },
       price: 3.75,
+      promoPercentage: null,
       image: "/images/products/photo-1565117661210-fd54898de423.avif",
       category: {
         en: "Beverages",

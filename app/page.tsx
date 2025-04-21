@@ -8,6 +8,8 @@ import { Button } from "@/components/button"
 import ProductCard from "@/components/product-card"
 import SearchBar from "@/components/search-bar"
 import styles from "./page.module.css"
+import PromoCard from "@/components/promo-card"
+import { promoCombos } from "@/data/combos"
 
 import { categories } from "@/data/categories"
 import { allProducts } from "@/data/products"
@@ -121,35 +123,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className={`${styles.section} ${styles.testimonials}`}>
+      {/* Combos Section */}
+      <section className={styles.section}>
         <div className={styles.sectionContent}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>{t("testimonials.title")}</h2>
-            <p className={styles.sectionSubtitle}>{t("testimonials.subtitle")}</p>
+            <h2 className={styles.sectionTitle}>{t("promos.title")}</h2>
+            <p className={styles.sectionSubtitle}>{t("promos.subtitle")}</p>
           </div>
-          <div className={styles.testimonialsGrid}>
-            {[
-              {
-                quote: t("testimonials.1"),
-                author: "Sarah T.",
-              },
-              {
-                quote: t("testimonials.2"),
-                author: "Michael R.",
-              },
-              {
-                quote: t("testimonials.3"),
-                author: "Emma L.",
-              },
-            ].map((testimonial, index) => (
-              <div key={index} className={styles.testimonialCard}>
-                <div className={styles.testimonialContent}>
-                  <p className={styles.testimonialText}>"{testimonial.quote}"</p>
-                  <h3 className={styles.testimonialAuthor}>{testimonial.author}</h3>
-                </div>
-              </div>
+
+          <div className={styles.productsGrid}>
+            {promoCombos.slice(0, 4).map((combo) => (
+              <PromoCard key={combo.slug} promo={combo} />
             ))}
+          </div>
+
+          <div className={styles.viewAllContainer}>
+            <Button asChild variant="outline" className={styles.viewAllButton}>
+              <Link href="/promos">
+                {t("promos.viewAll")}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
