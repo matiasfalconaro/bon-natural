@@ -4,13 +4,22 @@ import { useState } from "react"
 import { Minus, Plus, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/contexts/cart-context"
+import { useLanguage } from "@/contexts/language-context"
 
 export default function ProductDetailsControls({ product }: { product: any }) {
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
+  const { language } = useLanguage()
+
+  const localizedTitle = product.title[language]
 
   const handleAddToCart = () => {
-    addItem({ ...product, quantity })
+    addItem({
+      id: product.slug,
+      title: product.title[language], // 👈 this is important
+      price: product.price,
+      image: product.image,
+    }, quantity)
   }
 
   return (
