@@ -71,18 +71,18 @@
 .logoCircle {
   width: 40px;
   height: 40px;
-  border-radius: 50%;       /* makes it circular */
-  overflow: hidden;         /* clips the image inside the circle */
+  border-radius: 50%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;  /* optional: or any background */
+  background-color: white;
 }
 
 .logoImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;        /* ensures the image fills the circle */
+  object-fit: cover;
 }
 
 .desktopNav {

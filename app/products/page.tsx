@@ -1,7 +1,5 @@
 "use client"
 
-import Link from "next/link"
-import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import ProductCard from "@/components/product-card"
@@ -10,7 +8,6 @@ import SearchBar from "@/components/search-bar"
 import { useLanguage } from "@/contexts/language-context"
 import styles from "./page.module.css"
 import { allProducts } from "@/data/products"
-import { categories as rawCategories } from "@/data/categories"
 
 type SupportedLanguage = "en" | "es" | "fr"
 
@@ -38,7 +35,7 @@ interface Category {
 
 export default function ProductsPage() {
   const { language, t } = useLanguage()
-  const lang = language as SupportedLanguage // only cast once here
+  const lang = language as SupportedLanguage
 
   const searchParams = useSearchParams()
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(allProducts)

@@ -67,7 +67,7 @@
 
 .shopButton {
   background-color: var(--color-primary);
-  color: white; /* Ensure text is white for better contrast */
+  color: white;
 }
 
 .shopButton:hover {
@@ -226,7 +226,7 @@
   width: 100%;
   margin-bottom: 0.75rem;
   background-color: var(--color-primary);
-  color: white; /* Ensure text is white for better contrast */
+  color: white;
 }
 
 .checkoutButton:hover {
@@ -241,21 +241,21 @@
 :global(.dark).emptyIcon,
 :global(.dark).emptyText,
 :global(.dark).backLink {
-  color: hsl(215, 20.2%, 75.1%); /* Brighter text in dark mode */
+  color: hsl(215, 20.2%, 75.1%);
 }
 
 :global(.dark).backLink:hover {
-  color: hsl(0, 0%, 100%); /* White text on hover */
+  color: hsl(0, 0%, 100%);
 }
 
 :global(.dark).removeButton {
-  color: hsl(215, 20.2%, 75.1%); /* Brighter icon in dark mode */
+  color: hsl(215, 20.2%, 75.1%);
 }
 
 :global(.dark).removeButton:hover {
-  color: hsl(0, 84.2%, 70.2%); /* Brighter red in dark mode */
+  color: hsl(0, 84.2%, 70.2%);
 }
 
 :global(.dark).cartHeader {
-  background-color: hsl(217.2, 32.6%, 20%); /* Slightly brighter background for better contrast */
+  background-color: hsl(217.2, 32.6%, 20%);
 }

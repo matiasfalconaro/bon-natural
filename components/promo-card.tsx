@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { ShoppingCart } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 import { useCart } from "@/contexts/cart-context"
-import styles from "./product-card.module.css" // shared styles
+import styles from "./product-card.module.css"
 
 interface LocalizedString {
   en: string
@@ -27,7 +27,7 @@ interface PromoCombo {
   price: number
   quantity?: number
   promoType: PromoType
-  promoLabel?: string;
+  promoLabel?: string
 }
 
 export default function PromoCard({ promo }: { promo: PromoCombo }) {
@@ -47,27 +47,33 @@ export default function PromoCard({ promo }: { promo: PromoCombo }) {
   }
 
   const renderPromoBadge = () => {
-    const base = styles.promoBadge
+    let label = ""
+    let modifierClass = ""
   
     switch (promo.promoType) {
       case "combo":
-        return <div className={`${base} ${styles.promoBadgeCombo}`}>Combo</div>
+        label = "Combo"
+        modifierClass = styles.combo
+        break
       case "bulk":
-        return <div className={`${base} ${styles.promoBadgeBulk}`}>x{promo.quantity}</div>
+        label = `x${promo.quantity}`
+        modifierClass = styles.bulk
+        break
+      case "gift":
+        label = "+1 Free"
+        modifierClass = styles.gift
+        break
       default:
         return null
     }
+  
+    return <div className={`${styles.discountBadge} ${modifierClass}`}>{label}</div>
   }
 
   return (
     <Card className={styles.card}>
       <Link href={`/promos/${promo.slug}`} className={styles.imageContainer}>
-        {/* Badge rendered like discount badge */}
-        <div className={styles.discountBadge}>
-          {promo.promoType === "combo" && "Combo"}
-          {promo.promoType === "bulk" && `x${promo.quantity}`}
-        </div>
-
+        {renderPromoBadge()}
         <Image
           src={promo.image1}
           alt={title}

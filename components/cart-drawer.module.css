@@ -127,19 +127,6 @@
   width: 100%;
 }
 
-/* Dark mode specific styles */
-:global(.dark).emptyCart {
-  color: hsl(215, 20.2%, 75.1%); /* Brighter text in dark mode */
-}
-
-:global(.dark).removeButton {
-  color: hsl(215, 20.2%, 75.1%); /* Brighter icon in dark mode */
-}
-
-:global(.dark).removeButton:hover {
-  color: hsl(0, 84.2%, 70.2%); /* Brighter red in dark mode */
-}
-
 .button:hover {
   transform: rotate(15deg);
   transition: transform 0.2s;
@@ -158,7 +145,7 @@
   position: absolute;
   top: -4px;
   right: -4px;
-  background-color: green; /* You can customize */
+  background-color: green;
   color: white;
   font-size: 0.75rem;
   line-height: 1;
@@ -175,4 +162,17 @@
 
 .button:hover .cart-badge {
   transform: scale(1.1);
+}
+
+/* Dark mode specific styles */
+:global(.dark).emptyCart {
+  color: hsl(215, 20.2%, 75.1%); /* Brighter text in dark mode */
+}
+
+:global(.dark).removeButton {
+  color: hsl(215, 20.2%, 75.1%); /* Brighter icon in dark mode */
+}
+
+:global(.dark).removeButton:hover {
+  color: hsl(0, 84.2%, 70.2%); /* Brighter red in dark mode */
 }

@@ -49,6 +49,7 @@ export default function Home() {
               </div>
             </div>
             <div className={styles.heroImageContainer}>
+              {/*
               <Image
                 src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
                 alt="Natural Food Collection"
@@ -56,6 +57,7 @@ export default function Home() {
                 height={500}
                 className={styles.heroImage}
               />
+              */}
             </div>
           </div>
         </div>

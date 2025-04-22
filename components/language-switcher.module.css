@@ -7,6 +7,6 @@
 }
 
 .active {
-  background-color: hsl(30, 70%, 62%) !important; /* orange */
+  background-color: hsl(30, 70%, 62%) !important;
   color: white !important;
 }

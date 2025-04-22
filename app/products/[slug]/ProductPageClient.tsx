@@ -5,10 +5,8 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Button } from "@/components/ui/button"
 import ProductDetailsControls from "@/components/product-details-controls"
 import ProductCard from "@/components/product-card"
-import { allProducts } from "@/data/products"
 import { getRelatedProducts } from "@/data/products"
 
 
@@ -95,23 +93,23 @@ export default function ProductPageClient({ product }: { product: Product | null
 
           <Tabs defaultValue="description">
             <TabsList>
-              <TabsTrigger value="description">Description</TabsTrigger>
-              <TabsTrigger value="nutrition">Nutrition</TabsTrigger>
-              <TabsTrigger value="ingredients">Ingredients</TabsTrigger>
-              <TabsTrigger value="origin">Origin</TabsTrigger>
+            <TabsTrigger value="description">{t("product.description")}</TabsTrigger>
+              <TabsTrigger value="nutrition">{t("product.nutrition")}</TabsTrigger>
+              <TabsTrigger value="ingredients">{t("product.ingredients")}</TabsTrigger>
+              <TabsTrigger value="origin">{t("product.origin")}</TabsTrigger>
             </TabsList>
             <TabsContent value="description" className="pt-4">
               <p>{getLocalized(product.description, language)}</p>
             </TabsContent>
             <TabsContent value="nutrition" className="pt-4">
               <div className="space-y-2">
-                <p><strong>Serving Size:</strong> {product.nutritionalInfo?.servingSize || "N/A"}</p>
-                <p><strong>Calories:</strong> {product.nutritionalInfo?.calories || "N/A"}</p>
-                <p><strong>Total Fat:</strong> {product.nutritionalInfo?.totalFat || "N/A"}</p>
-                <p><strong>Sodium:</strong> {product.nutritionalInfo?.sodium || "N/A"}</p>
-                <p><strong>Total Carbs:</strong> {product.nutritionalInfo?.totalCarbs || "N/A"}</p>
-                <p><strong>Sugars:</strong> {product.nutritionalInfo?.sugars || "N/A"}</p>
-                <p><strong>Protein:</strong> {product.nutritionalInfo?.protein || "N/A"}</p>
+                <p><strong>{t("nutrition.servingSize")}:</strong> {product.nutritionalInfo?.servingSize || "N/A"}</p>
+                <p><strong>{t("nutrition.calories")}:</strong> {product.nutritionalInfo?.calories || "N/A"}</p>
+                <p><strong>{t("nutrition.totalFat")}:</strong> {product.nutritionalInfo?.totalFat || "N/A"}</p>
+                <p><strong>{t("nutrition.sodium")}:</strong> {product.nutritionalInfo?.sodium || "N/A"}</p>
+                <p><strong>{t("nutrition.totalCarbs")}:</strong> {product.nutritionalInfo?.totalCarbs || "N/A"}</p>
+                <p><strong>{t("nutrition.sugars")}:</strong> {product.nutritionalInfo?.sugars || "N/A"}</p>
+                <p><strong>{t("nutrition.protein")}:</strong> {product.nutritionalInfo?.protein || "N/A"}</p>
               </div>
             </TabsContent>
             <TabsContent value="ingredients" className="pt-4">
@@ -125,7 +123,7 @@ export default function ProductPageClient({ product }: { product: Product | null
       </div>
 
       <div className="mt-16">
-        <h2 className="text-2xl font-bold mb-6">{t("products.relatedProducts")}</h2>
+        <h2 className="text-2xl font-bold mb-6">{t("product.relatedProducts")}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {relatedProducts.map((rp) => (
             <ProductCard key={rp.slug} product={rp} />

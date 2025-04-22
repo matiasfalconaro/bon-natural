@@ -60,7 +60,7 @@
 .addButton {
   width: 100%;
   background-color: var(--color-primary);
-  color: white; /* Ensure text is white for better contrast */
+  color: white;
 }
 
 .addButton:hover {

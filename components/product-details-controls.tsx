@@ -16,7 +16,7 @@ export default function ProductDetailsControls({ product }: { product: any }) {
   const handleAddToCart = () => {
     addItem({
       id: product.slug,
-      title: product.title[language], // 👈 this is important
+      title: product.title[language],
       price: product.price,
       image: product.image,
     }, quantity)
