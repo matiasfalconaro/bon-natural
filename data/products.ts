@@ -28,6 +28,7 @@ interface Product {
     sugars: string
     protein: string
   }
+  featured?: boolean
 }
 
 export const allProducts: Product[] = [
@@ -35,6 +36,7 @@ export const allProducts: Product[] = [
       id: "1",
       slug: "organic-raw-honey",
       categorySlug: "natural-sweeteners",
+      featured: false,
       image: "/images/products/photo-1587049352851-8d4e89133924.avif",
       price: 12.99,
       promoPercentage: null,
@@ -78,6 +80,7 @@ export const allProducts: Product[] = [
       id: "9",
       slug: "organic-stevia",
       categorySlug: "natural-sweeteners",
+      featured: true,
       image: "/images/products/photo-1610219171189-286769cc9b20.avif",
       price: 6.49,
       promoPercentage: 25,
@@ -121,6 +124,7 @@ export const allProducts: Product[] = [
       id: "2",
       slug: "olive-oil",
       categorySlug: "oils-vinegars",
+      featured: false,
       title: {
         en: "Cold-Pressed Olive Oil",
         es: "Aceite de Oliva Prensado en Frío",
@@ -164,6 +168,7 @@ export const allProducts: Product[] = [
       id: "11",
       slug: "organic-rice-vinegar",
       categorySlug: "oils-vinegars",
+      featured: true,
       title: {
         en: "Organic Rice Vinegar",
         es: "Vinagre de Arroz Orgánico",
@@ -207,6 +212,7 @@ export const allProducts: Product[] = [
       id: "3",
       slug: "granola",
       categorySlug: "wholefood",
+      featured: false,
       title: {
         en: "Gluten-Free Granola",
         es: "Granola Sin Gluten",
@@ -250,6 +256,7 @@ export const allProducts: Product[] = [
       id: "12",
       slug: "integral-cereal-bars",
       categorySlug: "wholefood",
+      featured: false,
       title: {
         en: "Integral Cereal Bars",
         es: "Barras de Cereal Integral",
@@ -293,6 +300,7 @@ export const allProducts: Product[] = [
       id: "4",
       slug: "quinoa",
       categorySlug: "grains-legumes",
+      featured: false,
       title: {
         en: "Organic Quinoa",
         es: "Quinua Orgánica",
@@ -336,6 +344,7 @@ export const allProducts: Product[] = [
       id: "13",
       slug: "organic-red-lentils",
       categorySlug: "grains-legumes",
+      featured: true,
       title: {
         en: "Organic Red Lentils",
         es: "Lentejas Rojas Orgánicas",
@@ -379,6 +388,7 @@ export const allProducts: Product[] = [
       id: "5",
       slug: "almond-butter",
       categorySlug: "nuts-seeds",
+      featured: false,
       title: {
         en: "Almond Butter",
         es: "Mantequilla de Almendras",
@@ -422,6 +432,7 @@ export const allProducts: Product[] = [
       id: "14",
       slug: "pumpkin-seeds",
       categorySlug: "nuts-seeds",
+      featured: false,
       title: {
         en: "Organic Pumpkin Seeds",
         es: "Semillas de Calabaza Orgánicas",
@@ -465,6 +476,7 @@ export const allProducts: Product[] = [
       id: "6",
       slug: "coconut-yogurt",
       categorySlug: "dairy-alternatives",
+      featured: false,
       title: {
         en: "Coconut Yogurt",
         es: "Yogur de Coco",
@@ -508,9 +520,10 @@ export const allProducts: Product[] = [
       id: "15",
       slug: "cashew-milk",
       categorySlug: "dairy-alternatives",
+      featured: false,
       title: {
         en: "Creamy Cashew Milk",
-        es: "Leche de Castañas de Cajú Cremosa",
+        es: "Leche de Castañas de Cajú",
         fr: "Lait de Cajou Crémeux",
       },
       price: 4.99,
@@ -551,6 +564,7 @@ export const allProducts: Product[] = [
       id: "7",
       slug: "chia-seeds",
       categorySlug: "superfoods",
+      featured: false,
       title: {
         en: "Organic Chia Seeds",
         es: "Semillas de Chía Orgánicas",
@@ -594,6 +608,7 @@ export const allProducts: Product[] = [
       id: "16",
       slug: "spirulina-powder",
       categorySlug: "superfoods",
+      featured: true,
       title: {
         en: "Organic Spirulina Powder",
         es: "Polvo de Espirulina Orgánica",
@@ -637,6 +652,7 @@ export const allProducts: Product[] = [
       id: "8",
       slug: "kombucha",
       categorySlug: "beverages",
+      featured: false,
       title: {
         en: "Kombucha",
         es: "Kombucha",
@@ -680,6 +696,7 @@ export const allProducts: Product[] = [
       id: "17",
       slug: "matcha-green-tea",
       categorySlug: "beverages",
+      featured: false,
       title: {
         en: "Matcha Green Tea",
         es: "Té Verde Matcha",

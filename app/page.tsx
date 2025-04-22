@@ -20,8 +20,11 @@ export default function Home() {
   // Optional: Localize category names using translation keys
   const localizedCategories = categories
 
-  // Featured products (slice as needed)
-  const featuredProducts = allProducts.slice(0, 4)
+  // Featured products
+  const featuredProducts =
+  allProducts.filter(p => p.featured).length > 0
+    ? allProducts.filter(p => p.featured)
+    : allProducts.slice(0, 4)
 
   const { language } = useLanguage()
 
