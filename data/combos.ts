@@ -114,7 +114,7 @@ export const promoCombos: PromoCombo[] = [
     slug: "olive-oil-vinegar",
     title: {
       en: "Olive Oil + Rice Vinegar",
-      es: "Aceite de Oliva + Vinagre de Arroz",
+      es: "Aceite Oliva + Vinagre Arroz",
       fr: "Huile d'Olive + Vinaigre de Riz",
     },
     description: {
