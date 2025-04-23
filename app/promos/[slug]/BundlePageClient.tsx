@@ -4,9 +4,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
-import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useCart } from "@/contexts/cart-context"
+import BundleDetailsControls from "@/components/promo-details-controls"
 
 interface LocalizedString {
   en: string
@@ -88,20 +88,7 @@ export default function BundlePageClient({ bundle }: { bundle: Bundle | null }) 
 
           <p className="text-muted-foreground">{description}</p>
 
-          <Button
-            size="lg"
-            className="w-full md:w-auto"
-            onClick={() =>
-              addItem({
-                id: bundle.slug,
-                title,
-                price: bundle.price,
-                image: bundle.image1,
-              })
-            }
-          >
-            {t("product.addToCart")}
-          </Button>
+          <BundleDetailsControls bundle={bundle} />
 
           <Tabs defaultValue="description">
             <TabsList>
