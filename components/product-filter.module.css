@@ -1,3 +1,7 @@
+html, body {
+  overflow-x: hidden;
+}
+
 .container {
   background-color: var(--background);
   border-radius: 0.5rem;
@@ -79,6 +83,32 @@
 .checkboxLabel {
   font-size: 0.875rem;
   cursor: pointer;
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.searchInput {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--background);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border);
+  }
 }
 
 /* Dark mode specific styles */
