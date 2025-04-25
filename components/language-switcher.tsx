@@ -18,7 +18,7 @@ export default function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className={styles.button}>
+      <Button variant="ghost" size="icon" data-active={!!language} className={`${styles.button} ${language === "es" ? styles.active : ""}`}>
           <Globe className="h-5 w-5" />
           <span className="sr-only">Switch language</span>
         </Button>

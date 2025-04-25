@@ -41,14 +41,14 @@ export default function CartDrawer() {
   const total = subtotal - subtotal * (discount / 100)
 
   const handleCheckout = () => {
-    // In a real app, this would redirect to a checkout page or open a payment modal
+    // TODO: In a real app, this would redirect to a checkout page or open a payment modal
     alert(`Proceeding to checkout with total: $${total.toFixed(2)}`)
   }
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="relative">
+        <Button variant="ghost" size="icon" className={`${styles.button} ${styles.active}`}>
           <ShoppingBag className="h-5 w-5" />
           {itemCount > 0 && <Badge className="cart-badge">{itemCount}</Badge>}
           <span className="sr-only">{t("cart.open")}</span>

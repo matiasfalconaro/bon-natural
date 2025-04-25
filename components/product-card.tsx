@@ -10,38 +10,60 @@ import { useCart } from "@/contexts/cart-context"
 import { toast } from "@/hooks/use-toast"
 import styles from "./product-card.module.css"
 
+interface LocalizedString {
+  en: string
+  es: string
+  fr: string
+}
+
 interface Product {
   id: string
-  title: string
+  slug: string
+  title: LocalizedString
   price: number
   image: string
-  category: string
+  category: LocalizedString
+  promoPercentage?: number | null
+  isComboo?: boolean 
 }
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   const { addItem } = useCart()
+
+  const title = product.title[language as keyof LocalizedString]
+  const category = product.category[language as keyof LocalizedString]
+
+  const isDiscounted = typeof product.promoPercentage === "number" && product.promoPercentage > 0
+  const discountedPrice = isDiscounted
+    ? product.price * (1 - product.promoPercentage! / 100)
+    : product.price
 
   const handleAddToCart = () => {
     addItem({
-      id: product.id,
-      title: product.title,
-      price: product.price,
+      id: product.slug,
+      title,
+      price: discountedPrice,
       image: product.image,
     })
 
     toast({
       title: t("cart.added"),
-      description: `${product.title} ${t("cart.addedToCart")}`,
+      description: `${title} ${t("cart.addedToCart")}`,
     })
   }
 
   return (
     <Card className={styles.card}>
-      <Link href={`/products/${product.id}`} className={styles.imageContainer}>
+      <Link href={`/products/${product.slug}`} className={styles.imageContainer}>
+        {isDiscounted && (
+          <div className={styles.discountBadge}>
+            {product.promoPercentage}% OFF
+          </div>
+        )}
         <Image
           src={product.image || "/placeholder.svg"}
-          alt={product.title}
+          alt={title}
           width={300}
           height={300}
           className={styles.image}
@@ -49,11 +71,20 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
       <CardContent className={styles.content}>
         <div className={styles.details}>
-          <p className={styles.category}>{product.category}</p>
-          <Link href={`/products/${product.id}`} className={styles.title}>
-            {product.title}
+          <p className={styles.category}>{category}</p>
+          <Link href={`/products/${product.slug}`} className={styles.title}>
+            {title}
           </Link>
-          <p className={styles.price}>${product.price.toFixed(2)}</p>
+          {isDiscounted ? (
+            <div>
+              <span className={styles.price} style={{ textDecoration: "line-through", color: "#888", marginRight: "0.5rem" }}>
+                ${product.price.toFixed(2)}
+              </span>
+              <span className={styles.price}>${discountedPrice.toFixed(2)}</span>
+            </div>
+          ) : (
+            <p className={styles.price}>${product.price.toFixed(2)}</p>
+          )}
         </div>
       </CardContent>
       <CardFooter className={styles.footer}>

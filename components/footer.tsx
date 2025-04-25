@@ -3,10 +3,11 @@
 import Link from "next/link"
 import { Facebook, Instagram, Twitter } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
+import { categories } from "@/data/categories"
 import styles from "./footer.module.css"
 
 export default function Footer() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
   return (
     <footer className={styles.footer}>
@@ -15,7 +16,7 @@ export default function Footer() {
           <div className={styles.column}>
             <h3 className={styles.title}>{t("site.name")}</h3>
             <p className={styles.description}>
-              Providing organic, sustainable, and locally-sourced natural foods since 2010.
+              {t("footer.description")}
             </p>
             <div className={styles.socialLinks}>
               <Link href="#" className={styles.socialLink}>
@@ -32,87 +33,46 @@ export default function Footer() {
               </Link>
             </div>
           </div>
+
           <div className={styles.column}>
-            <h3 className={styles.title}>Shop</h3>
+            <h3 className={styles.title}>{t("footer.shop")}</h3>
             <ul className={styles.links}>
               <li>
                 <Link href="/products" className={styles.link}>
-                  All Products
+                  {t("footer.allProducts")}
                 </Link>
               </li>
-              <li>
-                <Link href="/categories/organic-produce" className={styles.link}>
-                  Organic Produce
-                </Link>
-              </li>
-              <li>
-                <Link href="/categories/superfoods" className={styles.link}>
-                  Superfoods
-                </Link>
-              </li>
-              <li>
-                <Link href="/categories/gluten-free" className={styles.link}>
-                  Gluten-Free
-                </Link>
-              </li>
-              <li>
-                <Link href="/categories/plant-based" className={styles.link}>
-                  Plant-Based
-                </Link>
-              </li>
+              {categories.slice(0, 4).map((category) => (
+                <li key={category.slug}>
+                  <Link href={`/categories/${category.slug}`} className={styles.link}>
+                    {category.name[language]}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
+
           <div className={styles.column}>
-            <h3 className={styles.title}>Company</h3>
+            <h3 className={styles.title}>{t("footer.company")}</h3>
             <ul className={styles.links}>
-              <li>
-                <Link href="/about" className={styles.link}>
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className={styles.link}>
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className={styles.link}>
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/careers" className={styles.link}>
-                  Careers
-                </Link>
-              </li>
+              <li><Link href="/about" className={styles.link}>{t("footer.aboutUs")}</Link></li>
+              <li><Link href="/contact" className={styles.link}>{t("footer.contactUs")}</Link></li>
+              <li><Link href="/blog" className={styles.link}>{t("footer.blog")}</Link></li>
+              <li><Link href="/careers" className={styles.link}>{t("footer.careers")}</Link></li>
             </ul>
           </div>
+
           <div className={styles.column}>
-            <h3 className={styles.title}>Help</h3>
+            <h3 className={styles.title}>{t("footer.help")}</h3>
             <ul className={styles.links}>
-              <li>
-                <Link href="/shipping" className={styles.link}>
-                  Shipping & Returns
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className={styles.link}>
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className={styles.link}>
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className={styles.link}>
-                  Terms of Service
-                </Link>
-              </li>
+              <li><Link href="/shipping" className={styles.link}>{t("footer.shippingReturns")}</Link></li>
+              <li><Link href="/faq" className={styles.link}>{t("footer.faq")}</Link></li>
+              <li><Link href="/privacy" className={styles.link}>{t("footer.privacyPolicy")}</Link></li>
+              <li><Link href="/terms" className={styles.link}>{t("footer.termsOfService")}</Link></li>
             </ul>
           </div>
         </div>
+
         <div className={styles.copyright}>
           © {new Date().getFullYear()} {t("site.name")}. {t("footer.copyright")}
         </div>

@@ -14,14 +14,13 @@ export default function SearchBar() {
   const searchParams = useSearchParams()
   const { t } = useLanguage()
   const [searchTerm, setSearchTerm] = useState("")
-  const [recentSearches, setRecentSearches] = useState<string[]>([])
-  const [showSuggestions, setShowSuggestions] = useState(false)
+  // const [recentSearches, setRecentSearches] = useState<string[]>([])
+  // const [showSuggestions, setShowSuggestions] = useState(false)
 
   // Use a ref to track if we've already initialized
   const initialized = useRef(false)
 
-  // Popular search suggestions
-  const suggestions = ["Organic", "Gluten-free", "Vegan", "Superfoods", "Natural sweeteners", "Healthy snacks"]
+  // const suggestions = ["Organic", "Gluten-free", "Vegan", "Superfoods", "Natural sweeteners", "Healthy snacks"]
 
   // Initialize search term and recent searches only once
   useEffect(() => {
@@ -32,48 +31,44 @@ export default function SearchBar() {
     const initialSearch = searchParams.get("search") || ""
     setSearchTerm(initialSearch)
 
-    // Load recent searches from localStorage
-    if (typeof window !== "undefined") {
-      try {
-        const savedSearches = localStorage.getItem("recentSearches")
-        if (savedSearches) {
-          setRecentSearches(JSON.parse(savedSearches))
-        }
-      } catch (e) {
-        console.error("Failed to parse recent searches", e)
-      }
-    }
+    // if (typeof window !== "undefined") {
+    //   try {
+    //     const savedSearches = localStorage.getItem("recentSearches")
+    //     if (savedSearches) {
+    //       setRecentSearches(JSON.parse(savedSearches))
+    //     }
+    //   } catch (e) {
+    //     console.error("Failed to parse recent searches", e)
+    //   }
+    // }
 
     // Mark as initialized
     initialized.current = true
-  }, [searchParams]) // Keep searchParams in deps to satisfy React
+  }, [searchParams])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     if (searchTerm.trim()) {
-      // Save to recent searches
-      const updatedSearches = [searchTerm, ...recentSearches.filter((s) => s !== searchTerm)].slice(0, 5) // Keep only 5 most recent
+      // const updatedSearches = [searchTerm, ...recentSearches.filter((s) => s !== searchTerm)].slice(0, 5)
+      // setRecentSearches(updatedSearches)
 
-      setRecentSearches(updatedSearches)
-
-      // Save to localStorage
-      try {
-        localStorage.setItem("recentSearches", JSON.stringify(updatedSearches))
-      } catch (e) {
-        console.error("Failed to save recent searches", e)
-      }
+      // try {
+      //   localStorage.setItem("recentSearches", JSON.stringify(updatedSearches))
+      // } catch (e) {
+      //   console.error("Failed to save recent searches", e)
+      // }
 
       // Navigate to search results
       router.push(`/products?search=${encodeURIComponent(searchTerm)}`)
-      setShowSuggestions(false)
+      // setShowSuggestions(false)
     }
   }
 
-  const handleSuggestionClick = (suggestion: string) => {
-    setSearchTerm(suggestion)
-    router.push(`/products?search=${encodeURIComponent(suggestion)}`)
-    setShowSuggestions(false)
-  }
+  // const handleSuggestionClick = (suggestion: string) => {
+  //   setSearchTerm(suggestion)
+  //   router.push(`/products?search=${encodeURIComponent(suggestion)}`)
+  //   setShowSuggestions(false)
+  // }
 
   return (
     <div className={styles.searchContainer}>
@@ -84,11 +79,8 @@ export default function SearchBar() {
             placeholder={t("search.placeholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onFocus={() => setShowSuggestions(true)}
-            onBlur={() => {
-              // Delay hiding suggestions to allow for clicks
-              setTimeout(() => setShowSuggestions(false), 200)
-            }}
+            // onFocus={() => setShowSuggestions(true)}
+            // onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             className={styles.searchInput}
           />
           <Button type="submit" className={styles.searchButton}>
@@ -97,6 +89,7 @@ export default function SearchBar() {
           </Button>
         </div>
 
+        {/*
         {showSuggestions && (
           <div className={styles.suggestionsContainer}>
             {recentSearches.length > 0 && (
@@ -136,6 +129,7 @@ export default function SearchBar() {
             </div>
           </div>
         )}
+        */}
       </form>
     </div>
   )

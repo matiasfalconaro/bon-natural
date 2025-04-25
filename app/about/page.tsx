@@ -17,17 +17,8 @@ export default function AboutPage() {
       <div className={styles.storySection}>
         <div className={styles.storyContent}>
           <h2 className={styles.sectionTitle}>{t("about.ourStory")}</h2>
-          <p className={styles.paragraph}>
-            Founded in 2010, Natural Food Boutique began with a simple mission: to make organic, sustainable, and
-            locally-sourced natural foods accessible to everyone. What started as a small family-owned store has grown
-            into a beloved community hub for health-conscious individuals and families.
-          </p>
-          <p className={styles.paragraph}>
-            Our founder, Sarah Johnson, was inspired to create Natural Food Boutique after struggling to find
-            high-quality organic products for her family. Frustrated by limited options and high prices, she envisioned
-            a store that offered premium natural foods at fair prices, while supporting local farmers and sustainable
-            practices.
-          </p>
+          <p className={styles.paragraph}>{t("about.storyParagraph1")}</p>
+          <p className={styles.paragraph}>{t("about.storyParagraph2")}</p>
         </div>
         <div className={styles.storyImage}>
           <Image
@@ -44,32 +35,20 @@ export default function AboutPage() {
         <h2 className={styles.sectionTitle}>{t("about.ourValues")}</h2>
         <div className={styles.valuesGrid}>
           <div className={styles.valueCard}>
-            <h3 className={styles.valueTitle}>Quality</h3>
-            <p className={styles.valueDescription}>
-              We carefully select every product in our store, ensuring it meets our strict standards for quality,
-              nutrition, and taste.
-            </p>
+            <h3 className={styles.valueTitle}>{t("about.values.quality.title")}</h3>
+            <p className={styles.valueDescription}>{t("about.values.quality.description")}</p>
           </div>
           <div className={styles.valueCard}>
-            <h3 className={styles.valueTitle}>Sustainability</h3>
-            <p className={styles.valueDescription}>
-              We're committed to environmentally friendly practices, from sourcing products with minimal packaging to
-              supporting regenerative agriculture.
-            </p>
+            <h3 className={styles.valueTitle}>{t("about.values.sustainability.title")}</h3>
+            <p className={styles.valueDescription}>{t("about.values.sustainability.description")}</p>
           </div>
           <div className={styles.valueCard}>
-            <h3 className={styles.valueTitle}>Community</h3>
-            <p className={styles.valueDescription}>
-              We believe in building strong relationships with local farmers, producers, and customers to create a
-              healthier, more connected community.
-            </p>
+            <h3 className={styles.valueTitle}>{t("about.values.community.title")}</h3>
+            <p className={styles.valueDescription}>{t("about.values.community.description")}</p>
           </div>
           <div className={styles.valueCard}>
-            <h3 className={styles.valueTitle}>Education</h3>
-            <p className={styles.valueDescription}>
-              We're passionate about helping our customers learn about nutrition, sustainable living, and the story
-              behind their food.
-            </p>
+            <h3 className={styles.valueTitle}>{t("about.values.education.title")}</h3>
+            <p className={styles.valueDescription}>{t("about.values.education.description")}</p>
           </div>
         </div>
       </div>
@@ -81,40 +60,42 @@ export default function AboutPage() {
             <div className={styles.teamImageContainer}>
               <Image
                 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                alt="Sarah Johnson"
+                alt={t("about.team.sarah.name")}
                 width={200}
                 height={200}
                 className={styles.teamImage}
               />
             </div>
-            <h3 className={styles.teamName}>Sarah Johnson</h3>
-            <p className={styles.teamRole}>Founder & CEO</p>
+            <h3 className={styles.teamName}>{t("about.team.sarah.name")}</h3>
+            <p className={styles.teamRole}>{t("about.team.sarah.role")}</p>
           </div>
+
           <div className={styles.teamMember}>
             <div className={styles.teamImageContainer}>
               <Image
                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                alt="Michael Chen"
+                alt={t("about.team.michael.name")}
                 width={200}
                 height={200}
                 className={styles.teamImage}
               />
             </div>
-            <h3 className={styles.teamName}>Michael Chen</h3>
-            <p className={styles.teamRole}>Head of Sourcing</p>
+            <h3 className={styles.teamName}>{t("about.team.michael.name")}</h3>
+            <p className={styles.teamRole}>{t("about.team.michael.role")}</p>
           </div>
+
           <div className={styles.teamMember}>
             <div className={styles.teamImageContainer}>
               <Image
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"
-                alt="Emily Rodriguez"
+                alt={t("about.team.emily.name")}
                 width={200}
                 height={200}
                 className={styles.teamImage}
               />
             </div>
-            <h3 className={styles.teamName}>Emily Rodriguez</h3>
-            <p className={styles.teamRole}>Nutritionist</p>
+            <h3 className={styles.teamName}>{t("about.team.emily.name")}</h3>
+            <p className={styles.teamRole}>{t("about.team.emily.role")}</p>
           </div>
         </div>
       </div>

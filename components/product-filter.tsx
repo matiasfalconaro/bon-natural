@@ -6,7 +6,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/atoms/button/button"
+import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { useLanguage } from "@/contexts/language-context"
@@ -33,21 +33,20 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
   const prevInitialSearchTerm = useRef(initialSearchTerm)
 
   const categories = [
-    "Beverages",
-    "Breakfast",
-    "Dairy Alternatives",
-    "Grains",
-    "Oils",
-    "Spreads",
-    "Superfoods",
-    "Sweeteners",
+    { label: "Beverages", slug: "beverages" },
+    { label: "Wholefood", slug: "wholefood" },
+    { label: "Dairy Alternatives", slug: "dairy-alternatives" },
+    { label: "Grains & Legumes", slug: "grains-legumes" },
+    { label: "Oils & Vinegars", slug: "oils-vinegars" },
+    { label: "Nuts & Seeds", slug: "nuts-seeds" },
+    { label: "Superfoods", slug: "superfoods" },
+    { label: "Natural Sweeteners", slug: "natural-sweeteners" },
   ]
 
-  const dietaryPreferences = ["Gluten-Free", "Organic", "Vegan", "Non-GMO", "Sugar-Free", "Paleo"]
+  const dietaryPreferences = ["Gluten-Free", "Organic", "Vegan", "Non-GMO", "Sugar-Free", "Paleo", "Whole Grain"]
 
   // Set initial search term when component mounts or when initialSearchTerm changes
   useEffect(() => {
-    // Only update if initialSearchTerm has changed
     if (!initialized.current || prevInitialSearchTerm.current !== initialSearchTerm) {
       setSearchTerm(initialSearchTerm)
       prevInitialSearchTerm.current = initialSearchTerm
@@ -171,18 +170,18 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
           <AccordionTrigger>{t("filters.categories")}</AccordionTrigger>
           <AccordionContent>
             <div className={styles.checkboxGroup}>
-              {categories.map((category) => (
-                <div key={category} className={styles.checkboxItem}>
-                  <Checkbox
-                    id={`category-${category}`}
-                    checked={selectedCategories.includes(category)}
-                    onCheckedChange={(checked) => handleCategoryChange(category, checked === true)}
-                  />
-                  <Label htmlFor={`category-${category}`} className={styles.checkboxLabel}>
-                    {category}
-                  </Label>
-                </div>
-              ))}
+            {categories.map(({ label, slug }) => (
+              <div key={slug} className={styles.checkboxItem}>
+                <Checkbox
+                  id={`category-${slug}`}
+                  checked={selectedCategories.includes(slug)}
+                  onCheckedChange={(checked) => handleCategoryChange(slug, checked === true)}
+                />
+                <Label htmlFor={`category-${slug}`} className={styles.checkboxLabel}>
+                  {label}
+                </Label>
+              </div>
+            ))}
             </div>
           </AccordionContent>
         </AccordionItem>

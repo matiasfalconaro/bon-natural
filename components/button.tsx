@@ -3,7 +3,9 @@ import { forwardRef } from "react"
 import { Button as ShadcnButton } from "@/components/ui/button"
 import styles from "./button.module.css"
 
-interface ButtonProps extends React.ComponentProps<typeof ShadcnButton> {
+type ShadcnProps = Omit<React.ComponentProps<typeof ShadcnButton>, "variant">
+
+interface ButtonProps extends ShadcnProps {
   variant?: "default" | "primary" | "outline" | "ghost"
 }
 
