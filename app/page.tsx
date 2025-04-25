@@ -1,31 +1,47 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 import { Button } from "@/components/button"
 import ProductCard from "@/components/product-card"
-import SearchBar from "@/components/search-bar"
 import PromoCard from "@/components/promo-card"
+import SearchBar from "@/components/search-bar"
+import { getAllCategories } from "@/lib/api/categories"
+import { getAllProducts } from "@/lib/api/products"
+import { getAllPromos } from "@/lib/api/promos"
+import { Category } from "@/types/categories"
+import { Product } from "@/types/products"
+import { PromoCombo } from "@/types/promos"
 import styles from "./page.module.css"
-
-import { promoCombos } from "@/data/combos"
-import { getAllCategories } from "@/lib/api/categories" // 🛠 NEW
-import { Category } from "@/types/categories" // 🛠 if you have it
 
 export default function Home() {
   const { t, language } = useLanguage()
-  const [categories, setCategories] = useState<Category[]>([]) // 🛠
-  
+
+  const [categories, setCategories] = useState<Category[]>([])
+  const [products, setProducts] = useState<Product[]>([])
+  const [promos, setPromos] = useState<PromoCombo[]>([])
+
   useEffect(() => {
-    async function loadCategories() {
-      const fetched = await getAllCategories()
-      setCategories(fetched)
+    async function loadData() {
+      const [fetchedCategories, fetchedProducts, fetchedPromos] = await Promise.all([
+        getAllCategories(),
+        getAllProducts(),
+        getAllPromos()
+      ])
+      setCategories(fetchedCategories)
+      setProducts(fetchedProducts)
+      setPromos(fetchedPromos)
     }
-    loadCategories()
+    loadData()
   }, [])
+
+  const featuredProducts =
+    products.filter((p) => p.featured).length > 0
+      ? products.filter((p) => p.featured)
+      : products.slice(0, 4)
 
   return (
     <div className={styles.container}>
@@ -72,42 +88,67 @@ export default function Home() {
             <p className={styles.sectionSubtitle}>{t("categories.subtitle")}</p>
           </div>
           <div className={styles.categoriesGrid}>
-            {categories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/categories/${category.slug}`}
-                className={styles.categoryCard}
-              >
-                <Image
-                  src={category.image}
-                  alt={category.name[language]}
-                  width={200}
-                  height={200}
-                  className={styles.categoryImage}
-                />
-                <div className={styles.categoryOverlay}>
-                  <h3 className={styles.categoryTitle}>{category.name[language]}</h3>
-                </div>
-              </Link>
-            ))}
+            {categories.length === 0 ? (
+              <p>Loading categories...</p>
+            ) : (
+              categories.map((category) => (
+                <Link
+                  key={category.slug}
+                  href={`/categories/${category.slug}`}
+                  className={styles.categoryCard}
+                >
+                  <Image
+                    src={category.image}
+                    alt={category.name[language]}
+                    width={200}
+                    height={200}
+                    className={styles.categoryImage}
+                  />
+                  <div className={styles.categoryOverlay}>
+                    <h3 className={styles.categoryTitle}>{category.name[language]}</h3>
+                  </div>
+                </Link>
+              ))
+            )}
           </div>
         </div>
       </section>
 
-      {/* Combos Section */}
+      {/* Featured Products Section */}
+      <section className={styles.section}>
+        <div className={styles.sectionContent}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>{t("featured.title")}</h2>
+            <p className={styles.sectionSubtitle}>{t("featured.subtitle")}</p>
+          </div>
+          <div className={styles.productsGrid}>
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.slug} product={product} />
+            ))}
+          </div>
+          <div className={styles.viewAllContainer}>
+            <Button asChild variant="outline" className={styles.viewAllButton}>
+              <Link href="/products">
+                {t("featured.viewAll")}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Promos Section */}
       <section className={styles.section}>
         <div className={styles.sectionContent}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>{t("promos.title")}</h2>
             <p className={styles.sectionSubtitle}>{t("promos.subtitle")}</p>
           </div>
-
           <div className={styles.productsGrid}>
-            {promoCombos.slice(0, 4).map((combo) => (
+            {promos.slice(0, 4).map((combo: PromoCombo) => (
               <PromoCard key={combo.slug} promo={combo} />
             ))}
           </div>
-
           <div className={styles.viewAllContainer}>
             <Button asChild variant="outline" className={styles.viewAllButton}>
               <Link href="/promos">
