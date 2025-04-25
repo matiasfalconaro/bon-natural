@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
@@ -11,12 +12,20 @@ import PromoCard from "@/components/promo-card"
 import styles from "./page.module.css"
 
 import { promoCombos } from "@/data/combos"
-import { categories } from "@/data/categories"
+import { getAllCategories } from "@/lib/api/categories" // 🛠 NEW
+import { Category } from "@/types/categories" // 🛠 if you have it
 
 export default function Home() {
   const { t, language } = useLanguage()
-
-  const localizedCategories = categories
+  const [categories, setCategories] = useState<Category[]>([]) // 🛠
+  
+  useEffect(() => {
+    async function loadCategories() {
+      const fetched = await getAllCategories()
+      setCategories(fetched)
+    }
+    loadCategories()
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -63,7 +72,7 @@ export default function Home() {
             <p className={styles.sectionSubtitle}>{t("categories.subtitle")}</p>
           </div>
           <div className={styles.categoriesGrid}>
-            {localizedCategories.map((category) => (
+            {categories.map((category) => (
               <Link
                 key={category.slug}
                 href={`/categories/${category.slug}`}

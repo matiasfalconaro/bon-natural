@@ -6,36 +6,11 @@ import { ArrowLeft } from "lucide-react"
 import ProductCard from "@/components/product-card"
 import ProductFilter from "@/components/product-filter"
 import { useLanguage } from "@/contexts/language-context"
+import { getAllProducts } from "@/lib/api/products"
+import { getAllCategories } from "@/lib/api/categories"
 import styles from "./page.module.css"
-import { allProducts } from "@/data/products"
-import { CATEGORY_MAP } from "@/data/category-map"
-
-// Localized string extractor
-const getLocalized = (
-  localized: { en: string; es: string; fr: string },
-  lang: string
-): string => {
-  return localized[lang as keyof typeof localized] || ""
-}
-
-type SupportedLanguage = "en" | "es" | "fr"
-
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
-
-interface Product {
-  id: string
-  slug: string
-  title: LocalizedString
-  price: number
-  image: string
-  category: LocalizedString
-  dietary: string[]
-  categorySlug: string
-}
+import { Product } from "@/types/products"
+import { Category, LocalizedString } from "@/types/categories"
 
 export default function CategoryPageClient({ slug }: { slug: string }) {
   const { language, t } = useLanguage()
@@ -44,22 +19,28 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
   const [categoryName, setCategoryName] = useState<string>("")
 
   useEffect(() => {
-    const resolvedCategory = CATEGORY_MAP[slug] || {
-      en: slug.replace(/-/g, " "),
-      es: slug.replace(/-/g, " "),
-      fr: slug.replace(/-/g, " "),
+    async function fetchData() {
+      const fetchedProducts = await getAllProducts()
+      const fetchedCategories = await getAllCategories()
+
+      const localizedCategory = fetchedCategories.find((cat) => cat.slug === slug)
+
+      setCategoryName(
+        localizedCategory
+          ? localizedCategory.name[language as keyof LocalizedString]
+          : slug.replace(/-/g, " ")
+      )
+
+      const categoryProducts =
+        slug === "all"
+          ? fetchedProducts
+          : fetchedProducts.filter((product) => product.categorySlug === slug)
+
+      setProducts(categoryProducts)
+      setFilteredProducts(categoryProducts)
     }
 
-    const displayName = getLocalized(resolvedCategory, language)
-    setCategoryName(displayName)
-
-    const categoryProducts =
-      slug === "all"
-        ? allProducts
-        : allProducts.filter((product) => product.categorySlug === slug)
-
-    setProducts(categoryProducts)
-    setFilteredProducts(categoryProducts)
+    fetchData()
   }, [slug, language])
 
   const handleFilter = useCallback(
@@ -69,7 +50,7 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
       dietary: string[]
       searchTerm: string
     }) => {
-      let filtered = slug === "all" ? [...allProducts] : [...products]
+      let filtered = [...products]
 
       filtered = filtered.filter(
         (product) =>
@@ -87,8 +68,8 @@ export default function CategoryPageClient({ slug }: { slug: string }) {
         const searchLower = filters.searchTerm.toLowerCase()
         filtered = filtered.filter(
           (product) =>
-            getLocalized(product.title, language).toLowerCase().includes(searchLower) ||
-            getLocalized(product.category, language).toLowerCase().includes(searchLower)
+            product.title[language as keyof LocalizedString].toLowerCase().includes(searchLower) ||
+            product.category[language as keyof LocalizedString].toLowerCase().includes(searchLower)
         )
       }
 

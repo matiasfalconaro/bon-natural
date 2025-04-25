@@ -1,13 +1,26 @@
 "use client"
 
+import { useState, useEffect } from "react"
+import { useLanguage } from "@/contexts/language-context"
+import { getAllCategories } from "@/lib/api/categories"
 import Link from "next/link"
 import Image from "next/image"
-import { useLanguage } from "@/contexts/language-context"
-import { categories } from "@/data/categories"
 import styles from "./page.module.css"
+import { Category } from "@/types/categories"
 
 export default function CategoriesPage() {
   const { t, language } = useLanguage()
+
+  const [categories, setCategories] = useState<Category[]>([])
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const fetched = await getAllCategories()
+      setCategories(fetched)
+    }
+
+    fetchCategories()
+  }, [])
 
   return (
     <div className={styles.container}>
