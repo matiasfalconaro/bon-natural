@@ -7,26 +7,16 @@ import { useLanguage } from "@/contexts/language-context"
 import { Button } from "@/components/button"
 import ProductCard from "@/components/product-card"
 import SearchBar from "@/components/search-bar"
-import styles from "./page.module.css"
 import PromoCard from "@/components/promo-card"
-import { promoCombos } from "@/data/combos"
+import styles from "./page.module.css"
 
+import { promoCombos } from "@/data/combos"
 import { categories } from "@/data/categories"
-import { allProducts } from "@/data/products"
 
 export default function Home() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
 
-  // Optional: Localize category names using translation keys
   const localizedCategories = categories
-
-  // Featured products
-  const featuredProducts =
-  allProducts.filter(p => p.featured).length > 0
-    ? allProducts.filter(p => p.featured)
-    : allProducts.slice(0, 4)
-
-  const { language } = useLanguage()
 
   return (
     <div className={styles.container}>
@@ -51,17 +41,7 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            <div className={styles.heroImageContainer}>
-              {/*
-              <Image
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                alt="Natural Food Collection"
-                width={500}
-                height={500}
-                className={styles.heroImage}
-              />
-              */}
-            </div>
+            <div className={styles.heroImageContainer}></div>
           </div>
         </div>
       </section>
@@ -101,29 +81,6 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products Section */}
-      <section className={styles.section}>
-        <div className={styles.sectionContent}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>{t("featured.title")}</h2>
-            <p className={styles.sectionSubtitle}>{t("featured.subtitle")}</p>
-          </div>
-          <div className={styles.productsGrid}>
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.slug} product={product} />
-            ))}
-          </div>
-          <div className={styles.viewAllContainer}>
-            <Button asChild variant="outline" className={styles.viewAllButton}>
-              <Link href="/products">
-                {t("featured.viewAll")}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
           </div>
         </div>
       </section>

@@ -1,12 +1,17 @@
-import { getProductBySlug } from "@/data/products"
+import { getProductBySlug } from "@/lib/api/products"
+import { getRelatedProducts } from "@/lib/api/products"
 import ProductPageClient from "./ProductPageClient"
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  const product = getProductBySlug(slug)
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const product = await getProductBySlug(params.slug)
 
-  return <ProductPageClient product={product} />
+  if (!product) return <div>Product not found</div>
+
+  const relatedProducts = await getRelatedProducts(product.categorySlug, product.slug)
+
+  return <ProductPageClient product={product} relatedProducts={relatedProducts} />
 }
+
 
 /**
 Temporary workaround to avoid the Next.js error:

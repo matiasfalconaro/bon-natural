@@ -7,60 +7,21 @@ import { useLanguage } from "@/contexts/language-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProductDetailsControls from "@/components/product-details-controls"
 import ProductCard from "@/components/product-card"
-import { getRelatedProducts } from "@/data/products"
+import type { Product } from "@/types/products" // ✅ Import types from /types
 
+const getLocalized = (field: Product["title"] | undefined, lang: string): string =>
+  field?.[lang as keyof Product["title"]] || "N/A"
 
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
-
-interface Product {
-  id: string
-  slug: string
-  categorySlug: string
-  title: LocalizedString
-  price: number
-  image: string
-  category: LocalizedString
-  dietary: string[]
-  description: LocalizedString
-  ingredients: LocalizedString
-  origin: LocalizedString
-  nutritionalInfo?: {
-    servingSize: string
-    calories: number
-    totalFat: string
-    sodium: string
-    totalCarbs: string
-    sugars: string
-    protein: string
-  }
-}
-
-const getLocalized = (field: LocalizedString | undefined, lang: string): string => {
-  return field?.[lang as keyof LocalizedString] || "N/A"
-}
-
-export default function ProductPageClient({ product }: { product: Product | null }) {
+export default function ProductPageClient({
+  product,
+  relatedProducts,
+}: {
+  product: Product
+  relatedProducts: Product[]
+}) {
   const { language, t } = useLanguage()
 
-  if (!product || !product.slug) {
-    return (
-      <div className="container px-4 py-8">
-        <h2 className="text-lg font-bold text-red-500">Product not found</h2>
-        <Link href="/products" className="mt-4 inline-block text-blue-600 underline">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          {t("product.backToAll")}
-        </Link>
-      </div>
-    )
-  }
-
   const categoryName = getLocalized(product.category, language)
-
-  const relatedProducts = getRelatedProducts(product.categorySlug, product.slug)
 
   return (
     <div className="container px-4 md:px-6 py-8 md:py-12">
@@ -82,7 +43,7 @@ export default function ProductPageClient({ product }: { product: Product | null
 
         <div className="space-y-6">
           <div>
-          <p className="text-sm text-muted-foreground">{getLocalized(product.category, language)}</p>
+            <p className="text-sm text-muted-foreground">{categoryName}</p>
             <h1 className="text-3xl font-bold mt-1">{getLocalized(product.title, language)}</h1>
             <p className="text-2xl font-bold mt-2">${product.price.toFixed(2)}</p>
           </div>
@@ -93,14 +54,16 @@ export default function ProductPageClient({ product }: { product: Product | null
 
           <Tabs defaultValue="description">
             <TabsList>
-            <TabsTrigger value="description">{t("product.description")}</TabsTrigger>
+              <TabsTrigger value="description">{t("product.description")}</TabsTrigger>
               <TabsTrigger value="nutrition">{t("product.nutrition")}</TabsTrigger>
               <TabsTrigger value="ingredients">{t("product.ingredients")}</TabsTrigger>
               <TabsTrigger value="origin">{t("product.origin")}</TabsTrigger>
             </TabsList>
+
             <TabsContent value="description" className="pt-4">
               <p>{getLocalized(product.description, language)}</p>
             </TabsContent>
+
             <TabsContent value="nutrition" className="pt-4">
               <div className="space-y-2">
                 <p><strong>{t("nutrition.servingSize")}:</strong> {product.nutritionalInfo?.servingSize || "N/A"}</p>
@@ -112,9 +75,11 @@ export default function ProductPageClient({ product }: { product: Product | null
                 <p><strong>{t("nutrition.protein")}:</strong> {product.nutritionalInfo?.protein || "N/A"}</p>
               </div>
             </TabsContent>
+
             <TabsContent value="ingredients" className="pt-4">
               <p>{getLocalized(product.ingredients, language)}</p>
             </TabsContent>
+
             <TabsContent value="origin" className="pt-4">
               <p>{getLocalized(product.origin, language)}</p>
             </TabsContent>
