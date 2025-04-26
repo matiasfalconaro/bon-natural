@@ -155,6 +155,18 @@ export type TranslationKeys =
   | "login.loggingIn"
   | "login.noAccount"
   | "login.forgotPassword"
+  | "login.successTitle"
+  | "login.successDescription"
+  | "login.failedTitle"
+  | "login.failedDescription"
+  | "login.errorTitle"
+  | "login.errorDescription"
+  | "login.successTitle"
+  | "login.successDescription"
+  | "login.failedTitle"
+  | "login.failedDescription"
+  | "login.errorTitle"
+  | "login.errorDescription"
   | "register.title"
   | "register.subtitle"
   | "register.name"
@@ -163,6 +175,7 @@ export type TranslationKeys =
   | "register.confirmPassword"
   | "register.register"
   | "register.registering"
+  | "register.haveAccount"
   | "register.haveAccount";
 
 export type Translations = Record<TranslationKeys, string>;

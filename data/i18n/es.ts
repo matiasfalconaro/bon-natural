@@ -160,6 +160,12 @@ export const es: Translations = {
     "login.loggingIn": "Iniciando sesión...",
     "login.noAccount": "¿No tienes una cuenta?",
     "login.forgotPassword": "¿Olvidaste tu contraseña?",
+    "login.successTitle": "Inicio de sesión exitoso",
+    "login.successDescription": "¡Bienvenido de nuevo!",
+    "login.failedTitle": "Inicio de sesión fallido",
+    "login.failedDescription": "Correo o contraseña inválidos. Inténtalo de nuevo.",
+    "login.errorTitle": "Algo salió mal",
+    "login.errorDescription": "Ocurrió un error. Por favor, inténtalo más tarde.",
 
     "register.title": "Registro",
     "register.subtitle": "Crea tu cuenta para comenzar",

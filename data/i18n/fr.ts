@@ -158,6 +158,12 @@ export const fr: Translations = {
     "login.loggingIn": "Connexion en cours...",
     "login.noAccount": "Vous n'avez pas de compte?",
     "login.forgotPassword": "Mot de passe oublié?",
+    "login.successTitle": "Connexion réussie",
+    "login.successDescription": "Bienvenue à nouveau !",
+    "login.failedTitle": "Échec de la connexion",
+    "login.failedDescription": "Email ou mot de passe invalide. Veuillez réessayer.",
+    "login.errorTitle": "Une erreur est survenue",
+    "login.errorDescription": "Une erreur s'est produite. Veuillez réessayer plus tard.",
 
     "register.title": "Créer un compte",
     "register.subtitle": "Créez votre compte pour commencer",

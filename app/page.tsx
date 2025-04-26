@@ -1,47 +1,63 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
-import { Button } from "@/components/button"
-import ProductCard from "@/components/product-card"
-import PromoCard from "@/components/promo-card"
-import SearchBar from "@/components/search-bar"
-import { getAllCategories } from "@/lib/api/categories"
-import { getAllProducts } from "@/lib/api/products"
-import { getAllPromos } from "@/lib/api/promos"
-import { Category } from "@/types/categories"
-import { Product } from "@/types/products"
-import { PromoCombo } from "@/types/promos"
-import styles from "./page.module.css"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
+import { useAuth } from "@/contexts/auth-context";
+import { Button } from "@/components/button";
+import ProductCard from "@/components/product-card";
+import PromoCard from "@/components/promo-card";
+import SearchBar from "@/components/search-bar";
+import { getAllCategories } from "@/lib/api/categories";
+import { getAllProducts } from "@/lib/api/products";
+import { getAllPromos } from "@/lib/api/promos";
+import { Category } from "@/types/categories";
+import { Product } from "@/types/products";
+import { PromoCombo } from "@/types/promos";
+import styles from "./page.module.css";
 
 export default function Home() {
-  const { t, language } = useLanguage()
+  const { t, language } = useLanguage();
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
 
-  const [categories, setCategories] = useState<Category[]>([])
-  const [products, setProducts] = useState<Product[]>([])
-  const [promos, setPromos] = useState<PromoCombo[]>([])
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [promos, setPromos] = useState<PromoCombo[]>([]);
+
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.push("/login"); // 🚀 Redirect if not authenticated
+    }
+  }, [user, isLoading, router]);
 
   useEffect(() => {
     async function loadData() {
       const [fetchedCategories, fetchedProducts, fetchedPromos] = await Promise.all([
         getAllCategories(),
         getAllProducts(),
-        getAllPromos()
-      ])
-      setCategories(fetchedCategories)
-      setProducts(fetchedProducts)
-      setPromos(fetchedPromos)
+        getAllPromos(),
+      ]);
+      setCategories(fetchedCategories);
+      setProducts(fetchedProducts);
+      setPromos(fetchedPromos);
     }
-    loadData()
-  }, [])
+    if (user) {
+      loadData();
+    }
+  }, [user]);
 
   const featuredProducts =
     products.filter((p) => p.featured).length > 0
       ? products.filter((p) => p.featured)
-      : products.slice(0, 4)
+      : products.slice(0, 4);
+
+  if (isLoading || !user) {
+    return null; // you can replace this with a loading spinner if you want
+  }
 
   return (
     <div className={styles.container}>
@@ -184,5 +200,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
