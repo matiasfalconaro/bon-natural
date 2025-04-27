@@ -1,87 +1,175 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { useToast } from "@/hooks/use-toast"
-import { useLanguage } from "@/contexts/language-context"
-import { useAuth } from "@/contexts/auth-context"
-import styles from "./page.module.css"
+import { useState, useEffect } from "react"; // ✅ ADD useEffect
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/language-context";
+import { useAuth } from "@/contexts/auth-context";
+import styles from "./page.module.css";
 
 export default function AccountPage() {
-  const { t } = useLanguage()
-  const { user, logout } = useAuth()
-  const { toast } = useToast()
-  const router = useRouter()
+  const { t } = useLanguage();
+  const { user, logout } = useAuth();
+  const { toast } = useToast();
+  const router = useRouter();
 
-  const [formData, setFormData] = useState({
+  const [profileFormData, setProfileFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
+  });
+
+  const [passwordFormData, setPasswordFormData] = useState({
     currentPassword: "",
     newPassword: "",
-    confirmPassword: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+    confirmNewPassword: "",
+  });
 
-  // Redirect if not logged in
+  const [isProfileSubmitting, setIsProfileSubmitting] = useState(false);
+  const [isPasswordSubmitting, setIsPasswordSubmitting] = useState(false);
+
+  // ✅ FIX: move router.push into useEffect
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user, router]);
+
+  // Still prevent rendering if user is missing
   if (!user) {
-    router.push("/login")
-    return null
+    return null;
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setProfileFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setPasswordFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
-    if (formData.newPassword && formData.newPassword !== formData.confirmPassword) {
+  const handleProfileSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProfileSubmitting(true);
+
+    try {
+      const response = await fetch("http://localhost:5100/api/users/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          name: profileFormData.name,
+          email: profileFormData.email,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Profile Updated",
+          description: "Your profile has been updated successfully.",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: data.message || "Profile update failed.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Something went wrong.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsProfileSubmitting(false);
+    }
+  };
+
+  const handlePasswordSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (passwordFormData.newPassword !== passwordFormData.confirmNewPassword) {
       toast({
         title: "Passwords don't match",
         description: "Please make sure your new passwords match.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
 
-    setIsSubmitting(true)
+    setIsPasswordSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const response = await fetch("http://localhost:5100/api/users/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          currentPassword: passwordFormData.currentPassword,
+          newPassword: passwordFormData.newPassword,
+        }),
+      });
 
-    toast({
-      title: "Profile updated",
-      description: "Your profile has been updated successfully.",
-    })
+      const data = await response.json();
 
-    setIsSubmitting(false)
-    setFormData((prev) => ({
-      ...prev,
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
-    }))
-  }
+      if (response.ok) {
+        toast({
+          title: "Password Changed",
+          description: "Your password has been updated successfully.",
+        });
+
+        setPasswordFormData({
+          currentPassword: "",
+          newPassword: "",
+          confirmNewPassword: "",
+        });
+      } else if (response.status === 401 && data.message === "Current password is incorrect") {
+        toast({
+          title: "Incorrect Password",
+          description: "The current password you entered is wrong.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Error",
+          description: data.message || "Password change failed.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Something went wrong.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsPasswordSubmitting(false);
+    }
+  };
 
   const handleLogout = () => {
-    logout()
-    router.push("/")
-  }
+    logout();
+    router.push("/");
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
         <h1 className={styles.title}>{t("account.title") || "Account Settings"}</h1>
 
+        {/* Profile Update */}
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>{t("account.profile") || "Profile Information"}</h2>
 
-          <form onSubmit={handleSubmit} className={styles.form}>
+          <form onSubmit={handleProfileSubmit} className={styles.form}>
             <div className={styles.formGroup}>
               <label htmlFor="name" className={styles.label}>
                 {t("account.name") || "Name"}
@@ -90,8 +178,8 @@ export default function AccountPage() {
                 id="name"
                 name="name"
                 type="text"
-                value={formData.name}
-                onChange={handleChange}
+                value={profileFormData.name}
+                onChange={handleProfileChange}
                 required
                 className={styles.input}
               />
@@ -105,23 +193,24 @@ export default function AccountPage() {
                 id="email"
                 name="email"
                 type="email"
-                value={formData.email}
-                onChange={handleChange}
+                value={profileFormData.email}
+                onChange={handleProfileChange}
                 required
                 className={styles.input}
               />
             </div>
 
-            <Button type="submit" disabled={isSubmitting} className={styles.submitButton}>
-              {isSubmitting ? t("account.saving") || "Saving..." : t("account.save") || "Save Changes"}
+            <Button type="submit" disabled={isProfileSubmitting} className={styles.submitButton}>
+              {isProfileSubmitting ? t("account.saving") || "Saving..." : t("account.save") || "Save Changes"}
             </Button>
           </form>
         </div>
 
+        {/* Password Change */}
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>{t("account.password") || "Change Password"}</h2>
 
-          <form onSubmit={handleSubmit} className={styles.form}>
+          <form onSubmit={handlePasswordSubmit} className={styles.form}>
             <div className={styles.formGroup}>
               <label htmlFor="currentPassword" className={styles.label}>
                 {t("account.currentPassword") || "Current Password"}
@@ -130,8 +219,9 @@ export default function AccountPage() {
                 id="currentPassword"
                 name="currentPassword"
                 type="password"
-                value={formData.currentPassword}
-                onChange={handleChange}
+                value={passwordFormData.currentPassword}
+                onChange={handlePasswordChange}
+                required
                 className={styles.input}
               />
             </div>
@@ -144,32 +234,35 @@ export default function AccountPage() {
                 id="newPassword"
                 name="newPassword"
                 type="password"
-                value={formData.newPassword}
-                onChange={handleChange}
+                value={passwordFormData.newPassword}
+                onChange={handlePasswordChange}
+                required
                 className={styles.input}
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="confirmPassword" className={styles.label}>
+              <label htmlFor="confirmNewPassword" className={styles.label}>
                 {t("account.confirmPassword") || "Confirm New Password"}
               </label>
               <Input
-                id="confirmPassword"
-                name="confirmPassword"
+                id="confirmNewPassword"
+                name="confirmNewPassword"
                 type="password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
+                value={passwordFormData.confirmNewPassword}
+                onChange={handlePasswordChange}
+                required
                 className={styles.input}
               />
             </div>
 
-            <Button type="submit" disabled={isSubmitting} className={styles.submitButton}>
-              {isSubmitting ? t("account.saving") || "Saving..." : t("account.changePassword") || "Change Password"}
+            <Button type="submit" disabled={isPasswordSubmitting} className={styles.submitButton}>
+              {isPasswordSubmitting ? t("account.saving") || "Saving..." : t("account.changePassword") || "Change Password"}
             </Button>
           </form>
         </div>
 
+        {/* Logout */}
         <div className={styles.card}>
           <h2 className={styles.cardTitle}>{t("account.logout") || "Logout"}</h2>
           <p className={styles.cardDescription}>
@@ -181,5 +274,5 @@ export default function AccountPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
