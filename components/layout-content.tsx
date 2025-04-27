@@ -8,11 +8,11 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    return null; // or your loading spinner
+    return null;
   }
 
   if (!user) {
-    return <main>{children}</main>; // Login page without Header/Footer
+    return <main>{children}</main>;
   }
 
   return (

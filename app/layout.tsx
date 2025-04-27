@@ -27,7 +27,7 @@ export default function RootLayout({
           <LanguageProvider>
             <AuthProvider>
               <CartProvider>
-                <LayoutContent>{children}</LayoutContent> {/* ✨ */}
+                <LayoutContent>{children}</LayoutContent>
                 <Toaster />
               </CartProvider>
             </AuthProvider>

@@ -38,20 +38,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true)
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5100"}/api/login`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5100"}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include",
       })
-
+  
       if (!res.ok) {
         throw new Error("Invalid credentials")
       }
-
+  
       const data = await res.json()
-
+  
       localStorage.setItem("token", data.token)
       localStorage.setItem("user", JSON.stringify(data.user))
       setUser(data.user)
