@@ -45,7 +45,6 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
 
   const dietaryPreferences = ["Gluten-Free", "Organic", "Vegan", "Non-GMO", "Sugar-Free", "Paleo", "Whole Grain"]
 
-  // Set initial search term when component mounts or when initialSearchTerm changes
   useEffect(() => {
     if (!initialized.current || prevInitialSearchTerm.current !== initialSearchTerm) {
       setSearchTerm(initialSearchTerm)
@@ -53,7 +52,6 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
 
       if (!initialized.current) {
         initialized.current = true
-        // Apply initial filters
         onFilter({
           categories: selectedCategories,
           priceRange,
@@ -61,13 +59,11 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
           searchTerm: initialSearchTerm,
         })
       } else {
-        // Mark filters as changed to trigger an update
         setFiltersChanged(true)
       }
     }
   }, [initialSearchTerm])
 
-  // Apply filters only when the user has made changes
   useEffect(() => {
     if (filtersChanged && initialized.current) {
       onFilter({
@@ -80,7 +76,6 @@ export default function ProductFilter({ onFilter, initialSearchTerm = "" }: Prod
     }
   }, [filtersChanged, selectedCategories, priceRange, selectedDietary, searchTerm, onFilter])
 
-  // Helper function to mark filters as changed
   const markFiltersChanged = () => {
     setFiltersChanged(true)
   }

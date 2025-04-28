@@ -33,23 +33,23 @@ export default function PasswordPage() {
 
       if (response.ok) {
         toast({
-          title: "Check your email",
-          description: "We sent you a password reset link.",
+          title: t("password.resetSuccessTitle"),
+          description: t("password.resetSuccessDescription"),
         });
         router.push("/login");
       } else {
         const data = await response.json();
         toast({
-          title: "Error",
-          description: data.message || "Failed to send reset email.",
+          title: t("password.resetErrorTitle"),
+          description: data.message || t("password.resetErrorDescription"),
           variant: "destructive",
         });
       }
     } catch (error) {
       console.error(error);
       toast({
-        title: "Error",
-        description: "Something went wrong. Please try again later.",
+        title: t("password.resetErrorTitle"),
+        description: t("password.resetErrorDescription"),
         variant: "destructive",
       });
     } finally {
@@ -60,13 +60,13 @@ export default function PasswordPage() {
   return (
     <div className={styles.container}>
       <div className={styles.formContainer}>
-        <h1 className={styles.title}>Forgot Password</h1>
-        <p className={styles.subtitle}>Enter your email and we’ll send you a reset link</p>
+        <h1 className={styles.title}>{t("password.resetPageTitle")}</h1>
+        <p className={styles.subtitle}>{t("password.resetPageSubtitle")}</p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label htmlFor="email" className={styles.label}>
-              Email
+              {t("contact.form.email")}
             </label>
             <Input
               id="email"
@@ -81,13 +81,13 @@ export default function PasswordPage() {
           </div>
 
           <Button type="submit" disabled={isSubmitting} className={styles.submitButton}>
-            {isSubmitting ? "Sending..." : "Send Reset Link"}
+            {isSubmitting ? t("contact.form.sending") : t("password.resetSubmitButton")}
           </Button>
         </form>
 
         <div className={styles.links}>
           <a href="/login" className={styles.link}>
-            Back to Login
+            {t("login.title")}
           </a>
         </div>
       </div>

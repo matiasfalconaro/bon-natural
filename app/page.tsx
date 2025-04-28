@@ -30,7 +30,7 @@ export default function Home() {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      router.push("/login"); // 🚀 Redirect if not authenticated
+      router.push("/login");
     }
   }, [user, isLoading, router]);
 
@@ -56,7 +56,7 @@ export default function Home() {
       : products.slice(0, 4);
 
   if (isLoading || !user) {
-    return null; // you can replace this with a loading spinner if you want
+    return null;
   }
 
   return (

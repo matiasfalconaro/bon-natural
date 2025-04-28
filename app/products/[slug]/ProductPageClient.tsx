@@ -7,7 +7,7 @@ import { useLanguage } from "@/contexts/language-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProductDetailsControls from "@/components/product-details-controls"
 import ProductCard from "@/components/product-card"
-import type { Product } from "@/types/products" // ✅ Import types from /types
+import type { Product } from "@/types/products"
 
 const getLocalized = (field: Product["title"] | undefined, lang: string): string =>
   field?.[lang as keyof Product["title"]] || "N/A"

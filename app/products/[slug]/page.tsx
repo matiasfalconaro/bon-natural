@@ -2,7 +2,7 @@ import { getProductBySlug, getRelatedProducts } from "@/lib/api/products"
 import ProductPageClient from "./ProductPageClient"
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params  // 🔥 await params!
+  const { slug } = await params
   
   const product = await getProductBySlug(slug)
   if (!product) return <div>Product not found</div>

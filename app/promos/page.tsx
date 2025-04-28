@@ -8,7 +8,7 @@ import SearchBar from "@/components/search-bar"
 import { useLanguage } from "@/contexts/language-context"
 import { getAllPromos } from "@/lib/api/promos"
 import { PromoCombo } from "@/types/promos"
-import styles from "../products/page.module.css" // Reusing products styles
+import styles from "../products/page.module.css"
 
 export default function PromosPage() {
   const { language, t } = useLanguage()

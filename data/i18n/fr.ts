@@ -84,6 +84,14 @@ export const fr: Translations = {
     "cart.discountCode": "Code de Réduction",
     "cart.apply": "Appliquer",
     "cart.discountApplied": "réduction appliquée",
+    "cart.addToCartMessage": "Ajoutez des produits à votre panier pour les voir ici.",
+    "cart.productHeader": "Produit",
+    "cart.priceHeader": "Prix",
+    "cart.quantityHeader": "Quantité",
+    "cart.totalHeader": "Total",
+    "cart.orderSummary": "Résumé de la commande",
+    "cart.shipping": "Livraison",
+    "cart.shippingCalculation": "Calculé lors du paiement",
 
     "filters.title": "Filtres",
     "filters.reset": "Réinitialiser",
@@ -192,7 +200,15 @@ export const fr: Translations = {
     "about.team.michael.name": "Michael Chen",
     "about.team.michael.role": "Responsable des achats",
     "about.team.emily.name": "Emily Rodriguez",
-    "about.team.emily.role": "Nutritionniste"
+    "about.team.emily.role": "Nutritionniste",
+
+    "password.resetPageTitle": "Réinitialiser le mot de passe",
+    "password.resetPageSubtitle": "Entrez votre adresse e-mail et nous vous enverrons un lien de réinitialisation.",
+    "password.resetSubmitButton": "Envoyer le lien",
+    "password.resetSuccessTitle": "Vérifiez votre e-mail",
+    "password.resetSuccessDescription": "Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.",
+    "password.resetErrorTitle": "Erreur",
+    "password.resetErrorDescription": "Une erreur est survenue. Veuillez réessayer plus tard.",
 }
 
 const checkTranslations: Translations = fr

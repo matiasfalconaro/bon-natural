@@ -73,6 +73,14 @@ export type TranslationKeys =
   | "cart.discountCode"
   | "cart.apply"
   | "cart.discountApplied"
+  | "cart.addToCartMessage"
+  | "cart.productHeader"
+  | "cart.priceHeader"
+  | "cart.quantityHeader"
+  | "cart.totalHeader"
+  | "cart.orderSummary"
+  | "cart.shipping"
+  | "cart.shippingCalculation"
   | "filters.title"
   | "filters.reset"
   | "filters.priceRange"
@@ -176,6 +184,13 @@ export type TranslationKeys =
   | "register.register"
   | "register.registering"
   | "register.haveAccount"
-  | "register.haveAccount";
+  | "register.haveAccount"
+  | "password.resetPageTitle"
+  | "password.resetPageSubtitle"
+  | "password.resetSubmitButton"
+  | "password.resetSuccessTitle"
+  | "password.resetSuccessDescription"
+  | "password.resetErrorTitle"
+  | "password.resetErrorDescription";
 
 export type Translations = Record<TranslationKeys, string>;

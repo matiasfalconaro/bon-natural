@@ -2,7 +2,7 @@ import { getPromoBySlug } from "@/lib/api/promos"
 import BundlePageClient from "./BundlePageClient"
 
 export default async function BundlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params  // 🔥 await params!
+  const { slug } = await params
 
   const bundle = await getPromoBySlug(slug)
 

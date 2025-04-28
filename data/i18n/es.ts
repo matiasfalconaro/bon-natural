@@ -86,6 +86,14 @@ export const es: Translations = {
     "cart.discountCode": "Código de Descuento",
     "cart.apply": "Aplicar",
     "cart.discountApplied": "descuento aplicado",
+    "cart.addToCartMessage": "Agrega algunos productos a tu carrito para verlos aquí.",
+    "cart.productHeader": "Producto",
+    "cart.priceHeader": "Precio",
+    "cart.quantityHeader": "Cantidad",
+    "cart.totalHeader": "Total",
+    "cart.orderSummary": "Resumen del Pedido",
+    "cart.shipping": "Envío",
+    "cart.shippingCalculation": "Calculado al finalizar la compra",
 
     "filters.title": "Filtros",
     "filters.reset": "Restablecer",
@@ -194,7 +202,15 @@ export const es: Translations = {
     "about.team.michael.name": "Michael Chen",
     "about.team.michael.role": "Jefe de Abastecimiento",
     "about.team.emily.name": "Emily Rodriguez",
-    "about.team.emily.role": "Nutricionista"
+    "about.team.emily.role": "Nutricionista",
+
+    "password.resetPageTitle": "Restablecer Contraseña",
+    "password.resetPageSubtitle": "Introduce tu correo electrónico y te enviaremos un enlace para restablecer la contraseña.",
+    "password.resetSubmitButton": "Enviar enlace de restablecimiento",
+    "password.resetSuccessTitle": "Revisa tu correo electrónico",
+    "password.resetSuccessDescription": "Te hemos enviado un enlace para restablecer tu contraseña.",
+    "password.resetErrorTitle": "Error",
+    "password.resetErrorDescription": "Algo salió mal. Por favor, inténtalo de nuevo más tarde.",
 }
 
 const checkTranslations: Translations = es

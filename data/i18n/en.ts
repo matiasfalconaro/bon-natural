@@ -84,6 +84,14 @@ export const en: Translations = {
     "cart.discountCode": "Discount Code",
     "cart.apply": "Apply",
     "cart.discountApplied": "discount applied",
+    "cart.addToCartMessage": "Add some products to your cart to see them here.",
+    "cart.productHeader": "Product",
+    "cart.priceHeader": "Price",
+    "cart.quantityHeader": "Quantity",
+    "cart.totalHeader": "Total",
+    "cart.orderSummary": "Order Summary",
+    "cart.shipping": "Shipping",
+    "cart.shippingCalculation": "Calculated at checkout",
 
     "filters.title": "Filters",
     "filters.reset": "Reset",
@@ -193,6 +201,14 @@ export const en: Translations = {
     "about.team.michael.role": "Head of Sourcing",
     "about.team.emily.name": "Emily Rodriguez",
     "about.team.emily.role": "Nutritionist",
+
+    "password.resetPageTitle": "Forgot Password",
+    "password.resetPageSubtitle": "Enter your email and we’ll send you a password reset link.",
+    "password.resetSubmitButton": "Send Reset Link",
+    "password.resetSuccessTitle": "Check your email",
+    "password.resetSuccessDescription": "We sent you a password reset link.",
+    "password.resetErrorTitle": "Error",
+    "password.resetErrorDescription": "Something went wrong. Please try again later.",
 }
 
 const checkTranslations: Translations = en
