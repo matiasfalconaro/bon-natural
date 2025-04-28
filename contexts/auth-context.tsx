@@ -74,27 +74,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     setIsLoading(true)
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5100"}/api/register`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5100"}/api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ name, email, password }),
       })
-
-      if (!res.ok) {
-        throw new Error("Registration failed")
-      }
-
+  
       const data = await res.json()
-
+  
+      if (!res.ok) {
+        throw new Error(data.message || "Registration failed")
+      }
+  
       localStorage.setItem("token", data.token)
       localStorage.setItem("user", JSON.stringify(data.user))
       setUser(data.user)
       return true
     } catch (error) {
       console.error("Registration error:", error)
-      return false
+      throw error // <<<<< THROW error up to page
     } finally {
       setIsLoading(false)
     }
