@@ -17,13 +17,23 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
 export async function getRelatedProducts(categorySlug: string, excludeSlug: string): Promise<Product[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/related/${categorySlug}/${excludeSlug}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/products`, {
       cache: "no-store",
       credentials: "include",
     });
 
     if (!res.ok) return [];
-    return await res.json();
+
+    const allProducts: Product[] = await res.json();
+
+    const related = allProducts.filter(p =>
+      p.categorySlug === categorySlug && p.slug !== excludeSlug
+    );
+
+    const shuffled = related.sort(() => 0.5 - Math.random());
+    const limited = shuffled.slice(0, 4);
+
+    return limited;
   } catch (err) {
     console.error("Failed to fetch related products", err);
     return [];

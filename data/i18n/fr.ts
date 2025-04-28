@@ -32,7 +32,7 @@ export const fr: Translations = {
 
     "featured.title": "Produits Vedettes",
     "featured.subtitle": "Nos aliments naturels et biologiques les plus populaires, sélectionnés pour leur qualité et leur goût.",
-    "featured.viewAll": "Voir Tous les Produits",
+    "featured.viewAll": "Produits",
 
     "testimonials.title": "Ce Que Disent Nos Clients",
     "testimonials.subtitle": "Ne prenez pas seulement notre parole. Voici ce que nos clients disent de nos produits.",
@@ -44,7 +44,7 @@ export const fr: Translations = {
     "newsletter.privacy": "Nous respectons votre vie privée. Désabonnez-vous à tout moment.",
 
     "nav.home": "Accueil",
-    "nav.products": "Tous les Produits",
+    "nav.products": "Produits",
     "nav.categories": "Catégories",
     "nav.about": "À Propos",
     "nav.contact": "Contact",
@@ -52,7 +52,7 @@ export const fr: Translations = {
     "footer.copyright": "Tous droits réservés.",
     "footer.description": "Fournir des aliments naturels biologiques, durables et locaux depuis 2010.",
     "footer.shop": "Boutique",
-    "footer.allProducts": "Tous les Produits",
+    "footer.allProducts": "Produits",
     "footer.company": "Entreprise",
     "footer.aboutUs": "À Propos",
     "footer.contactUs": "Contactez-Nous",
@@ -100,12 +100,12 @@ export const fr: Translations = {
     "filters.dietaryPreferences": "Préférences Alimentaires",
 
     "product.addToCart": "Ajouter au Panier",
-    "product.allProducts": "Tous les produits",
+    "product.allProducts": "produits",
     "product.searchResults": "Résultats de recherche",
     "product.noResults": "Aucun produit trouvé. Essayez de modifier vos filtres.",
     "product.relatedProducts": "Vous pourriez aussi aimer",
     "product.backToAll" : "Retour aux Produits",
-    "product.backToProducts": "Retour à tous les produits",
+    "product.backToProducts": "Retour à produits",
     "product.description": "Description",
     "product.nutrition": "Informations nutritionnelles",
     "product.ingredients": "Ingrédients",

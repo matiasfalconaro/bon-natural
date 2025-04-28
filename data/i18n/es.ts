@@ -32,7 +32,7 @@ export const es: Translations = {
 
     "featured.title": "Productos Destacados",
     "featured.subtitle": "Nuestros alimentos naturales y orgánicos más populares, seleccionados por su calidad y sabor.",
-    "featured.viewAll": "Ver Todos los Productos",
+    "featured.viewAll": "Ver Productos",
 
     "testimonials.title": "Lo Que Dicen Nuestros Clientes",
     "testimonials.subtitle": "No solo tome nuestra palabra. Esto es lo que nuestros clientes dicen sobre nuestros productos.",
@@ -44,7 +44,7 @@ export const es: Translations = {
     "newsletter.privacy": "Respetamos tu privacidad. Cancela la suscripción en cualquier momento.",
 
     "nav.home": "Inicio",
-    "nav.products": "Todos los Productos",
+    "nav.products": "Productos",
     "nav.categories": "Categorías",
     "nav.about": "Sobre Nosotros",
     "nav.contact": "Contacto",
@@ -53,7 +53,7 @@ export const es: Translations = {
     "footer.description": "Proporcionando alimentos naturales orgánicos, sostenibles y de origen local desde 2010.",
     "footer.shop": "Tienda",
 
-    "footer.allProducts": "Todos los Productos",
+    "footer.allProducts": "Productos",
 
     "footer.company": "Empresa",
     "footer.aboutUs": "Sobre Nosotros",
@@ -102,12 +102,12 @@ export const es: Translations = {
     "filters.dietaryPreferences": "Preferencias Dietéticas",
 
     "product.addToCart": "Añadir al Carrito",
-    "product.allProducts": "Todos los Productos",
+    "product.allProducts": "Productos",
     "product.searchResults": "Resultados de Búsqueda",
     "product.noResults": "No se encontraron productos. Intenta ajustar tus filtros.",
     "product.relatedProducts": "También te puede interesar",
     "product.backToAll" : "Volver a Productos",
-    "product.backToProducts": "Volver a todos los Productos",
+    "product.backToProducts": "Volver a Productos",
     "product.description": "Descripción",
     "product.nutrition": "Información nutricional",
     "product.ingredients": "Ingredientes",

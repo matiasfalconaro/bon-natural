@@ -32,7 +32,7 @@ export const en: Translations = {
 
     "featured.title": "Featured Products",
     "featured.subtitle": "Our most popular natural and organic foods, handpicked for quality and taste.",
-    "featured.viewAll": "View All Products",
+    "featured.viewAll": "Products",
 
     "testimonials.title": "What Our Customers Say",
     "testimonials.subtitle": "Don't just take our word for it. Here's what our customers have to say about our products.",
@@ -44,7 +44,7 @@ export const en: Translations = {
     "newsletter.privacy": "We respect your privacy. Unsubscribe at any time.",
 
     "nav.home": "Home",
-    "nav.products": "All Products",
+    "nav.products": "Products",
     "nav.categories": "Categories",
     "nav.about": "About Us",
     "nav.contact": "Contact",
@@ -52,7 +52,7 @@ export const en: Translations = {
     "footer.copyright": "All rights reserved.",
     "footer.description": "Providing organic, sustainable, and locally-sourced natural foods since 2010.",
     "footer.shop": "Shop",
-    "footer.allProducts": "All Products",
+    "footer.allProducts": "Products",
     "footer.company": "Company",
     "footer.aboutUs": "About Us",
     "footer.contactUs": "Contact Us",
@@ -100,12 +100,12 @@ export const en: Translations = {
     "filters.dietaryPreferences": "Dietary Preferences",
 
     "product.addToCart": "Add to Cart",
-    "product.allProducts": "All Products",
+    "product.allProducts": "Products",
     "product.searchResults": "Search Results",
     "product.noResults": "No products found. Try adjusting your filters.",
     "product.relatedProducts": "You may also like",
     "product.backToAll" : "Back to Product",
-    "product.backToProducts": "Back to All Products",
+    "product.backToProducts": "Back to Products",
     "product.description": "Description",
     "product.nutrition": "Nutrition",
     "product.ingredients": "Ingredients",
