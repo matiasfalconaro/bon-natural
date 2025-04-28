@@ -1,23 +1,33 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { Facebook, Instagram, Twitter } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
-import { categories } from "@/data/categories"
+import { getAllCategories } from "@/lib/api/categories"
+import { Category } from "@/types/categories"
 import styles from "./footer.module.css"
 
 export default function Footer() {
   const { t, language } = useLanguage()
+  const [categories, setCategories] = useState<Category[]>([])
+
+  useEffect(() => {
+    async function loadCategories() {
+      const fetched = await getAllCategories()
+      setCategories(fetched)
+    }
+    loadCategories()
+  }, [])
 
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.grid}>
+          {/* Company Info */}
           <div className={styles.column}>
             <h3 className={styles.title}>{t("site.name")}</h3>
-            <p className={styles.description}>
-              {t("footer.description")}
-            </p>
+            <p className={styles.description}>{t("footer.description")}</p>
             <div className={styles.socialLinks}>
               <Link href="#" className={styles.socialLink}>
                 <Facebook className="h-5 w-5" />
@@ -34,6 +44,7 @@ export default function Footer() {
             </div>
           </div>
 
+          {/* Shop */}
           <div className={styles.column}>
             <h3 className={styles.title}>{t("footer.shop")}</h3>
             <ul className={styles.links}>
@@ -52,6 +63,7 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Company */}
           <div className={styles.column}>
             <h3 className={styles.title}>{t("footer.company")}</h3>
             <ul className={styles.links}>
@@ -62,6 +74,7 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Help */}
           <div className={styles.column}>
             <h3 className={styles.title}>{t("footer.help")}</h3>
             <ul className={styles.links}>
@@ -73,6 +86,7 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Footer bottom */}
         <div className={styles.copyright}>
           © {new Date().getFullYear()} {t("site.name")}. {t("footer.copyright")}
         </div>

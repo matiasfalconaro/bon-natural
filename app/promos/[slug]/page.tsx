@@ -1,11 +1,14 @@
-import { getBundleBySlug } from "@/data/combos"
+import { getPromoBySlug } from "@/lib/api/promos"
 import BundlePageClient from "./BundlePageClient"
 
 export default async function BundlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const bundle = getBundleBySlug(slug)
+
+  const bundle = await getPromoBySlug(slug)
+
   return <BundlePageClient bundle={bundle} />
 }
+
 
 /**
 Temporary workaround to avoid the Next.js error:

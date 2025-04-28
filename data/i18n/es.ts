@@ -32,7 +32,7 @@ export const es: Translations = {
 
     "featured.title": "Productos Destacados",
     "featured.subtitle": "Nuestros alimentos naturales y orgánicos más populares, seleccionados por su calidad y sabor.",
-    "featured.viewAll": "Ver Todos los Productos",
+    "featured.viewAll": "Ver Productos",
 
     "testimonials.title": "Lo Que Dicen Nuestros Clientes",
     "testimonials.subtitle": "No solo tome nuestra palabra. Esto es lo que nuestros clientes dicen sobre nuestros productos.",
@@ -44,7 +44,7 @@ export const es: Translations = {
     "newsletter.privacy": "Respetamos tu privacidad. Cancela la suscripción en cualquier momento.",
 
     "nav.home": "Inicio",
-    "nav.products": "Todos los Productos",
+    "nav.products": "Productos",
     "nav.categories": "Categorías",
     "nav.about": "Sobre Nosotros",
     "nav.contact": "Contacto",
@@ -53,7 +53,7 @@ export const es: Translations = {
     "footer.description": "Proporcionando alimentos naturales orgánicos, sostenibles y de origen local desde 2010.",
     "footer.shop": "Tienda",
 
-    "footer.allProducts": "Todos los Productos",
+    "footer.allProducts": "Productos",
 
     "footer.company": "Empresa",
     "footer.aboutUs": "Sobre Nosotros",
@@ -86,6 +86,14 @@ export const es: Translations = {
     "cart.discountCode": "Código de Descuento",
     "cart.apply": "Aplicar",
     "cart.discountApplied": "descuento aplicado",
+    "cart.addToCartMessage": "Agrega algunos productos a tu carrito para verlos aquí.",
+    "cart.productHeader": "Producto",
+    "cart.priceHeader": "Precio",
+    "cart.quantityHeader": "Cantidad",
+    "cart.totalHeader": "Total",
+    "cart.orderSummary": "Resumen del Pedido",
+    "cart.shipping": "Envío",
+    "cart.shippingCalculation": "Calculado al finalizar la compra",
 
     "filters.title": "Filtros",
     "filters.reset": "Restablecer",
@@ -94,12 +102,12 @@ export const es: Translations = {
     "filters.dietaryPreferences": "Preferencias Dietéticas",
 
     "product.addToCart": "Añadir al Carrito",
-    "product.allProducts": "Todos los Productos",
+    "product.allProducts": "Productos",
     "product.searchResults": "Resultados de Búsqueda",
     "product.noResults": "No se encontraron productos. Intenta ajustar tus filtros.",
     "product.relatedProducts": "También te puede interesar",
     "product.backToAll" : "Volver a Productos",
-    "product.backToProducts": "Volver a todos los Productos",
+    "product.backToProducts": "Volver a Productos",
     "product.description": "Descripción",
     "product.nutrition": "Información nutricional",
     "product.ingredients": "Ingredientes",
@@ -146,6 +154,14 @@ export const es: Translations = {
     "contact.form.message": "Mensaje",
     "contact.form.send": "Enviar Mensaje",
     "contact.form.sending": "Enviando...",
+    "contact.addressDetails": "123 Calle Natural, Ciudad Orgánica, OC 12345",
+    "contact.phoneNumber": "(555) 123-4567",
+    "contact.emailAddress": "boutiquebonnatural@gmail.com",
+    "contact.hoursDetails": "Lunes a Viernes: 9:00am - 6:00pm\nSábado: 10:00am - 4:00pm\nDomingo: Cerrado",
+    "contact.toast.successTitle": "Mensaje enviado",
+    "contact.toast.successDescription": "¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.",
+    "contact.toast.errorTitle": "Error",
+    "contact.toast.errorDescription": "Algo salió mal. Por favor, inténtalo de nuevo más tarde.",
 
     "user.login": "Iniciar Sesión",
     "user.register": "Registrarse",
@@ -160,6 +176,12 @@ export const es: Translations = {
     "login.loggingIn": "Iniciando sesión...",
     "login.noAccount": "¿No tienes una cuenta?",
     "login.forgotPassword": "¿Olvidaste tu contraseña?",
+    "login.successTitle": "Inicio de sesión exitoso",
+    "login.successDescription": "¡Bienvenido de nuevo!",
+    "login.failedTitle": "Inicio de sesión fallido",
+    "login.failedDescription": "Correo o contraseña inválidos. Inténtalo de nuevo.",
+    "login.errorTitle": "Algo salió mal",
+    "login.errorDescription": "Ocurrió un error. Por favor, inténtalo más tarde.",
 
     "register.title": "Registro",
     "register.subtitle": "Crea tu cuenta para comenzar",
@@ -188,7 +210,15 @@ export const es: Translations = {
     "about.team.michael.name": "Michael Chen",
     "about.team.michael.role": "Jefe de Abastecimiento",
     "about.team.emily.name": "Emily Rodriguez",
-    "about.team.emily.role": "Nutricionista"
+    "about.team.emily.role": "Nutricionista",
+
+    "password.resetPageTitle": "Restablecer Contraseña",
+    "password.resetPageSubtitle": "Introduce tu correo electrónico y te enviaremos un enlace para restablecer la contraseña.",
+    "password.resetSubmitButton": "Enviar enlace de restablecimiento",
+    "password.resetSuccessTitle": "Revisa tu correo electrónico",
+    "password.resetSuccessDescription": "Te hemos enviado un enlace para restablecer tu contraseña.",
+    "password.resetErrorTitle": "Error",
+    "password.resetErrorDescription": "Algo salió mal. Por favor, inténtalo de nuevo más tarde.",
 }
 
 const checkTranslations: Translations = es

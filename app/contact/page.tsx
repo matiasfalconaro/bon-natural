@@ -1,7 +1,6 @@
 "use client"
 
-import type React from "react"
-
+import React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,12 +13,14 @@ import styles from "./page.module.css"
 export default function ContactPage() {
   const { t } = useLanguage()
   const { toast } = useToast()
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   })
+  
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,21 +32,44 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5100"}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
 
-    toast({
-      title: "Message Sent",
-      description: "Thank you for your message. We'll get back to you soon!",
-    })
+      const contentType = response.headers.get("content-type")
 
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    })
-    setIsSubmitting(false)
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json()
+
+        if (response.ok) {
+          toast({
+            title: t("contact.toast.successTitle"),
+            description: t("contact.toast.successDescription"),
+          })
+          setFormData({ name: "", email: "", subject: "", message: "" })
+        } else {
+          toast({
+            title: t("contact.toast.errorTitle"),
+            description: data.message || t("contact.toast.errorDescription"),
+            variant: "destructive",
+          })
+        }
+      } else {
+        throw new Error("Server did not return JSON")
+      }
+    } catch (error) {
+      console.error(error)
+      toast({
+        title: t("contact.toast.errorTitle"),
+        description: t("contact.toast.errorDescription"),
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -68,7 +92,7 @@ export default function ContactPage() {
                 <MapPin className={styles.infoIcon} />
                 <div>
                   <h3 className={styles.infoItemTitle}>{t("contact.address")}</h3>
-                  <p className={styles.infoItemText}>123 Nature Lane, Organic City, OC 12345</p>
+                  <p className={styles.infoItemText}>{t("contact.addressDetails")}</p>
                 </div>
               </div>
 
@@ -76,7 +100,7 @@ export default function ContactPage() {
                 <Phone className={styles.infoIcon} />
                 <div>
                   <h3 className={styles.infoItemTitle}>{t("contact.phone")}</h3>
-                  <p className={styles.infoItemText}>(555) 123-4567</p>
+                  <p className={styles.infoItemText}>{t("contact.phoneNumber")}</p>
                 </div>
               </div>
 
@@ -84,23 +108,24 @@ export default function ContactPage() {
                 <Mail className={styles.infoIcon} />
                 <div>
                   <h3 className={styles.infoItemTitle}>{t("contact.email")}</h3>
-                  <p className={styles.infoItemText}>hello@naturalfoodboutique.com</p>
+                  <p className={styles.infoItemText}>{t("contact.emailAddress")}</p>
                 </div>
               </div>
 
               <div className={styles.infoItem}>
-                <Clock className={styles.infoIcon} />
-                <div>
-                  <h3 className={styles.infoItemTitle}>{t("contact.hours")}</h3>
-                  <p className={styles.infoItemText}>
-                    Monday - Friday: 9am - 6pm
-                    <br />
-                    Saturday: 10am - 4pm
-                    <br />
-                    Sunday: Closed
-                  </p>
-                </div>
+              <Clock className={styles.infoIcon} />
+              <div>
+                <h3 className={styles.infoItemTitle}>{t("contact.hours")}</h3>
+                <p className={styles.infoItemText}>
+                  {t("contact.hoursDetails").split("\n").map((line, idx) => (
+                    <React.Fragment key={idx}>
+                      {line}
+                      <br />
+                    </React.Fragment>
+                  ))}
+                </p>
               </div>
+            </div>
             </div>
           </div>
         </div>

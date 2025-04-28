@@ -32,7 +32,7 @@ export const fr: Translations = {
 
     "featured.title": "Produits Vedettes",
     "featured.subtitle": "Nos aliments naturels et biologiques les plus populaires, sélectionnés pour leur qualité et leur goût.",
-    "featured.viewAll": "Voir Tous les Produits",
+    "featured.viewAll": "Produits",
 
     "testimonials.title": "Ce Que Disent Nos Clients",
     "testimonials.subtitle": "Ne prenez pas seulement notre parole. Voici ce que nos clients disent de nos produits.",
@@ -44,7 +44,7 @@ export const fr: Translations = {
     "newsletter.privacy": "Nous respectons votre vie privée. Désabonnez-vous à tout moment.",
 
     "nav.home": "Accueil",
-    "nav.products": "Tous les Produits",
+    "nav.products": "Produits",
     "nav.categories": "Catégories",
     "nav.about": "À Propos",
     "nav.contact": "Contact",
@@ -52,7 +52,7 @@ export const fr: Translations = {
     "footer.copyright": "Tous droits réservés.",
     "footer.description": "Fournir des aliments naturels biologiques, durables et locaux depuis 2010.",
     "footer.shop": "Boutique",
-    "footer.allProducts": "Tous les Produits",
+    "footer.allProducts": "Produits",
     "footer.company": "Entreprise",
     "footer.aboutUs": "À Propos",
     "footer.contactUs": "Contactez-Nous",
@@ -84,6 +84,14 @@ export const fr: Translations = {
     "cart.discountCode": "Code de Réduction",
     "cart.apply": "Appliquer",
     "cart.discountApplied": "réduction appliquée",
+    "cart.addToCartMessage": "Ajoutez des produits à votre panier pour les voir ici.",
+    "cart.productHeader": "Produit",
+    "cart.priceHeader": "Prix",
+    "cart.quantityHeader": "Quantité",
+    "cart.totalHeader": "Total",
+    "cart.orderSummary": "Résumé de la commande",
+    "cart.shipping": "Livraison",
+    "cart.shippingCalculation": "Calculé lors du paiement",
 
     "filters.title": "Filtres",
     "filters.reset": "Réinitialiser",
@@ -92,12 +100,12 @@ export const fr: Translations = {
     "filters.dietaryPreferences": "Préférences Alimentaires",
 
     "product.addToCart": "Ajouter au Panier",
-    "product.allProducts": "Tous les produits",
+    "product.allProducts": "produits",
     "product.searchResults": "Résultats de recherche",
     "product.noResults": "Aucun produit trouvé. Essayez de modifier vos filtres.",
     "product.relatedProducts": "Vous pourriez aussi aimer",
     "product.backToAll" : "Retour aux Produits",
-    "product.backToProducts": "Retour à tous les produits",
+    "product.backToProducts": "Retour à produits",
     "product.description": "Description",
     "product.nutrition": "Informations nutritionnelles",
     "product.ingredients": "Ingrédients",
@@ -144,6 +152,14 @@ export const fr: Translations = {
     "contact.form.message": "Message",
     "contact.form.send": "Envoyer le Message",
     "contact.form.sending": "Envoi en cours...",
+    "contact.addressDetails": "123 Allée de la Nature, Ville Organique, OC 12345",
+    "contact.phoneNumber": "(555) 123-4567",
+    "contact.emailAddress": "boutiquebonnatural@gmail.com",
+    "contact.hoursDetails": "Lundi - Vendredi : 9h00 - 18h00\nSamedi : 10h00 - 16h00\nDimanche : Fermé",
+    "contact.toast.successTitle": "Message envoyé",
+    "contact.toast.successDescription": "Merci pour votre message. Nous vous répondrons bientôt !",
+    "contact.toast.errorTitle": "Erreur",
+    "contact.toast.errorDescription": "Une erreur s'est produite. Veuillez réessayer plus tard.",
 
     "user.login": "Se Connecter",
     "user.register": "S'inscrire",
@@ -158,6 +174,12 @@ export const fr: Translations = {
     "login.loggingIn": "Connexion en cours...",
     "login.noAccount": "Vous n'avez pas de compte?",
     "login.forgotPassword": "Mot de passe oublié?",
+    "login.successTitle": "Connexion réussie",
+    "login.successDescription": "Bienvenue à nouveau !",
+    "login.failedTitle": "Échec de la connexion",
+    "login.failedDescription": "Email ou mot de passe invalide. Veuillez réessayer.",
+    "login.errorTitle": "Une erreur est survenue",
+    "login.errorDescription": "Une erreur s'est produite. Veuillez réessayer plus tard.",
 
     "register.title": "Créer un compte",
     "register.subtitle": "Créez votre compte pour commencer",
@@ -186,7 +208,15 @@ export const fr: Translations = {
     "about.team.michael.name": "Michael Chen",
     "about.team.michael.role": "Responsable des achats",
     "about.team.emily.name": "Emily Rodriguez",
-    "about.team.emily.role": "Nutritionniste"
+    "about.team.emily.role": "Nutritionniste",
+
+    "password.resetPageTitle": "Réinitialiser le mot de passe",
+    "password.resetPageSubtitle": "Entrez votre adresse e-mail et nous vous enverrons un lien de réinitialisation.",
+    "password.resetSubmitButton": "Envoyer le lien",
+    "password.resetSuccessTitle": "Vérifiez votre e-mail",
+    "password.resetSuccessDescription": "Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.",
+    "password.resetErrorTitle": "Erreur",
+    "password.resetErrorDescription": "Une erreur est survenue. Veuillez réessayer plus tard.",
 }
 
 const checkTranslations: Translations = fr

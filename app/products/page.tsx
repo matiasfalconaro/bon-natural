@@ -7,30 +7,21 @@ import ProductFilter from "@/components/product-filter"
 import SearchBar from "@/components/search-bar"
 import { useLanguage } from "@/contexts/language-context"
 import styles from "./page.module.css"
-import { allProducts } from "@/data/products"
+import { Product } from "@/types/products"
 
 type SupportedLanguage = "en" | "es" | "fr"
 
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
-
-interface Product {
-  id: string
-  slug: string
-  title: LocalizedString
-  category: LocalizedString
-  dietary: string[]
-  price: number
-  image: string
-}
-
-interface Category {
-  slug: string
-  name: LocalizedString
-  image: string
+async function fetchAllProducts(): Promise<Product[]> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/products`, {
+      cache: "no-store",
+    })
+    if (!res.ok) return []
+    return await res.json()
+  } catch (error) {
+    console.error("Failed to fetch products", error)
+    return []
+  }
 }
 
 export default function ProductsPage() {
@@ -38,26 +29,34 @@ export default function ProductsPage() {
   const lang = language as SupportedLanguage
 
   const searchParams = useSearchParams()
-  const [filteredProducts, setFilteredProducts] = useState<Product[]>(allProducts)
   const searchTerm = searchParams.get("search") || ""
+
+  const [allProducts, setAllProducts] = useState<Product[]>([])
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
   const initialized = useRef(false)
 
   useEffect(() => {
-    if (initialized.current && !searchTerm) return
+    async function loadProducts() {
+      const products = await fetchAllProducts()
+      setAllProducts(products)
 
-    if (searchTerm) {
-      const searchLower = searchTerm.toLowerCase()
-      const filtered = allProducts.filter((product) =>
-        product.title[lang].toLowerCase().includes(searchLower) ||
-        product.category[lang].toLowerCase().includes(searchLower) ||
-        product.dietary.some((diet: string) => diet.toLowerCase().includes(searchLower))
-      )
-      setFilteredProducts(filtered)
-    } else if (!initialized.current) {
-      setFilteredProducts(allProducts)
+      if (searchTerm) {
+        const searchLower = searchTerm.toLowerCase()
+        const filtered = products.filter((product) =>
+          product.title[lang].toLowerCase().includes(searchLower) ||
+          product.category[lang].toLowerCase().includes(searchLower) ||
+          product.dietary.some((diet: string) => diet.toLowerCase().includes(searchLower))
+        )
+        setFilteredProducts(filtered)
+      } else {
+        setFilteredProducts(products)
+      }
+      initialized.current = true
     }
 
-    initialized.current = true
+    if (!initialized.current) {
+      loadProducts()
+    }
   }, [searchTerm, lang])
 
   const handleFilter = (filters: {
@@ -102,30 +101,6 @@ export default function ProductsPage() {
       <div className={styles.searchSection}>
         <SearchBar />
       </div>
-
-      {/* Search by category in /products endpoint optional */}
-      {/*
-      {!searchTerm && (
-        <section className={styles.categoriesSection}>
-          <h2 className={styles.subTitle}>{t("categories.title")}</h2>
-          <p className={styles.subText}>{t("categories.subtitle")}</p>
-          <div className={styles.categoriesGrid}>
-            {rawCategories.map((category) => (
-              <Link key={category.slug} href={`/categories/${category.slug}`} className={styles.categoryCard}>
-                <Image
-                  src={category.image}
-                  alt={category.name[lang]}
-                  width={200}
-                  height={200}
-                  className={styles.categoryImage}
-                />
-                <p>{category.name[lang]}</p>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-      */}
 
       <div className={styles.content}>
         <div className={styles.sidebar}>

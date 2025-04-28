@@ -27,7 +27,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([])
   const [isInitialized, setIsInitialized] = useState(false)
 
-  // Load cart from localStorage on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
       const savedCart = localStorage.getItem("cart")
@@ -42,7 +41,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setIsInitialized(true)
   }, [])
 
-  // Save cart to localStorage when it changes
   useEffect(() => {
     if (!isInitialized) return
     localStorage.setItem("cart", JSON.stringify(items))

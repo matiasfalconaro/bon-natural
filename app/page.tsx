@@ -1,32 +1,63 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowRight } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
-import { Button } from "@/components/button"
-import ProductCard from "@/components/product-card"
-import SearchBar from "@/components/search-bar"
-import styles from "./page.module.css"
-import PromoCard from "@/components/promo-card"
-import { promoCombos } from "@/data/combos"
-
-import { categories } from "@/data/categories"
-import { allProducts } from "@/data/products"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
+import { useAuth } from "@/contexts/auth-context";
+import { Button } from "@/components/button";
+import ProductCard from "@/components/product-card";
+import PromoCard from "@/components/promo-card";
+import SearchBar from "@/components/search-bar";
+import { getAllCategories } from "@/lib/api/categories";
+import { getAllProducts } from "@/lib/api/products";
+import { getAllPromos } from "@/lib/api/promos";
+import { Category } from "@/types/categories";
+import { Product } from "@/types/products";
+import { PromoCombo } from "@/types/promos";
+import styles from "./page.module.css";
 
 export default function Home() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage();
+  const { user, isLoading } = useAuth();
+  const router = useRouter();
 
-  // Optional: Localize category names using translation keys
-  const localizedCategories = categories
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [promos, setPromos] = useState<PromoCombo[]>([]);
 
-  // Featured products
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.push("/login");
+    }
+  }, [user, isLoading, router]);
+
+  useEffect(() => {
+    async function loadData() {
+      const [fetchedCategories, fetchedProducts, fetchedPromos] = await Promise.all([
+        getAllCategories(),
+        getAllProducts(),
+        getAllPromos(),
+      ]);
+      setCategories(fetchedCategories);
+      setProducts(fetchedProducts);
+      setPromos(fetchedPromos);
+    }
+    if (user) {
+      loadData();
+    }
+  }, [user]);
+
   const featuredProducts =
-  allProducts.filter(p => p.featured).length > 0
-    ? allProducts.filter(p => p.featured)
-    : allProducts.slice(0, 4)
+    products.filter((p) => p.featured).length > 0
+      ? products.filter((p) => p.featured)
+      : products.slice(0, 4);
 
-  const { language } = useLanguage()
+  if (isLoading || !user) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>
@@ -51,17 +82,7 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            <div className={styles.heroImageContainer}>
-              {/*
-              <Image
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                alt="Natural Food Collection"
-                width={500}
-                height={500}
-                className={styles.heroImage}
-              />
-              */}
-            </div>
+            <div className={styles.heroImageContainer}></div>
           </div>
         </div>
       </section>
@@ -83,24 +104,28 @@ export default function Home() {
             <p className={styles.sectionSubtitle}>{t("categories.subtitle")}</p>
           </div>
           <div className={styles.categoriesGrid}>
-            {localizedCategories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/categories/${category.slug}`}
-                className={styles.categoryCard}
-              >
-                <Image
-                  src={category.image}
-                  alt={category.name[language]}
-                  width={200}
-                  height={200}
-                  className={styles.categoryImage}
-                />
-                <div className={styles.categoryOverlay}>
-                  <h3 className={styles.categoryTitle}>{category.name[language]}</h3>
-                </div>
-              </Link>
-            ))}
+            {categories.length === 0 ? (
+              <p>Loading categories...</p>
+            ) : (
+              categories.map((category) => (
+                <Link
+                  key={category.slug}
+                  href={`/categories/${category.slug}`}
+                  className={styles.categoryCard}
+                >
+                  <Image
+                    src={category.image}
+                    alt={category.name[language]}
+                    width={200}
+                    height={200}
+                    className={styles.categoryImage}
+                  />
+                  <div className={styles.categoryOverlay}>
+                    <h3 className={styles.categoryTitle}>{category.name[language]}</h3>
+                  </div>
+                </Link>
+              ))
+            )}
           </div>
         </div>
       </section>
@@ -128,20 +153,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Combos Section */}
+      {/* Promos Section */}
       <section className={styles.section}>
         <div className={styles.sectionContent}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>{t("promos.title")}</h2>
             <p className={styles.sectionSubtitle}>{t("promos.subtitle")}</p>
           </div>
-
           <div className={styles.productsGrid}>
-            {promoCombos.slice(0, 4).map((combo) => (
+            {promos.slice(0, 4).map((combo: PromoCombo) => (
               <PromoCard key={combo.slug} promo={combo} />
             ))}
           </div>
-
           <div className={styles.viewAllContainer}>
             <Button asChild variant="outline" className={styles.viewAllButton}>
               <Link href="/promos">
@@ -177,5 +200,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }

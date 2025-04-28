@@ -38,21 +38,21 @@ export default function LoginPage() {
 
       if (success) {
         toast({
-          title: "Login successful",
-          description: "Welcome back!",
+          title: t("login.successTitle") || "Login successful",
+          description: t("login.successDescription") || "Welcome back!",
         })
         router.push("/")
       } else {
         toast({
-          title: "Login failed",
-          description: "Invalid email or password. Try user@example.com / password",
+          title: t("login.failedTitle") || "Login failed",
+          description: t("login.failedDescription") || "Invalid email or password.",
           variant: "destructive",
         })
       }
     } catch (error) {
       toast({
-        title: "Login failed",
-        description: "An error occurred. Please try again.",
+        title: t("login.errorTitle") || "Error",
+        description: t("login.errorDescription") || "Something went wrong. Please try again later.",
         variant: "destructive",
       })
     } finally {
@@ -79,7 +79,7 @@ export default function LoginPage() {
               onChange={handleChange}
               required
               className={styles.input}
-              placeholder="user@example.com"
+              placeholder="you@example.com"
             />
           </div>
 
@@ -95,7 +95,7 @@ export default function LoginPage() {
               onChange={handleChange}
               required
               className={styles.input}
-              placeholder="password"
+              placeholder="Your password"
             />
           </div>
 
@@ -113,11 +113,6 @@ export default function LoginPage() {
           </Link>
         </div>
 
-        <div className={styles.demoInfo}>
-          <p>Demo credentials:</p>
-          <p>Email: user@example.com</p>
-          <p>Password: password</p>
-        </div>
       </div>
     </div>
   )

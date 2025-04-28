@@ -1,15 +1,15 @@
-"use client"
-import Link from "next/link"
-import Image from "next/image"
-import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useCart } from "@/contexts/cart-context"
-import { useLanguage } from "@/contexts/language-context"
-import styles from "./page.module.css"
+"use client";
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useCart } from "@/contexts/cart-context";
+import { useLanguage } from "@/contexts/language-context";
+import styles from "./page.module.css";
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, clearCart, subtotal } = useCart()
-  const { t } = useLanguage()
+  const { items, removeItem, updateQuantity, clearCart, subtotal } = useCart();
+  const { t } = useLanguage();
 
   return (
     <div className={styles.container}>
@@ -28,7 +28,7 @@ export default function CartPage() {
         <div className={styles.emptyCart}>
           <ShoppingBag className={styles.emptyIcon} />
           <h2 className={styles.emptyTitle}>{t("cart.empty")}</h2>
-          <p className={styles.emptyText}>Add some products to your cart to see them here.</p>
+          <p className={styles.emptyText}>{t("cart.addToCartMessage")}</p>
           <Button asChild className={styles.shopButton}>
             <Link href="/products">{t("hero.shopNow")}</Link>
           </Button>
@@ -37,10 +37,10 @@ export default function CartPage() {
         <div className={styles.content}>
           <div className={styles.cartItems}>
             <div className={styles.cartHeader}>
-              <div className={styles.productHeader}>Product</div>
-              <div className={styles.priceHeader}>Price</div>
-              <div className={styles.quantityHeader}>Quantity</div>
-              <div className={styles.totalHeader}>Total</div>
+              <div className={styles.productHeader}>{t("cart.productHeader")}</div>
+              <div className={styles.priceHeader}>{t("cart.priceHeader")}</div>
+              <div className={styles.quantityHeader}>{t("cart.quantityHeader")}</div>
+              <div className={styles.totalHeader}>{t("cart.totalHeader")}</div>
               <div className={styles.actionHeader}></div>
             </div>
 
@@ -96,17 +96,17 @@ export default function CartPage() {
           </div>
 
           <div className={styles.summary}>
-            <h2 className={styles.summaryTitle}>Order Summary</h2>
+            <h2 className={styles.summaryTitle}>{t("cart.orderSummary")}</h2>
             <div className={styles.summaryRow}>
               <span>{t("cart.subtotal")}</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className={styles.summaryRow}>
-              <span>Shipping</span>
-              <span>Calculated at checkout</span>
+              <span>{t("cart.shipping")}</span>
+              <span>{t("cart.shippingCalculation")}</span>
             </div>
             <div className={styles.summaryTotal}>
-              <span>Total</span>
+              <span>{t("cart.total")}</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <Button className={styles.checkoutButton}>{t("cart.checkout")}</Button>
@@ -117,5 +117,5 @@ export default function CartPage() {
         </div>
       )}
     </div>
-  )
+  );
 }
