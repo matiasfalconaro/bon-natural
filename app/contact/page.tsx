@@ -28,25 +28,48 @@ export default function ContactPage() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    toast({
-      title: "Message Sent",
-      description: "Thank you for your message. We'll get back to you soon!",
-    })
-
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    })
-    setIsSubmitting(false)
-  }
+    e.preventDefault();
+    setIsSubmitting(true);
+  
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:5100"}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+    
+      const contentType = response.headers.get("content-type");
+    
+      if (contentType && contentType.includes("application/json")) {
+        const data = await response.json();
+    
+        if (response.ok) {
+          toast({
+            title: "Message Sent",
+            description: "Thank you for your message. We'll get back to you soon!",
+          });
+          setFormData({ name: "", email: "", subject: "", message: "" });
+        } else {
+          toast({
+            title: "Error",
+            description: data.message || "Something went wrong.",
+            variant: "destructive",
+          });
+        }
+      } else {
+        throw new Error("Server did not return JSON");
+      }
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
