@@ -19,7 +19,7 @@ export default function CartDrawer() {
   const [discountCode, setDiscountCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [discountApplied, setDiscountApplied] = useState(false);
-  const [checkoutLoading, setCheckoutLoading] = useState(false); // 👈 for better UX
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   const handleApplyDiscount = () => {
     const discountCodes = {

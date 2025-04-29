@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import { useCart } from "@/contexts/cart-context"; // ✅ add this
 
 interface User {
   id: string;
@@ -22,7 +21,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { loadCart, resetCartState } = useCart(); // ✅ grab from cart context
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
@@ -53,11 +51,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem("user", JSON.stringify(data.user));
       setUser(data.user);
 
-      // ✅ delay slightly to ensure cookie/session is fully registered
-      setTimeout(() => {
-        loadCart();
-      }, 300);
-
       return true;
     } catch (e) {
       console.error(e);
@@ -71,7 +64,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    resetCartState(); // ✅ client-only reset
   };
 
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
@@ -90,11 +82,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       setUser(data.user);
-
-      // 🧠 optional: load cart for new user
-      setTimeout(() => {
-        loadCart();
-      }, 300);
 
       return true;
     } catch (error) {

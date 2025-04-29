@@ -25,12 +25,12 @@ export default function RootLayout({
       <body className={inter.className}>
       <ThemeProvider>
         <LanguageProvider>
-          <CartProvider> {/* ⬅️ outer */}
-            <AuthProvider> {/* ⬅️ now safe to call useCart() here */}
+          <AuthProvider>
+            <CartProvider>
               <LayoutContent>{children}</LayoutContent>
               <Toaster />
-            </AuthProvider>
-          </CartProvider>
+            </CartProvider>
+          </AuthProvider>
         </LanguageProvider>
       </ThemeProvider>
       </body>
