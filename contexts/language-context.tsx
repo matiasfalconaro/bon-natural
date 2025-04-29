@@ -2,28 +2,20 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react"
 import { translations } from "@/data/i18n/translations"
-import { TranslationKeys } from "@/types/i18n"
-
-export type Language = "en" | "es" | "fr"
-
-type LanguageContextType = {
-  language: Language
-  setLanguage: (language: Language) => void
-  t: (key: TranslationKeys) => string
-}
+import { SupportedLanguage, LanguageContextType, TranslationKeys } from "@/types/i18n";
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
-const getInitialLanguage = (): Language => {
+const getInitialLanguage = (): SupportedLanguage => {
   if (typeof window !== "undefined") {
-    const saved = localStorage.getItem("preferredLanguage") as Language | null
+    const saved = localStorage.getItem("preferredLanguage") as SupportedLanguage | null
     if (saved && ["en", "es", "fr"].includes(saved)) return saved
   }
   return "en"
 }
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("en")
+  const [language, setLanguage] = useState<SupportedLanguage>("en")
   const [isInitialized, setIsInitialized] = useState(false)
 
   useEffect(() => {

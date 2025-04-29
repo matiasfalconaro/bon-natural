@@ -201,4 +201,16 @@ export type TranslationKeys =
   | "password.resetErrorTitle"
   | "password.resetErrorDescription";
 
-export type Translations = Record<TranslationKeys, string>;
+  export type Translations = Record<TranslationKeys, string>;
+
+  export type SupportedLanguage = "en" | "es" | "fr";
+
+  export type LocalizedString = {
+    [key in SupportedLanguage]: string;
+  };
+
+  export type LanguageContextType = {
+    language: SupportedLanguage;
+    setLanguage: (language: SupportedLanguage) => void;
+    t: (key: TranslationKeys) => string;
+  };

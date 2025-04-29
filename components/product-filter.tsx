@@ -12,14 +12,17 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { useLanguage } from "@/contexts/language-context"
 import styles from "./product-filter.module.css"
 
+//No need to move to types/, is not reused
+interface ProductFilters {
+  categories: string[];
+  priceRange: [number, number];
+  dietary: string[];
+  searchTerm: string;
+}
+
 interface ProductFilterProps {
-  onFilter: (filters: {
-    categories: string[]
-    priceRange: [number, number]
-    dietary: string[]
-    searchTerm: string
-  }) => void
-  initialSearchTerm?: string
+  onFilter: (filters: ProductFilters) => void;
+  initialSearchTerm?: string;
 }
 
 export default function ProductFilter({ onFilter, initialSearchTerm = "" }: ProductFilterProps) {

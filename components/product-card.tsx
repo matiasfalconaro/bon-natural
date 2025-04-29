@@ -9,30 +9,14 @@ import { useLanguage } from "@/contexts/language-context"
 import { useCart } from "@/contexts/cart-context"
 import { toast } from "@/hooks/use-toast"
 import styles from "./product-card.module.css"
+import type { Product } from "@/types/products";
 
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
-
-interface Product {
-  id: string
-  slug: string
-  title: LocalizedString
-  price: number
-  image: string
-  category: LocalizedString
-  promoPercentage?: number | null
-  isComboo?: boolean 
-}
-
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: Product }) { 
   const { language, t } = useLanguage()
   const { addItem } = useCart()
 
-  const title = product.title[language as keyof LocalizedString]
-  const category = product.category[language as keyof LocalizedString]
+  const title = product.title[language];
+  const category = product.category[language];
 
   const isDiscounted = typeof product.promoPercentage === "number" && product.promoPercentage > 0
   const discountedPrice = isDiscounted

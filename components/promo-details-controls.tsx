@@ -5,22 +5,9 @@ import { Minus, Plus, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/contexts/cart-context"
 import { useLanguage } from "@/contexts/language-context"
+import { LocalizedString, PromoCombo } from "@/types/promos";
 
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
-
-interface Bundle {
-  id: string;
-  slug: string;
-  title: LocalizedString;
-  price: number;
-  image1: string;
-}
-
-export default function BundleDetailsControls({ bundle }: { bundle: Bundle }) {
+export default function BundleDetailsControls({ bundle }: { bundle: PromoCombo }) {
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
   const { language, t } = useLanguage()

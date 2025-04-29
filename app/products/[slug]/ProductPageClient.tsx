@@ -8,9 +8,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProductDetailsControls from "@/components/product-details-controls"
 import ProductCard from "@/components/product-card"
 import type { Product } from "@/types/products"
+import type { SupportedLanguage } from "@/types/i18n";
 
-const getLocalized = (field: Product["title"] | undefined, lang: string): string =>
-  field?.[lang as keyof Product["title"]] || "N/A"
+const getLocalized = (
+  field: Product["title"] | undefined,
+  lang: SupportedLanguage
+): string => field?.[lang] || "N/A";
 
 export default function ProductPageClient({
   product,

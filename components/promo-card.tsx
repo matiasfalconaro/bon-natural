@@ -8,27 +8,7 @@ import { ShoppingCart } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 import { useCart } from "@/contexts/cart-context"
 import styles from "./product-card.module.css"
-
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
-
-type PromoType = "combo" | "bulk" | "gift"
-
-interface PromoCombo {
-  id: string
-  slug: string
-  title: LocalizedString
-  description: LocalizedString
-  image1: string
-  image2?: string
-  price: number
-  quantity?: number
-  promoType: PromoType
-  promoLabel?: string
-}
+import { PromoCombo } from "@/types/promos"
 
 export default function PromoCard({ promo }: { promo: PromoCombo }) {
   const { language, t } = useLanguage()
