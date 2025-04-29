@@ -1,49 +1,59 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ShoppingBag, Plus, Minus, Trash2, Tag } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { useCart } from "@/contexts/cart-context"
-import { useLanguage } from "@/contexts/language-context"
-import Image from "next/image"
-import Link from "next/link"
-import styles from "./cart-drawer.module.css"
+import { useState } from "react";
+import { ShoppingBag, Plus, Minus, Trash2, Tag } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { useCart } from "@/contexts/cart-context";
+import { useLanguage } from "@/contexts/language-context";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "./cart-drawer.module.css";
 
 export default function CartDrawer() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { items, removeItem, updateQuantity, clearCart, itemCount, subtotal } = useCart()
-  const { t } = useLanguage()
-  const [discountCode, setDiscountCode] = useState("")
-  const [discount, setDiscount] = useState(0)
-  const [discountApplied, setDiscountApplied] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const { items, removeItem, updateQuantity, clearCart, itemCount, subtotal, loading } = useCart();
+  const { t } = useLanguage();
+  const [discountCode, setDiscountCode] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false); // 👈 for better UX
 
   const handleApplyDiscount = () => {
-    // Mock discount codes
     const discountCodes = {
       WELCOME10: 10,
       SUMMER20: 20,
       FREESHIP: 5,
-    }
+    };
 
     if (discountCode in discountCodes) {
-      const discountAmount = (discountCodes as any)[discountCode]
-      setDiscount(discountAmount)
-      setDiscountApplied(true)
+      const discountAmount = (discountCodes as any)[discountCode];
+      setDiscount(discountAmount);
+      setDiscountApplied(true);
     } else {
-      setDiscount(0)
-      setDiscountApplied(false)
+      setDiscount(0);
+      setDiscountApplied(false);
     }
-  }
+  };
 
-  const total = subtotal - subtotal * (discount / 100)
+  const total = subtotal - subtotal * (discount / 100);
 
-  const handleCheckout = () => {
-    // TODO: In a real app, this would redirect to a checkout page or open a payment modal
-    alert(`Proceeding to checkout with total: $${total.toFixed(2)}`)
-  }
+  const handleCheckout = async () => {
+    setCheckoutLoading(true);
+    try {
+      alert(`Proceeding to checkout with total: $${total.toFixed(2)}`);
+      await clearCart();
+      alert("✅ Purchase completed! Cart is now empty.");
+      setIsOpen(false);
+    } catch (err) {
+      console.error("Checkout failed:", err);
+      alert("❌ Checkout failed, please try again.");
+    } finally {
+      setCheckoutLoading(false);
+    }
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -54,6 +64,7 @@ export default function CartDrawer() {
           <span className="sr-only">{t("cart.open")}</span>
         </Button>
       </SheetTrigger>
+
       <SheetContent className={styles.cartDrawer}>
         <SheetHeader>
           <SheetTitle className={styles.cartTitle}>
@@ -62,7 +73,11 @@ export default function CartDrawer() {
           </SheetTitle>
         </SheetHeader>
 
-        {items.length === 0 ? (
+        {loading ? (
+          <div className={styles.emptyCart}>
+            <p>Loading cart...</p>
+          </div>
+        ) : items.length === 0 ? (
           <div className={styles.emptyCart}>
             <p>{t("cart.empty")}</p>
             <Button asChild className="mt-4" onClick={() => setIsOpen(false)}>
@@ -72,20 +87,27 @@ export default function CartDrawer() {
         ) : (
           <>
             <div className={styles.cartItems}>
-              {items.map((item) => (
-                <div key={item.id} className={styles.cartItem}>
+              {items.map((item, index) => (
+                <div 
+                  key={`${item.id}-${item.itemType}-${index}`} 
+                  className={styles.cartItem}
+                >
                   <div className={styles.itemImage}>
                     <Image
                       src={item.image || "/placeholder.svg"}
-                      alt={item.title}
+                      alt={item.title || "Unnamed"}
                       width={80}
                       height={80}
                       className="rounded-md object-cover"
                     />
                   </div>
                   <div className={styles.itemDetails}>
-                    <h3 className={styles.itemTitle}>{item.title}</h3>
-                    <p className={styles.itemPrice}>${item.price.toFixed(2)}</p>
+                    <h3 className={styles.itemTitle}>
+                      {item.title || "Unnamed Item"}
+                    </h3>
+                    <p className={styles.itemPrice}>
+                      ${item.price?.toFixed(2) ?? "0.00"}
+                    </p>
                     <div className={styles.itemActions}>
                       <div className={styles.quantityControl}>
                         <Button
@@ -164,10 +186,19 @@ export default function CartDrawer() {
                 <span>${total.toFixed(2)}</span>
               </div>
 
-              <Button className={styles.checkoutButton} onClick={handleCheckout}>
-                {t("cart.checkout")}
+              <Button
+                className={styles.checkoutButton}
+                onClick={handleCheckout}
+                disabled={checkoutLoading || loading}
+              >
+                {checkoutLoading ? "Processing..." : t("cart.checkout")}
               </Button>
-              <Button variant="outline" className={styles.clearButton} onClick={clearCart}>
+              <Button
+                variant="outline"
+                className={styles.clearButton}
+                onClick={clearCart}
+                disabled={checkoutLoading || loading}
+              >
                 {t("cart.clear")}
               </Button>
             </div>
@@ -175,5 +206,5 @@ export default function CartDrawer() {
         )}
       </SheetContent>
     </Sheet>
-  )
+  );
 }

@@ -13,10 +13,11 @@ interface LocalizedString {
 }
 
 interface Bundle {
-  slug: string
-  title: LocalizedString
-  price: number
-  image1: string
+  id: string;
+  slug: string;
+  title: LocalizedString;
+  price: number;
+  image1: string;
 }
 
 export default function BundleDetailsControls({ bundle }: { bundle: Bundle }) {
@@ -27,16 +28,15 @@ export default function BundleDetailsControls({ bundle }: { bundle: Bundle }) {
   const localizedTitle = bundle.title[language]
 
   const handleAddToCart = () => {
-    addItem(
-      {
-        id: bundle.slug,
-        title: localizedTitle,
-        price: bundle.price,
-        image: bundle.image1,
-      },
-      quantity
-    )
-  }
+    addItem({
+      id: bundle.id,
+      title: localizedTitle,
+      price: bundle.price,
+      image: bundle.image1,
+      quantity: quantity,
+      itemType: "promo",
+    });
+  };
 
   return (
     <div className="flex items-center space-x-4">

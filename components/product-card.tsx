@@ -39,19 +39,21 @@ export default function ProductCard({ product }: { product: Product }) {
     ? product.price * (1 - product.promoPercentage! / 100)
     : product.price
 
-  const handleAddToCart = () => {
-    addItem({
-      id: product.slug,
-      title,
-      price: discountedPrice,
-      image: product.image,
-    })
-
-    toast({
-      title: t("cart.added"),
-      description: `${title} ${t("cart.addedToCart")}`,
-    })
-  }
+    const handleAddToCart = () => {
+      addItem({
+        id: product.id,
+        title,
+        price: discountedPrice,
+        image: product.image,
+        quantity: 1,
+        itemType: "product",
+      });
+    
+      toast({
+        title: t("cart.added"),
+        description: `${title} ${t("cart.addedToCart")}`,
+      });
+    };
 
   return (
     <Card className={styles.card}>

@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/language-context";
 import { useAuth } from "@/contexts/auth-context";
 import styles from "./page.module.css";
+import { useCart } from "@/contexts/cart-context";
 
 export default function AccountPage() {
   const { t } = useLanguage();
@@ -153,8 +154,11 @@ export default function AccountPage() {
     }
   };
 
-  const handleLogout = () => {
+  const { clearCart } = useCart();
+
+  const handleLogout = async () => {
     logout();
+    clearCart();
     router.push("/");
   };
 

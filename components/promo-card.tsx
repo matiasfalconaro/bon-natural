@@ -39,12 +39,14 @@ export default function PromoCard({ promo }: { promo: PromoCombo }) {
 
   const handleAddToCart = () => {
     addItem({
-      id: promo.slug,
+      id: promo.id,
       title,
       price: promo.price,
       image: promo.image1,
-    })
-  }
+      quantity: 1,
+      itemType: "promo",
+    });
+  };
 
   const renderPromoBadge = () => {
     let label = ""

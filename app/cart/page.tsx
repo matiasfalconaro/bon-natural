@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
@@ -8,8 +9,16 @@ import { useLanguage } from "@/contexts/language-context";
 import styles from "./page.module.css";
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, clearCart, subtotal } = useCart();
+  const { items, removeItem, updateQuantity, clearCart, subtotal, loading } = useCart();
   const { t } = useLanguage();
+
+  if (loading) {
+    return (
+      <div className={styles.container}>
+        <h1 className={styles.title}>Loading cart...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -109,7 +118,15 @@ export default function CartPage() {
               <span>{t("cart.total")}</span>
               <span>${subtotal.toFixed(2)}</span>
             </div>
-            <Button className={styles.checkoutButton}>{t("cart.checkout")}</Button>
+            <Button
+              className={styles.checkoutButton}
+              onClick={async () => {
+                alert(`Proceeding to checkout! Total: $${subtotal.toFixed(2)}`);
+                await clearCart();
+              }}
+            >
+              {t("cart.checkout")}
+            </Button>
             <Button variant="outline" className={styles.clearButton} onClick={clearCart}>
               {t("cart.clear")}
             </Button>
