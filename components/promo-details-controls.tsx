@@ -5,21 +5,9 @@ import { Minus, Plus, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/contexts/cart-context"
 import { useLanguage } from "@/contexts/language-context"
+import { LocalizedString, PromoCombo } from "@/types/promos";
 
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
-
-interface Bundle {
-  slug: string
-  title: LocalizedString
-  price: number
-  image1: string
-}
-
-export default function BundleDetailsControls({ bundle }: { bundle: Bundle }) {
+export default function BundleDetailsControls({ bundle }: { bundle: PromoCombo }) {
   const [quantity, setQuantity] = useState(1)
   const { addItem } = useCart()
   const { language, t } = useLanguage()
@@ -27,16 +15,15 @@ export default function BundleDetailsControls({ bundle }: { bundle: Bundle }) {
   const localizedTitle = bundle.title[language]
 
   const handleAddToCart = () => {
-    addItem(
-      {
-        id: bundle.slug,
-        title: localizedTitle,
-        price: bundle.price,
-        image: bundle.image1,
-      },
-      quantity
-    )
-  }
+    addItem({
+      id: bundle.id,
+      title: localizedTitle,
+      price: bundle.price,
+      image: bundle.image1,
+      quantity: quantity,
+      itemType: "promo",
+    });
+  };
 
   return (
     <div className="flex items-center space-x-4">

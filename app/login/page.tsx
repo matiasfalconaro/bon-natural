@@ -1,64 +1,71 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { useToast } from "@/hooks/use-toast"
-import { useLanguage } from "@/contexts/language-context"
-import { useAuth } from "@/contexts/auth-context"
-import styles from "./page.module.css"
+import type React from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/language-context";
+import { useAuth } from "@/contexts/auth-context";
+import styles from "./page.module.css";
 
 export default function LoginPage() {
-  const { t } = useLanguage()
-  const { login } = useAuth()
-  const { toast } = useToast()
-  const router = useRouter()
+  const { t } = useLanguage();
+  const { login, user, isLoading } = useAuth();
+  const { toast } = useToast();
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading && user) {
+      router.push("/");
+    }
+  }, [user, isLoading, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      const success = await login(formData.email, formData.password)
+      const success = await login(formData.email, formData.password);
 
       if (success) {
         toast({
           title: t("login.successTitle") || "Login successful",
           description: t("login.successDescription") || "Welcome back!",
-        })
-        router.push("/")
+        });
+        router.push("/");
       } else {
         toast({
           title: t("login.failedTitle") || "Login failed",
           description: t("login.failedDescription") || "Invalid email or password.",
           variant: "destructive",
-        })
+        });
       }
     } catch (error) {
       toast({
         title: t("login.errorTitle") || "Error",
         description: t("login.errorDescription") || "Something went wrong. Please try again later.",
         variant: "destructive",
-      })
+      });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
+
+  if (isLoading) return null;
 
   return (
     <div className={styles.container}>
@@ -112,8 +119,7 @@ export default function LoginPage() {
             {t("login.forgotPassword")}
           </Link>
         </div>
-
       </div>
     </div>
-  )
+  );
 }

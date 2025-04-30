@@ -9,49 +9,35 @@ import { useLanguage } from "@/contexts/language-context"
 import { useCart } from "@/contexts/cart-context"
 import { toast } from "@/hooks/use-toast"
 import styles from "./product-card.module.css"
+import type { Product } from "@/types/products";
 
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
-
-interface Product {
-  id: string
-  slug: string
-  title: LocalizedString
-  price: number
-  image: string
-  category: LocalizedString
-  promoPercentage?: number | null
-  isComboo?: boolean 
-}
-
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({ product }: { product: Product }) { 
   const { language, t } = useLanguage()
   const { addItem } = useCart()
 
-  const title = product.title[language as keyof LocalizedString]
-  const category = product.category[language as keyof LocalizedString]
+  const title = product.title[language];
+  const category = product.category[language];
 
   const isDiscounted = typeof product.promoPercentage === "number" && product.promoPercentage > 0
   const discountedPrice = isDiscounted
     ? product.price * (1 - product.promoPercentage! / 100)
     : product.price
 
-  const handleAddToCart = () => {
-    addItem({
-      id: product.slug,
-      title,
-      price: discountedPrice,
-      image: product.image,
-    })
-
-    toast({
-      title: t("cart.added"),
-      description: `${title} ${t("cart.addedToCart")}`,
-    })
-  }
+    const handleAddToCart = () => {
+      addItem({
+        id: product.id,
+        title,
+        price: discountedPrice,
+        image: product.image,
+        quantity: 1,
+        itemType: "product",
+      });
+    
+      toast({
+        title: t("cart.added"),
+        description: `${title} ${t("cart.addedToCart")}`,
+      });
+    };
 
   return (
     <Card className={styles.card}>

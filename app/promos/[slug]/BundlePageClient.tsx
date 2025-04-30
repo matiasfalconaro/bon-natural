@@ -7,45 +7,16 @@ import { useLanguage } from "@/contexts/language-context"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { useCart } from "@/contexts/cart-context"
 import BundleDetailsControls from "@/components/promo-details-controls"
+import type { PromoCombo } from "@/types/promos";
+import type { SupportedLanguage } from "@/types/i18n";
 
-interface LocalizedString {
-  en: string
-  es: string
-  fr: string
-}
+const getLocalized = (field: PromoCombo["title"], lang: SupportedLanguage): string => {
+  return field?.[lang as keyof PromoCombo["title"]] || "N/A";
+};
 
-type PromoType = "combo" | "bulk" | "gift"
-
-interface Bundle {
-  id: string
-  slug: string
-  title: LocalizedString
-  description: LocalizedString
-  image1: string
-  image2?: string
-  price: number
-  quantity?: number
-  promoType: PromoType
-  ingredients: LocalizedString
-  origin: LocalizedString
-  nutritionalInfo?: {
-    servingSize: string
-    calories: number
-    totalFat: string
-    sodium: string
-    totalCarbs: string
-    sugars: string
-    protein: string
-  }
-}
-
-const getLocalized = (field: LocalizedString | undefined, lang: string): string => {
-  return field?.[lang as keyof LocalizedString] || "N/A"
-}
-
-export default function BundlePageClient({ bundle }: { bundle: Bundle | null }) {
-  const { language, t } = useLanguage()
-  const { addItem } = useCart()
+export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null }) {
+  const { language, t } = useLanguage();
+  const { addItem } = useCart();
 
   if (!bundle || !bundle.slug) {
     return (
@@ -56,11 +27,11 @@ export default function BundlePageClient({ bundle }: { bundle: Bundle | null }) 
           {t("promos.viewAll")}
         </Link>
       </div>
-    )
+    );
   }
 
-  const title = getLocalized(bundle.title, language)
-  const description = getLocalized(bundle.description, language)
+  const title = getLocalized(bundle.title, language);
+  const description = getLocalized(bundle.description, language);
 
   return (
     <div className="container px-4 md:px-6 py-8 md:py-12">

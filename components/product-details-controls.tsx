@@ -16,12 +16,14 @@ export default function ProductDetailsControls({ product }: { product: Product }
 
   const handleAddToCart = () => {
     addItem({
-      id: product.slug,
+      id: product.id,
       title: localizedTitle,
       price: product.price,
       image: product.image,
-    }, quantity)
-  }
+      quantity: quantity,
+      itemType: "product",
+    });
+  };
 
   return (
     <div className="flex items-center space-x-4">

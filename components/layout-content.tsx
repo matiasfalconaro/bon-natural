@@ -1,25 +1,44 @@
 "use client";
 
 import { useAuth } from "@/contexts/auth-context";
+import { useSyncCartWithUser } from "@/hooks/use-sync-cart-with-user";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export default function LayoutContent({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useSyncCartWithUser();
+
+  useEffect(() => {
+    if (!isLoading && !user) {
+      const publicPaths = ["/login", "/register", "/forgot-password"];
+      if (!publicPaths.includes(pathname)) {
+        router.push("/login");
+      }
+    }
+  }, [user, isLoading, router, pathname]);
 
   if (isLoading) {
     return null;
   }
 
-  if (!user) {
-    return <main>{children}</main>;
+  const publicPaths = ["/login", "/register", "/forgot-password"];
+  const isPublicPage = publicPaths.includes(pathname);
+
+  if (!user && !isPublicPage) {
+    return null;
   }
 
   return (
     <>
-      <Header />
+      {user && <Header />}
       <main>{children}</main>
-      <Footer />
+      {user && <Footer />}
     </>
   );
 }

@@ -8,21 +8,24 @@ import { useAuth } from "@/contexts/auth-context"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
 import styles from "./user-menu.module.css"
+import { useCart } from "@/contexts/cart-context";
 
 export default function UserMenu() {
   const { t } = useLanguage()
   const { user, logout } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
+  const { clearCart } = useCart();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen)
   }
 
   const handleLogout = () => {
-    logout()
-    setIsOpen(false)
-  }
+    logout();
+    clearCart();
+    setIsOpen(false);
+  };
   return (
     <div className="user-menu">
       <Button variant="ghost" size="icon" data-active={isOpen || pathname === "/account"} className={`${styles.button} ${styles.active}`} onClick={toggleMenu}>

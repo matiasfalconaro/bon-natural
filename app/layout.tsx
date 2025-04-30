@@ -23,16 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider>
-          <LanguageProvider>
-            <AuthProvider>
-              <CartProvider>
-                <LayoutContent>{children}</LayoutContent>
-                <Toaster />
-              </CartProvider>
-            </AuthProvider>
-          </LanguageProvider>
-        </ThemeProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <CartProvider>
+              <LayoutContent>{children}</LayoutContent>
+              <Toaster />
+            </CartProvider>
+          </AuthProvider>
+        </LanguageProvider>
+      </ThemeProvider>
       </body>
     </html>
   );
