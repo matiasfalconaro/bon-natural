@@ -29,28 +29,36 @@ export default function PromoCard({ promo }: { promo: PromoCombo }) {
   };
 
   const renderPromoBadge = () => {
-    let label = ""
-    let modifierClass = ""
+    if (promo.promoPercentage && promo.promoPercentage > 0) {
+      return (
+        <div className={`${styles.discountBadge} ${styles.discount}`}>
+          {promo.promoPercentage}% OFF
+        </div>
+      );
+    }
+  
+    let label = "";
+    let modifierClass = "";
   
     switch (promo.promoType) {
       case "combo":
-        label = "Combo"
-        modifierClass = styles.combo
-        break
+        label = "Combo";
+        modifierClass = styles.combo;
+        break;
       case "bulk":
-        label = `x${promo.quantity}`
-        modifierClass = styles.bulk
-        break
+        label = `x${promo.quantity}`;
+        modifierClass = styles.bulk;
+        break;
       case "gift":
-        label = "+1 Free"
-        modifierClass = styles.gift
-        break
+        label = "+1 Free";
+        modifierClass = styles.gift;
+        break;
       default:
-        return null
+        return null;
     }
   
-    return <div className={`${styles.discountBadge} ${modifierClass}`}>{label}</div>
-  }
+    return <div className={`${styles.discountBadge} ${modifierClass}`}>{label}</div>;
+  };
 
   return (
     <Card className={styles.card}>
