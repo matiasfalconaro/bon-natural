@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import ProductDetailsControls from "@/components/product-details-controls"
 import ProductCard from "@/components/product-card"
 import type { Product } from "@/types/products"
-import type { SupportedLanguage } from "@/types/i18n";
+import type { SupportedLanguage } from "@/types/i18n"
 
 const getLocalized = (
   field: Product["title"] | undefined,
@@ -25,6 +25,10 @@ export default function ProductPageClient({
   const { language, t } = useLanguage()
 
   const categoryName = getLocalized(product.category, language)
+  const isDiscounted = typeof product.promoPercentage === "number" && product.promoPercentage > 0
+  const discountedPrice = isDiscounted
+    ? product.price * (1 - product.promoPercentage! / 100)
+    : product.price;
 
   return (
     <div className="container px-4 md:px-6 py-8 md:py-12">
@@ -34,7 +38,12 @@ export default function ProductPageClient({
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-[#f8f5f0] rounded-lg p-6 flex items-center justify-center">
+        <div className="relative bg-[#f8f5f0] rounded-lg p-6 flex items-center justify-center">
+          {isDiscounted && (
+            <div className="absolute top-4 left-4 bg-yellow-400 text-black text-sm font-bold px-2 py-1 rounded shadow-md z-10">
+              {product.promoPercentage}% OFF
+            </div>
+          )}
           <Image
             src={product.image || "/placeholder.svg"}
             alt={getLocalized(product.title, language)}
@@ -48,7 +57,14 @@ export default function ProductPageClient({
           <div>
             <p className="text-sm text-muted-foreground">{categoryName}</p>
             <h1 className="text-3xl font-bold mt-1">{getLocalized(product.title, language)}</h1>
-            <p className="text-2xl font-bold mt-2">${product.price.toFixed(2)}</p>
+            {isDiscounted ? (
+              <p className="text-2xl font-bold mt-2">
+                <span className="line-through text-gray-400 mr-2">${product.price.toFixed(2)}</span>
+                <span className="text-green-600">${discountedPrice.toFixed(2)}</span>
+              </p>
+            ) : (
+              <p className="text-2xl font-bold mt-2">${product.price.toFixed(2)}</p>
+            )}
           </div>
 
           <p className="text-muted-foreground">{getLocalized(product.description, language)}</p>

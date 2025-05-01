@@ -1,18 +1,19 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useCart } from "@/contexts/cart-context"
-import BundleDetailsControls from "@/components/promo-details-controls"
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useCart } from "@/contexts/cart-context";
+import BundleDetailsControls from "@/components/promo-details-controls";
 import type { PromoCombo } from "@/types/promos";
 import type { SupportedLanguage } from "@/types/i18n";
 
-const getLocalized = (field: PromoCombo["title"], lang: SupportedLanguage): string => {
-  return field?.[lang as keyof PromoCombo["title"]] || "N/A";
-};
+const getLocalized = (
+  field: PromoCombo["title"] | undefined,
+  lang: SupportedLanguage
+): string => field?.[lang as keyof typeof field] || "N/A";
 
 export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null }) {
   const { language, t } = useLanguage();
@@ -32,6 +33,10 @@ export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null
 
   const title = getLocalized(bundle.title, language);
   const description = getLocalized(bundle.description, language);
+  const isDiscounted = (bundle.promoPercentage ?? 0) > 0;
+  const discountedPrice = isDiscounted
+    ? bundle.price * (1 - bundle.promoPercentage! / 100)
+    : bundle.price;
 
   return (
     <div className="container px-4 md:px-6 py-8 md:py-12">
@@ -41,7 +46,16 @@ export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-[#f8f5f0] rounded-lg p-6 flex items-center justify-center">
+        <div className="relative bg-[#f8f5f0] rounded-lg p-6 flex items-center justify-center">
+        <div className="absolute top-4 left-4 bg-yellow-400 text-black text-sm font-bold px-2 py-1 rounded shadow-md z-10">
+          {bundle.promoPercentage && bundle.promoPercentage > 0
+            ? `${bundle.promoPercentage}% OFF`
+            : bundle.promoType === "bulk"
+            ? `x${bundle.quantity ?? 1}`
+            : bundle.promoType === "gift"
+            ? "+1 Free"
+            : "Combo"}
+        </div>
           <Image
             src={bundle.image1 || "/placeholder.svg"}
             alt={title}
@@ -54,7 +68,14 @@ export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null
         <div className="space-y-6">
           <div>
             <h1 className="text-3xl font-bold mt-1">{title}</h1>
-            <p className="text-2xl font-bold mt-2">${bundle.price.toFixed(2)}</p>
+            {isDiscounted ? (
+              <p className="text-2xl font-bold mt-2">
+                <span className="line-through text-gray-400 mr-2">${bundle.price.toFixed(2)}</span>
+                <span className="text-green-600">${discountedPrice.toFixed(2)}</span>
+              </p>
+            ) : (
+              <p className="text-2xl font-bold mt-2">${bundle.price.toFixed(2)}</p>
+            )}
           </div>
 
           <p className="text-muted-foreground">{description}</p>
@@ -96,5 +117,5 @@ export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null
         </div>
       </div>
     </div>
-  )
+  );
 }

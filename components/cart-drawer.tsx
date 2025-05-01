@@ -21,22 +21,41 @@ export default function CartDrawer() {
   const [discountApplied, setDiscountApplied] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
 
-  const handleApplyDiscount = () => {
-    const discountCodes = {
-      WELCOME10: 10,
-      SUMMER20: 20,
-      FREESHIP: 5,
-    };
+  const handleApplyDiscount = async () => {
+    try {
+      const response = await fetch("http://localhost:5100/api/cart/discount", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ code: discountCode }),
+      });
+      console.log("Applying code:", discountCode);
 
-    if (discountCode in discountCodes) {
-      const discountAmount = (discountCodes as any)[discountCode];
-      setDiscount(discountAmount);
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        alert(errorData.message);
+        setDiscount(0);
+        setDiscountApplied(false);
+        return;
+      }
+  
+      const data = await response.json();
+      setDiscount(data.amount);
       setDiscountApplied(true);
-    } else {
-      setDiscount(0);
-      setDiscountApplied(false);
+    } catch (err) {
+      console.error("Discount validation failed", err);
+      alert("Failed to apply discount");
     }
   };
+
+  const resetDiscount = () => {
+    setDiscount(0);
+    setDiscountApplied(false);
+    setDiscountCode("");
+  };  
 
   const total = subtotal - subtotal * (discount / 100);
 
@@ -45,6 +64,7 @@ export default function CartDrawer() {
     try {
       alert(`Proceeding to checkout with total: $${total.toFixed(2)}`);
       await clearCart();
+      resetDiscount();
       alert("✅ Purchase completed! Cart is now empty.");
       setIsOpen(false);
     } catch (err) {
@@ -151,7 +171,7 @@ export default function CartDrawer() {
                 <div className="discount-form">
                   <Input
                     type="text"
-                    placeholder="WELCOME10"
+                    // placeholder=""
                     value={discountCode}
                     onChange={(e) => setDiscountCode(e.target.value)}
                     className="discount-input"
@@ -196,7 +216,10 @@ export default function CartDrawer() {
               <Button
                 variant="outline"
                 className={styles.clearButton}
-                onClick={clearCart}
+                onClick={() => {
+                  clearCart();
+                  resetDiscount();
+                }}
                 disabled={checkoutLoading || loading}
               >
                 {t("cart.clear")}
