@@ -1,13 +1,13 @@
 "use client"
 
-import type React from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Search } from "lucide-react"
+import { useLanguage } from "@/contexts/language-context"
 import { useState, useEffect, useRef } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { Search } from "lucide-react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { useLanguage } from "@/contexts/language-context"
 import styles from "./search-bar.module.css"
+import type React from "react"
 
 export default function SearchBar() {
   const router = useRouter()

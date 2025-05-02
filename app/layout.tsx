@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
+import { AuthProvider } from "@/contexts/auth-context";
+import { CartProvider } from "@/contexts/cart-context";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { LanguageProvider } from "@/contexts/language-context";
 import { ThemeProvider } from "@/contexts/theme-context";
-import { CartProvider } from "@/contexts/cart-context";
-import { AuthProvider } from "@/contexts/auth-context";
 import { Toaster } from "@/components/ui/toaster";
+import "./globals.css";
 import LayoutContent from "@/components/layout-content";
+import type { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 

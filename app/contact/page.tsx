@@ -1,13 +1,13 @@
 "use client"
 
-import React from "react"
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { Clock, MapPin, Mail, Phone } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/hooks/use-toast"
 import { useLanguage } from "@/contexts/language-context"
-import { MapPin, Phone, Mail, Clock } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
+import { useState } from "react"
+import React from "react"
 import styles from "./page.module.css"
 
 export default function ContactPage() {

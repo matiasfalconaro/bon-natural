@@ -1,13 +1,13 @@
 "use client"
 
+import { Product } from "@/types/products"
+import { useLanguage } from "@/contexts/language-context"
 import { useState, useEffect, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import ProductCard from "@/components/product-card"
 import ProductFilter from "@/components/product-filter"
 import SearchBar from "@/components/search-bar"
-import { useLanguage } from "@/contexts/language-context"
 import styles from "./page.module.css"
-import { Product } from "@/types/products"
 
 type SupportedLanguage = "en" | "es" | "fr"
 

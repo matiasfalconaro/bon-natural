@@ -1,12 +1,12 @@
 "use client"
 
+import { ArrowLeft } from "lucide-react"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useLanguage } from "@/contexts/language-context"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import ProductDetailsControls from "@/components/product-details-controls"
 import ProductCard from "@/components/product-card"
+import ProductDetailsControls from "@/components/product-details-controls"
 import type { Product } from "@/types/products"
 import type { SupportedLanguage } from "@/types/i18n"
 

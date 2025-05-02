@@ -1,8 +1,8 @@
 "use client"
 
-import React, { createContext, useContext, useState, useEffect } from "react"
 import { translations } from "@/data/i18n/translations"
-import { SupportedLanguage, LanguageContextType, TranslationKeys } from "@/types/i18n";
+import { LanguageContextType, SupportedLanguage, TranslationKeys } from "@/types/i18n";
+import React, { createContext, useContext, useState, useEffect } from "react"
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 

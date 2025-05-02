@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { useLanguage } from "@/contexts/language-context";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLanguage } from "@/contexts/language-context";
 import { useCart } from "@/contexts/cart-context";
 import BundleDetailsControls from "@/components/promo-details-controls";
+import Image from "next/image";
+import Link from "next/link";
 import type { PromoCombo } from "@/types/promos";
 import type { SupportedLanguage } from "@/types/i18n";
 

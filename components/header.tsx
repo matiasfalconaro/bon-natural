@@ -1,17 +1,17 @@
 "use client"
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Menu } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { useLanguage } from "@/contexts/language-context"
-import LanguageSwitcher from "@/components/language-switcher"
-import ThemeSwitcher from "@/components/theme-switcher"
+import { useState } from "react"
 import CartDrawer from "@/components/cart-drawer"
-import UserMenu from "@/components/user-menu"
+import Image from "next/image"
+import LanguageSwitcher from "@/components/language-switcher"
+import Link from "next/link"
+import ThemeSwitcher from "@/components/theme-switcher"
 import styles from "./header.module.css"
+import UserMenu from "@/components/user-menu"
 
 export default function Header() {
   const { t } = useLanguage()

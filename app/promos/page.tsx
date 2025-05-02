@@ -1,13 +1,13 @@
 "use client"
 
+import { getAllPromos } from "@/lib/api/promos"
+import { PromoCombo } from "@/types/promos"
+import { useLanguage } from "@/contexts/language-context"
 import { useEffect, useState, useRef } from "react"
 import { useSearchParams } from "next/navigation"
 import PromoCard from "@/components/promo-card"
 import ProductFilter from "@/components/product-filter"
 import SearchBar from "@/components/search-bar"
-import { useLanguage } from "@/contexts/language-context"
-import { getAllPromos } from "@/lib/api/promos"
-import { PromoCombo } from "@/types/promos"
 import styles from "../products/page.module.css"
 
 export default function PromosPage() {
