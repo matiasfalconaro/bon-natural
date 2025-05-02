@@ -9,13 +9,16 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/language-context";
 import { useAuth } from "@/contexts/auth-context";
+import { useSearchParams } from "next/navigation";
 import styles from "./page.module.css";
 
 export default function LoginPage() {
   const { t } = useLanguage();
   const { login, user, isLoading } = useAuth();
   const { toast } = useToast();
+
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -24,10 +27,15 @@ export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    const hasResetToken = searchParams.get("resetToken");
+    const hasEmailToken = searchParams.get("token");
+  
     if (!isLoading && user) {
-      router.push("/");
+      if (!hasResetToken && !hasEmailToken) {
+        router.push("/");
+      }
     }
-  }, [user, isLoading, router]);
+  }, [user, isLoading, searchParams, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
