@@ -60,25 +60,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
-        credentials: "include",
       });
-
+  
+      if (!res.ok) {
+        throw new Error("Registration failed");
+      }
+  
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Registration failed");
-
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      setUser(data.user);
-
+  
       return true;
     } catch (error) {
-      console.error(error);
+      console.error("Register error:", error);
       throw error;
     } finally {
       setIsLoading(false);
     }
   };
-
   return (
     <AuthContext.Provider value={{ user, login, logout, register, isLoading }}>
       {children}

@@ -50,10 +50,9 @@ export default function RegisterPage() {
 
       if (success) {
         toast({
-          title: "Registration successful",
-          description: "Your account has been created!",
-        })
-        router.push("/")
+          title: "Check your email",
+          description: "We've sent you a verification link. Please confirm your email to complete registration.",
+        });
       } else {
         toast({
           title: "Registration failed",

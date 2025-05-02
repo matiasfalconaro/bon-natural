@@ -31,7 +31,6 @@ export default function CartDrawer() {
         credentials: "include",
         body: JSON.stringify({ code: discountCode }),
       });
-      console.log("Applying code:", discountCode);
 
   
       if (!response.ok) {
