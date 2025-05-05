@@ -1,10 +1,13 @@
 import { Product } from "@/types/products"
 
-export async function getProductBySlug(slug: string): Promise<Product | null> {
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE;
+
+export async function getProductBySlug(slug: string, token?: string): Promise<Product | null> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/product/${slug}`, {
+    const res = await fetch(`${API_BASE}/api/product/${slug}`, {
       cache: "no-store",
       credentials: "include",
+      headers: token ? { Cookie: `token=${token}` } : {},
     });
 
     if (!res.ok) return null;
@@ -15,36 +18,36 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   }
 }
 
-export async function getRelatedProducts(categorySlug: string, excludeSlug: string): Promise<Product[]> {
+export async function getRelatedProducts(categorySlug: string, excludeSlug: string, token?: string): Promise<Product[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/products`, {
+    const res = await fetch(`${API_BASE}/api/products`, {
       cache: "no-store",
       credentials: "include",
+      headers: token ? { Cookie: `token=${token}` } : {},
     });
 
     if (!res.ok) return [];
 
     const allProducts: Product[] = await res.json();
 
-    const related = allProducts.filter(p =>
-      p.categorySlug === categorySlug && p.slug !== excludeSlug
-    );
+    const related = allProducts
+      .filter(p => p.categorySlug === categorySlug && p.slug !== excludeSlug)
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 4);
 
-    const shuffled = related.sort(() => 0.5 - Math.random());
-    const limited = shuffled.slice(0, 4);
-
-    return limited;
+    return related;
   } catch (err) {
     console.error("Failed to fetch related products", err);
     return [];
   }
 }
 
-export async function getAllProducts(): Promise<Product[]> {
+export async function getAllProducts(token?: string): Promise<Product[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/products`, {
+    const res = await fetch(`${API_BASE}/api/products`, {
       cache: "no-store",
       credentials: "include",
+      headers: token ? { Cookie: `token=${token}` } : {},
     });
 
     if (!res.ok) {

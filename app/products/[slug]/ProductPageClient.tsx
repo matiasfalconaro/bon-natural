@@ -15,10 +15,7 @@ const getLocalized = (
   lang: SupportedLanguage
 ): string => field?.[lang] || "N/A";
 
-export default function ProductPageClient({
-  product,
-  relatedProducts,
-}: {
+export default function ProductPageClient({product, relatedProducts,}: {
   product: Product
   relatedProducts: Product[]
 }) {

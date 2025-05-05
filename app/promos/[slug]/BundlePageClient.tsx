@@ -16,10 +16,7 @@ const getLocalized = (
   lang: SupportedLanguage
 ): string => field?.[lang] ?? "N/A";
 
-export default function BundlePageClient({
-  bundle,
-  relatedPromos,
-}: {
+export default function BundlePageClient({bundle,relatedPromos,}: {
   bundle: PromoCombo;
   relatedPromos: PromoCombo[];
 }) {
