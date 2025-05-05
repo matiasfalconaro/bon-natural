@@ -1,24 +1,24 @@
-import { getPromoBySlug } from "@/lib/api/promos"
-import BundlePageClient from "./BundlePageClient"
+import BundlePageClient from "./BundlePageClient";
+import { cookies } from "next/headers";
+import { getPromoBySlug, getRelatedPromos } from "@/lib/api/promos";
 
-export default async function BundlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-
-  const bundle = await getPromoBySlug(slug)
-
-  return <BundlePageClient bundle={bundle} />
+interface Props {
+  params: Promise<{ slug: string }>;
 }
 
+export default async function BundlePage({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value || "";
 
-/**
-Temporary workaround to avoid the Next.js error:
-"params.slug must be awaited".
+  
+  const promo = await getPromoBySlug(slug, token);
 
-`params` is wrapped in a Promise to comply with Next.js app router expectations
-for dynamic routes, avoiding a runtime error when destructuring.
+  if (!promo) {
+    return <div>Promo not found</div>;
+  }
 
-Potential issue: this is a non-standard approach and might not be supported
-in future Next.js versions or static generation (SSG/ISR).
+  const relatedPromos = await getRelatedPromos(promo.category, slug, token);
 
-TODO: Make `getXBySlug` async and use `await getXBySlug(params.slug)` directly.
-*/
+  return <BundlePageClient bundle={promo} relatedPromos={relatedPromos} />;
+}

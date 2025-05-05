@@ -1,35 +1,27 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { useLanguage } from "@/contexts/language-context";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLanguage } from "@/contexts/language-context";
 import { useCart } from "@/contexts/cart-context";
 import BundleDetailsControls from "@/components/promo-details-controls";
+import PromoCard from "@/components/promo-card";
+import Image from "next/image";
+import Link from "next/link";
 import type { PromoCombo } from "@/types/promos";
 import type { SupportedLanguage } from "@/types/i18n";
 
 const getLocalized = (
-  field: PromoCombo["title"] | undefined,
+  field: Record<SupportedLanguage, string> | undefined,
   lang: SupportedLanguage
-): string => field?.[lang as keyof typeof field] || "N/A";
+): string => field?.[lang] ?? "N/A";
 
-export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null }) {
+export default function BundlePageClient({bundle,relatedPromos,}: {
+  bundle: PromoCombo;
+  relatedPromos: PromoCombo[];
+}) {
   const { language, t } = useLanguage();
   const { addItem } = useCart();
-
-  if (!bundle || !bundle.slug) {
-    return (
-      <div className="container px-4 py-8">
-        <h2 className="text-lg font-bold text-red-500">Bundle not found</h2>
-        <Link href="/bundles" className="mt-4 inline-block text-blue-600 underline">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          {t("promos.viewAll")}
-        </Link>
-      </div>
-    );
-  }
 
   const title = getLocalized(bundle.title, language);
   const description = getLocalized(bundle.description, language);
@@ -47,15 +39,15 @@ export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         <div className="relative bg-[#f8f5f0] rounded-lg p-6 flex items-center justify-center">
-        <div className="absolute top-4 left-4 bg-yellow-400 text-black text-sm font-bold px-2 py-1 rounded shadow-md z-10">
-          {bundle.promoPercentage && bundle.promoPercentage > 0
-            ? `${bundle.promoPercentage}% OFF`
-            : bundle.promoType === "bulk"
-            ? `x${bundle.quantity ?? 1}`
-            : bundle.promoType === "gift"
-            ? "+1 Free"
-            : "Combo"}
-        </div>
+          <div className="absolute top-4 left-4 bg-yellow-400 text-black text-sm font-bold px-2 py-1 rounded shadow-md z-10">
+            {isDiscounted
+              ? `${bundle.promoPercentage}% OFF`
+              : bundle.promoType === "bulk"
+              ? `x${bundle.quantity ?? 1}`
+              : bundle.promoType === "gift"
+              ? "+1 Free"
+              : "Combo"}
+          </div>
           <Image
             src={bundle.image1 || "/placeholder.svg"}
             alt={title}
@@ -116,6 +108,19 @@ export default function BundlePageClient({ bundle }: { bundle: PromoCombo | null
           </Tabs>
         </div>
       </div>
+
+      {relatedPromos.length > 0 ? (
+        <div className="mt-16">
+          <h2 className="text-2xl font-bold mb-6">{t("promos.relatedPromos")}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {relatedPromos.map((promo) => (
+              <PromoCard key={promo.slug} promo={promo} />
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div className="mt-16 text-muted-foreground">{t("promos.noRelatedPromos")}</div>
+      )}
     </div>
   );
 }

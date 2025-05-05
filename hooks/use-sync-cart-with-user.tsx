@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import { useAuth } from "@/contexts/auth-context";
 import { useCart } from "@/contexts/cart-context";
+import { useEffect } from "react";
 
 export function useSyncCartWithUser() {
   const { user } = useAuth();

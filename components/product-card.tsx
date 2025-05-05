@@ -1,13 +1,13 @@
 "use client"
 
-import Link from "next/link"
-import Image from "next/image"
-import { ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { ShoppingCart } from "lucide-react"
+import { toast } from "@/hooks/use-toast"
 import { useLanguage } from "@/contexts/language-context"
 import { useCart } from "@/contexts/cart-context"
-import { toast } from "@/hooks/use-toast"
+import Link from "next/link"
+import Image from "next/image"
 import styles from "./product-card.module.css"
 import type { Product } from "@/types/products";
 

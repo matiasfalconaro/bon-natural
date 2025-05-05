@@ -123,6 +123,8 @@ export const en: Translations = {
     "promos.nutrition": "Nutrition",
     "promos.ingredients": "Ingredients",
     "promos.origin": "Origin",
+    "promos.relatedPromos": "You may also like",
+    "promos.noRelatedPromos": "No related bundles found",
 
     "nutrition.servingSize": "Serving Size",
     "nutrition.calories": "Calories",

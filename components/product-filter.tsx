@@ -1,16 +1,20 @@
 "use client"
 
-import type React from "react"
-import { useState, useEffect, useRef } from "react"
+import { Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion"
+import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { Search } from "lucide-react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Slider } from "@/components/ui/slider"
 import { useLanguage } from "@/contexts/language-context"
+import { useState, useEffect, useRef } from "react"
 import styles from "./product-filter.module.css"
+import type React from "react"
 
 //No need to move to types/, is not reused
 interface ProductFilters {

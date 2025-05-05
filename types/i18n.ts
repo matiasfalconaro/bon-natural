@@ -109,6 +109,8 @@ export type TranslationKeys =
   | "promos.ingredients"
   | "promos.origin"
   | "promos.details"
+  | "promos.relatedPromos"
+  | "promos.noRelatedPromos"
   | "nutrition.servingSize"
   | "nutrition.calories"
   | "nutrition.totalFat"

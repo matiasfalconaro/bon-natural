@@ -1,8 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext,
+  useContext,
+  useEffect,
+  useState
+} from "react";
 import { CartItem, CartContextType } from "@/types/cart";
-import { useAuth } from "@/contexts/auth-context";
+
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
@@ -14,30 +18,23 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const API_URL = "http://localhost:5100";
 
   const loadCart = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.warn("No token, skipping cart fetch.");
-      resetCartState();
-      return;
-    }
-
     setLoading(true);
     try {
       const res = await fetch(`${API_URL}/api/cart`, {
         credentials: "include",
       });
-
+  
       if (!res.ok) {
         console.warn("Cart fetch failed:", res.status);
-        setItems([]);
+        resetCartState();
         return;
       }
-
+  
       const data = await res.json();
       const mappedItems = data.items.map((item: any) => {
         const isProduct = !!item.product;
         const base = isProduct ? item.product : item.promo;
-      
+  
         return {
           id: base?._id ?? item._id ?? Math.random().toString(),
           title: base?.title?.en ?? "Unnamed Item",
@@ -47,11 +44,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
           itemType: isProduct ? "product" : "promo",
         };
       });
-
+  
       setItems(mappedItems);
     } catch (error) {
       console.error("Failed to load cart", error);
-      setItems([]);
+      resetCartState();
     } finally {
       setLoading(false);
     }
@@ -64,10 +61,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [shouldLoadCart]);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setShouldLoadCart(true);
-    }
+    setShouldLoadCart(true);
   }, []);
 
   const addItem = async (item: CartItem) => {
@@ -129,12 +123,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   };
 
   const clearCart = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      resetCartState();
-      return;
-    }
-  
     setLoading(true);
     try {
       await fetch(`${API_URL}/api/cart`, {

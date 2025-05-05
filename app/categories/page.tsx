@@ -1,12 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { useLanguage } from "@/contexts/language-context"
-import { getAllCategories } from "@/lib/api/categories"
-import Link from "next/link"
-import Image from "next/image"
-import styles from "./page.module.css"
 import { Category } from "@/types/categories"
+import { getAllCategories } from "@/lib/api/categories"
+import { useLanguage } from "@/contexts/language-context"
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import Link from "next/link"
+import styles from "./page.module.css"
 
 export default function CategoriesPage() {
   const { t, language } = useLanguage()

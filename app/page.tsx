@@ -1,22 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { useLanguage } from "@/contexts/language-context";
-import { useAuth } from "@/contexts/auth-context";
 import { Button } from "@/components/button";
-import ProductCard from "@/components/product-card";
-import PromoCard from "@/components/promo-card";
-import SearchBar from "@/components/search-bar";
+import { Category } from "@/types/categories";
 import { getAllCategories } from "@/lib/api/categories";
 import { getAllProducts } from "@/lib/api/products";
 import { getAllPromos } from "@/lib/api/promos";
-import { Category } from "@/types/categories";
 import { Product } from "@/types/products";
 import { PromoCombo } from "@/types/promos";
+import { useAuth } from "@/contexts/auth-context";
+import { useLanguage } from "@/contexts/language-context";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import ProductCard from "@/components/product-card";
+import PromoCard from "@/components/promo-card";
+
+import SearchBar from "@/components/search-bar";
 import styles from "./page.module.css";
 
 export default function Home() {

@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { Minus, Plus, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Minus, Plus, ShoppingCart } from "lucide-react"
+import { PromoCombo } from "@/types/promos";
 import { useCart } from "@/contexts/cart-context"
 import { useLanguage } from "@/contexts/language-context"
-import { LocalizedString, PromoCombo } from "@/types/promos";
+import { useState } from "react"
 
 export default function BundleDetailsControls({ bundle }: { bundle: PromoCombo }) {
   const [quantity, setQuantity] = useState(1)

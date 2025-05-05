@@ -1,16 +1,15 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { useToast } from "@/hooks/use-toast"
 import { useLanguage } from "@/contexts/language-context"
 import { useAuth } from "@/contexts/auth-context"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useToast } from "@/hooks/use-toast"
+import Link from "next/link"
 import styles from "../login/page.module.css"
+import type React from "react"
 
 export default function RegisterPage() {
   const { t } = useLanguage()
@@ -50,10 +49,9 @@ export default function RegisterPage() {
 
       if (success) {
         toast({
-          title: "Registration successful",
-          description: "Your account has been created!",
-        })
-        router.push("/")
+          title: "Check your email",
+          description: "We've sent you a verification link. Please confirm your email to complete registration.",
+        });
       } else {
         toast({
           title: "Registration failed",

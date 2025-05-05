@@ -10,7 +10,7 @@ import { getAllProducts } from "@/lib/api/products"
 import { getAllCategories } from "@/lib/api/categories"
 import styles from "./page.module.css"
 import { Product } from "@/types/products"
-import { Category, LocalizedString } from "@/types/categories"
+import { LocalizedString } from "@/types/categories"
 
 export default function CategoryPageClient({ slug }: { slug: string }) {
   const { language, t } = useLanguage()

@@ -1,14 +1,14 @@
 "use client"
 
-import Image from "next/image"
-import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
+import { PromoCombo } from "@/types/promos"
 import { ShoppingCart } from "lucide-react"
 import { useLanguage } from "@/contexts/language-context"
 import { useCart } from "@/contexts/cart-context"
+import Image from "next/image"
+import Link from "next/link"
 import styles from "./product-card.module.css"
-import { PromoCombo } from "@/types/promos"
 
 export default function PromoCard({ promo }: { promo: PromoCombo }) {
   const { language, t } = useLanguage()

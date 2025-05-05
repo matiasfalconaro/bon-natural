@@ -1,11 +1,11 @@
 "use client"
 
+import { Category } from "@/types/categories"
+import { Facebook, Instagram, Twitter } from "lucide-react"
+import { getAllCategories } from "@/lib/api/categories"
+import { useLanguage } from "@/contexts/language-context"
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { Facebook, Instagram, Twitter } from "lucide-react"
-import { useLanguage } from "@/contexts/language-context"
-import { getAllCategories } from "@/lib/api/categories"
-import { Category } from "@/types/categories"
 import styles from "./footer.module.css"
 
 export default function Footer() {

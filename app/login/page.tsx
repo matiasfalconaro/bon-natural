@@ -1,21 +1,24 @@
 "use client";
 
-import type React from "react";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
-import { useLanguage } from "@/contexts/language-context";
 import { useAuth } from "@/contexts/auth-context";
+import { useLanguage } from "@/contexts/language-context";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import styles from "./page.module.css";
+import type React from "react";
 
 export default function LoginPage() {
   const { t } = useLanguage();
   const { login, user, isLoading } = useAuth();
   const { toast } = useToast();
+
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -24,10 +27,15 @@ export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    const hasResetToken = searchParams.get("resetToken");
+    const hasEmailToken = searchParams.get("token");
+  
     if (!isLoading && user) {
-      router.push("/");
+      if (!hasResetToken && !hasEmailToken) {
+        router.push("/");
+      }
     }
-  }, [user, isLoading, router]);
+  }, [user, isLoading, searchParams, router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

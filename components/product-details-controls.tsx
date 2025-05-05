@@ -1,11 +1,11 @@
 "use client"
 
-import { useState } from "react"
-import { Minus, Plus, ShoppingCart } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Minus, Plus, ShoppingCart } from "lucide-react"
+import { Product } from "@/types/products"
 import { useCart } from "@/contexts/cart-context"
 import { useLanguage } from "@/contexts/language-context"
-import { Product } from "@/types/products"
+import { useState } from "react"
 
 export default function ProductDetailsControls({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1)
