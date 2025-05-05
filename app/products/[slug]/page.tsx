@@ -1,27 +1,55 @@
-import { getProductBySlug, getRelatedProducts } from "@/lib/api/products"
-import ProductPageClient from "./ProductPageClient"
+import ProductPageClient from "./ProductPageClient";
+import { cookies } from "next/headers";
+import { Product } from "@/types/products";
 
-export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-  
-  const product = await getProductBySlug(slug)
-  if (!product) return <div>Product not found</div>
-
-  const relatedProducts = await getRelatedProducts(product.categorySlug, product.slug)
-
-  return <ProductPageClient product={product} relatedProducts={relatedProducts} />
+interface Props {
+  params: Promise<{ slug: string }>;
 }
 
+async function getProductBySlug(slug: string): Promise<Product | null> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
 
-/**
-Temporary workaround to avoid the Next.js error:
-"params.slug must be awaited".
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/product/${slug}`, {
+    headers: { Cookie: `token=${token}` },
+    cache: "no-store",
+  });
 
-`params` is wrapped in a Promise to comply with Next.js app router expectations
-for dynamic routes, avoiding a runtime error when destructuring.
+  if (!res.ok) {
+    console.warn("Failed to fetch product:", res.status);
+    return null;
+  }
 
-Potential issue: this is a non-standard approach and might not be supported
-in future Next.js versions or static generation (SSG/ISR).
+  return await res.json();
+}
 
-TODO: Make `getXBySlug` async and use `await getXBySlug(params.slug)` directly.
-*/
+async function getRelatedProducts(categorySlug: string, currentSlug: string): Promise<Product[]> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/products`, {
+    headers: { Cookie: `token=${token}` },
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    console.warn("Failed to fetch related products:", res.status);
+    return [];
+  }
+
+  const allProducts: Product[] = await res.json();
+  return allProducts.filter((p) => p.categorySlug === categorySlug && p.slug !== currentSlug);
+}
+
+export default async function ProductPage({ params }: Props) {
+  const { slug } = await params;
+  const product = await getProductBySlug(slug);
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
+  const relatedProducts = await getRelatedProducts(product.categorySlug, slug);
+
+  return <ProductPageClient product={product} relatedProducts={relatedProducts} />;
+}

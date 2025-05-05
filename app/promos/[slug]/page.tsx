@@ -1,24 +1,67 @@
-import { getPromoBySlug } from "@/lib/api/promos"
-import BundlePageClient from "./BundlePageClient"
+import BundlePageClient from "./BundlePageClient";
+import { cookies } from "next/headers";
+import { PromoCombo } from "@/types/promos";
 
-export default async function BundlePage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
-
-  const bundle = await getPromoBySlug(slug)
-
-  return <BundlePageClient bundle={bundle} />
+interface Props {
+  params: Promise<{ slug: string }>;
 }
 
+async function getPromoBySlug(slug: string): Promise<PromoCombo | null> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
 
-/**
-Temporary workaround to avoid the Next.js error:
-"params.slug must be awaited".
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/promo/${slug}`, {
+    headers: { Cookie: `token=${token}` },
+    cache: "no-store",
+  });
 
-`params` is wrapped in a Promise to comply with Next.js app router expectations
-for dynamic routes, avoiding a runtime error when destructuring.
+  if (!res.ok) {
+    console.warn("Failed to fetch promo:", res.status);
+    return null;
+  }
 
-Potential issue: this is a non-standard approach and might not be supported
-in future Next.js versions or static generation (SSG/ISR).
+  return await res.json();
+}
 
-TODO: Make `getXBySlug` async and use `await getXBySlug(params.slug)` directly.
-*/
+async function getRelatedPromos(category: string | undefined, currentSlug: string): Promise<PromoCombo[]> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/promos`, {
+    headers: { Cookie: `token=${token}` },
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    console.warn("Failed to fetch related promos:", res.status);
+    return [];
+  }
+
+  const allPromos: PromoCombo[] = await res.json();
+
+  let filtered: PromoCombo[] = [];
+
+  if (category) {
+    filtered = allPromos.filter(p => p.category === category && p.slug !== currentSlug);
+  }
+
+  // fallback: show random ones if category is missing or filter returned none
+  if (filtered.length === 0) {
+    filtered = allPromos.filter(p => p.slug !== currentSlug);
+  }
+
+  return filtered.sort(() => 0.5 - Math.random()).slice(0, 4);
+}
+
+export default async function BundlePage({ params }: Props) {
+  const { slug } = await params;
+  const promo = await getPromoBySlug(slug);
+
+  if (!promo) {
+    return <div>Promo not found</div>;
+  }
+
+  const relatedPromos = await getRelatedPromos(promo.category, slug);
+
+  return <BundlePageClient bundle={promo} relatedPromos={relatedPromos} />;
+}

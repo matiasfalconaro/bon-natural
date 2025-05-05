@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
-import { use } from "react"
-import CategoryPageClient from "./CategoryPageClient"
+import CategoryPageClient from "./CategoryPageClient";
 
-export default function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params)
-
-  return <CategoryPageClient slug={slug} />
+export default function CategoryPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  return <CategoryPageClient slug={params.slug} />;
 }

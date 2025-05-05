@@ -1,94 +1,99 @@
-"use client"
+"use client";
 
-import { getAllPromos } from "@/lib/api/promos"
-import { PromoCombo } from "@/types/promos"
-import { useLanguage } from "@/contexts/language-context"
-import { useEffect, useState, useRef } from "react"
-import { useSearchParams } from "next/navigation"
-import PromoCard from "@/components/promo-card"
-import ProductFilter from "@/components/product-filter"
-import SearchBar from "@/components/search-bar"
-import styles from "../products/page.module.css"
+import { useEffect, useState, useRef } from "react";
+import { useSearchParams } from "next/navigation";
+import { getAllPromos } from "@/lib/api/promos";
+import { PromoCombo } from "@/types/promos";
+import { useLanguage } from "@/contexts/language-context";
+import PromoCard from "@/components/promo-card";
+import ProductFilter from "@/components/product-filter";
+import SearchBar from "@/components/search-bar";
+import styles from "../products/page.module.css";
 
 export default function PromosPage() {
-  const { language, t } = useLanguage()
-  const lang = language as "en" | "es" | "fr"
+  const { language, t } = useLanguage();
+  const lang = language as "en" | "es" | "fr";
 
-  const searchParams = useSearchParams()
-  const searchTerm = searchParams.get("search") || ""
+  const searchParams = useSearchParams();
+  const searchTerm = searchParams.get("search") || "";
 
-  const [allPromos, setAllPromos] = useState<PromoCombo[]>([])
-  const [filteredPromos, setFilteredPromos] = useState<PromoCombo[]>([])
-  const initialized = useRef(false)
+  const [allPromos, setAllPromos] = useState<PromoCombo[]>([]);
+  const [filteredPromos, setFilteredPromos] = useState<PromoCombo[]>([]);
+  const initialized = useRef(false);
 
   useEffect(() => {
-    async function loadPromos() {
-      const promos = await getAllPromos()
-      setAllPromos(promos)
-      setFilteredPromos(promos)
-      initialized.current = true
-    }
+    const loadPromos = async () => {
+      const promos = await getAllPromos();
+      setAllPromos(promos);
+      setFilteredPromos(applyFilters(promos, searchTerm));
+      initialized.current = true;
+    };
 
     if (!initialized.current) {
-      loadPromos()
+      loadPromos();
     }
-  }, [])
+  }, [searchTerm, lang]);
+
+  const applyFilters = (
+    promos: PromoCombo[],
+    term: string,
+    filters?: {
+      categories?: string[];
+      priceRange?: [number, number];
+      dietary?: string[];
+    }
+  ): PromoCombo[] => {
+    let result = [...promos];
+    const searchLower = term.toLowerCase();
+
+    if (filters?.categories?.length) {
+      result = result.filter((p) => filters.categories!.includes(p.category));
+    }
+
+    if (filters?.priceRange) {
+      const [min, max] = filters.priceRange;
+      result = result.filter((p) => p.price >= min && p.price <= max);
+    }
+
+    if (filters?.dietary?.length) {
+      result = result.filter((p) =>
+        filters.dietary!.some((d) => p.dietary.includes(d))
+      );
+    }
+
+    if (term) {
+      result = result.filter(
+        (p) =>
+          p.title[lang].toLowerCase().includes(searchLower) ||
+          p.description[lang].toLowerCase().includes(searchLower)
+      );
+    }
+
+    return result;
+  };
 
   const handleFilter = (filters: {
-    categories: string[]
-    priceRange: [number, number]
-    dietary: string[]
-    searchTerm: string
+    categories: string[];
+    priceRange: [number, number];
+    dietary: string[];
+    searchTerm: string;
   }) => {
-    let filtered = [...allPromos]
-
-    if (filters.categories.length > 0) {
-      filtered = filtered.filter(promo => filters.categories.includes(promo.category))
-    }
-
-    filtered = filtered.filter(promo =>
-      promo.price >= filters.priceRange[0] && promo.price <= filters.priceRange[1]
-    )
-
-    if (filters.dietary.length > 0) {
-      filtered = filtered.filter(promo =>
-        filters.dietary.some(diet => promo.dietary.includes(diet))
-      )
-    }
-
-    if (filters.searchTerm) {
-      const searchLower = filters.searchTerm.toLowerCase()
-      filtered = filtered.filter(promo =>
-        promo.title[lang].toLowerCase().includes(searchLower) ||
-        promo.description[lang].toLowerCase().includes(searchLower)
-      )
-    }
-
-    setFilteredPromos(filtered)
-  }
+    const filtered = applyFilters(allPromos, filters.searchTerm || searchTerm, filters);
+    setFilteredPromos(filtered);
+  };
 
   return (
     <div className={styles.container}>
-      {/* Search Section */}
       <div className={styles.searchSection}>
         <SearchBar />
       </div>
 
-      {/* Content Layout */}
       <div className={styles.content}>
         <div className={styles.sidebar}>
           <ProductFilter onFilter={handleFilter} initialSearchTerm={searchTerm} />
         </div>
 
         <div className={styles.products}>
-          {/* Optional: Section Header */}
-          {/* 
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>{t("promos.title")}</h2>
-            <p className={styles.sectionSubtitle}>{t("promos.subtitle")}</p>
-          </div>
-          */}
-
           {filteredPromos.length === 0 ? (
             <div className={styles.noResults}>
               <p>{t("product.noResults")}</p>
@@ -103,5 +108,5 @@ export default function PromosPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

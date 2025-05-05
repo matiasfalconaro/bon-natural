@@ -114,6 +114,8 @@ export const es: Translations = {
     "product.origin": "Origen",
     "product.quantity": "Cantidad",
     "promos.details": "Detalles",
+    "promos.relatedPromos": "También te puede interesar",
+    "promos.noRelatedPromos": "No se encontraron combos relacionados",
 
     "nutrition.servingSize": "Tamaño de porción",
     "nutrition.calories": "Calorías",

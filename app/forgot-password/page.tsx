@@ -29,6 +29,7 @@ export default function PasswordPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
+        credentials: "include",
       });
 
       if (response.ok) {

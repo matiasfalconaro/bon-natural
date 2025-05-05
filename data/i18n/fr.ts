@@ -131,6 +131,8 @@ export const fr: Translations = {
     "promos.nutrition": "Informations nutritionnelles",
     "promos.ingredients": "Ingrédients",
     "promos.origin": "Origine",
+    "promos.relatedPromos": "Vous pourriez aussi aimer",
+    "promos.noRelatedPromos": "Aucun lot similaire trouvé",
 
     "about.title": "À Propos de Nous",
     "about.subtitle": "Découvrez notre mission, nos valeurs et l'équipe derrière Bon Natural.",

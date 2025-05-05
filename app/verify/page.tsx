@@ -19,6 +19,7 @@ export default function VerifyPage() {
     fetch(`http://localhost:5100/api/auth/verify?token=${token}`, {
       method: "GET",
       headers: { Accept: "application/json" },
+      credentials: "include",
     })
       .then(async (res) => {
         const text = await res.text();

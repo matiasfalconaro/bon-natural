@@ -37,6 +37,7 @@ export default function ContactPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
+        credentials: "include",
       })
 
       const contentType = response.headers.get("content-type")
