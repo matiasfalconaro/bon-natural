@@ -63,7 +63,14 @@ export default function ProductCard({ product }: { product: Product }) {
           </Link>
           {isDiscounted ? (
             <div>
-              <span className={styles.price} style={{ textDecoration: "line-through", color: "#888", marginRight: "0.5rem" }}>
+              <span
+                className={styles.price}
+                style={{
+                  textDecoration: "line-through",
+                  color: "#888",
+                  marginRight: "0.5rem",
+                }}
+              >
                 ${product.price.toFixed(2)}
               </span>
               <span className={styles.price}>${discountedPrice.toFixed(2)}</span>
@@ -71,10 +78,22 @@ export default function ProductCard({ product }: { product: Product }) {
           ) : (
             <p className={styles.price}>${product.price.toFixed(2)}</p>
           )}
+
+          {/* 👉 Add this here */}
+          <p className={styles.stock}>
+            {product.stock > 0
+              ? `${t("product.stockAvailable")}: ${product.stock}`
+              : t("product.outOfStock")}
+          </p>
         </div>
       </CardContent>
       <CardFooter className={styles.footer}>
-        <Button onClick={handleAddToCart} className={styles.addButton} size="sm">
+        <Button
+          onClick={handleAddToCart}
+          className={styles.addButton}
+          size="sm"
+          disabled={product.stock === 0}
+        >
           <ShoppingCart className="mr-2 h-4 w-4" />
           {t("product.addToCart")}
         </Button>

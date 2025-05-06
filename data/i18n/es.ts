@@ -113,9 +113,8 @@ export const es: Translations = {
     "product.ingredients": "Ingredientes",
     "product.origin": "Origen",
     "product.quantity": "Cantidad",
-    "promos.details": "Detalles",
-    "promos.relatedPromos": "También te puede interesar",
-    "promos.noRelatedPromos": "No se encontraron combos relacionados",
+    "product.stockAvailable": "Stock disponible",
+    "product.outOfStock": "Sin stock",
 
     "nutrition.servingSize": "Tamaño de porción",
     "nutrition.calories": "Calorías",
@@ -135,6 +134,9 @@ export const es: Translations = {
     "promos.nutrition": "Información nutricional",
     "promos.ingredients": "Ingredientes",
     "promos.origin": "Origen",
+    "promos.details": "Detalles",
+    "promos.relatedPromos": "También te puede interesar",
+    "promos.noRelatedPromos": "No se encontraron combos relacionados",
 
     "about.title": "Sobre Nosotros",
     "about.subtitle": "Conoce nuestra misión, valores y el equipo detrás de Bon Natural.",
