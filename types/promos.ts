@@ -32,4 +32,5 @@ export interface PromoCombo {
     sugars: string;
     protein: string;
   };
+  stock: number;
 }
