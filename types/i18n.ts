@@ -37,6 +37,7 @@ export type TranslationKeys =
   | "newsletter.privacy"
   | "nav.home"
   | "nav.products"
+  | "nav.promos"
   | "nav.categories"
   | "nav.about"
   | "nav.contact"

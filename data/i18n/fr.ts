@@ -45,6 +45,7 @@ export const fr: Translations = {
 
     "nav.home": "Accueil",
     "nav.products": "Produits",
+    "nav.promos": "Offres groupées",
     "nav.categories": "Catégories",
     "nav.about": "À Propos",
     "nav.contact": "Contact",

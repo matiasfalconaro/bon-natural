@@ -38,6 +38,9 @@ export default function Header() {
               <Link href="/products" className={styles.mobileNavLink} onClick={closeSheet}>
                 {t("nav.products")}
               </Link>
+              <Link href="/promos" className={styles.mobileNavLink} onClick={closeSheet}>
+                {t("nav.promos")}
+              </Link>
               <Link href="/categories" className={styles.mobileNavLink} onClick={closeSheet}>
                 {t("nav.categories")}
               </Link>
@@ -69,6 +72,9 @@ export default function Header() {
           </Link>
           <Link href="/products" className={styles.navLink}>
             {t("nav.products")}
+          </Link>
+          <Link href="/promos" className={styles.navLink}>
+            {t("nav.promos")}
           </Link>
           <Link href="/categories" className={styles.navLink}>
             {t("nav.categories")}
