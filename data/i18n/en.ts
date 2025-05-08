@@ -111,7 +111,8 @@ export const en: Translations = {
     "product.ingredients": "Ingredients",
     "product.origin": "Origin",
     "product.quantity": "Quantity",
-    "promos.details": "Details",
+    "product.stockAvailable": "Stock available",
+    "product.outOfStock": "Out of stock",
 
     "promos.title": "Bundles",
     "promos.subtitle": "Mix, match, and save on your essentials",
@@ -125,6 +126,7 @@ export const en: Translations = {
     "promos.origin": "Origin",
     "promos.relatedPromos": "You may also like",
     "promos.noRelatedPromos": "No related bundles found",
+    "promos.details": "Details",
 
     "nutrition.servingSize": "Serving Size",
     "nutrition.calories": "Calories",

@@ -60,15 +60,51 @@ export default function CartDrawer() {
 
   const handleCheckout = async () => {
     setCheckoutLoading(true);
+  
     try {
-      alert(`Proceeding to checkout with total: $${total.toFixed(2)}`);
-      await clearCart();
+      // Sync each item to the backend cart
+      for (const item of items) {
+        await fetch("http://localhost:5100/api/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            productId: item.id,
+            quantity: item.quantity,
+            itemType: item.itemType,
+          }),
+        });
+      }
+  
+      // Now trigger checkout
+      const response = await fetch("http://localhost:5100/api/cart/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          items: items.map((item) => ({
+            productId: item.id,
+            quantity: item.quantity,
+            itemType: item.itemType,
+          })),
+        }),
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok) throw new Error(result.message || "Checkout failed");
+  
+      await clearCart(); // clear local cart
       resetDiscount();
-      alert("✅ Purchase completed! Cart is now empty.");
+      alert("✅ Purchase completed! Stock updated.");
       setIsOpen(false);
-    } catch (err) {
+    } catch (err: any) {
       console.error("Checkout failed:", err);
-      alert("❌ Checkout failed, please try again.");
+      alert(`❌ ${err.message || "Checkout failed, please try again."}`);
     } finally {
       setCheckoutLoading(false);
     }

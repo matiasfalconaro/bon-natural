@@ -98,6 +98,8 @@ export type TranslationKeys =
   | "product.ingredients"
   | "product.origin"
   | "product.quantity"
+  | "product.stockAvailable"
+  | "product.outOfStock"
   | "promos.title"
   | "promos.subtitle"
   | "promos.viewAll"

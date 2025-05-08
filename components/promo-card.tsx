@@ -76,9 +76,19 @@ export default function PromoCard({ promo }: { promo: PromoCombo }) {
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.description}>{description}</p>
         <p className={styles.price}>${promo.price.toFixed(2)}</p>
+        <p className={styles.stock}>
+          {promo.stock > 0
+            ? `${t("product.stockAvailable")}: ${promo.stock}`
+            : t("product.outOfStock")}
+        </p>
       </CardContent>
       <CardFooter className={styles.footer}>
-        <Button onClick={handleAddToCart} className={styles.addButton} size="sm">
+        <Button
+          onClick={handleAddToCart}
+          className={styles.addButton}
+          size="sm"
+          disabled={promo.stock === 0}
+        >
           <ShoppingCart className="mr-2 h-4 w-4" />
           {t("product.addToCart")}
         </Button>

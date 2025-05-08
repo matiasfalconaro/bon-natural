@@ -29,4 +29,5 @@ export interface Product {
   }
   promoPercentage?: number | null
   featured?: boolean
+  stock: number
 }
