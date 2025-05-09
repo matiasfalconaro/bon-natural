@@ -225,6 +225,11 @@ export const es: Translations = {
     "password.resetSuccessDescription": "Te hemos enviado un enlace para restablecer tu contraseña.",
     "password.resetErrorTitle": "Error",
     "password.resetErrorDescription": "Algo salió mal. Por favor, inténtalo de nuevo más tarde.",
+
+    "orders.empty": "No tienes pedidos anteriores.",
+    "orders.orderId": "ID del pedido",
+    "orders.placedOn": "Realizado el",
+    "orders.back": "Home",
 }
 
 const checkTranslations: Translations = es

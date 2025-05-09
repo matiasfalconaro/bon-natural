@@ -1,0 +1,134 @@
+/* orders.module.css */
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  
+  .backLink {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #4f46e5;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  
+  .content {
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: #fafafa;
+  }
+  
+  .cartItems {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .cartItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1rem;
+  }
+  
+  .product {
+    display: flex;
+    align-items: center;
+    flex: 2;
+  }
+  
+  .productImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+  }
+  
+  .productInfo {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .productTitle {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .price,
+  .quantity,
+  .total {
+    flex: 1;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+  
+  .summary {
+    margin-top: 1rem;
+    border-top: 1px solid #d1d5db;
+    padding-top: 1rem;
+  }
+  
+  .summaryRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .summaryTotal {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .emptyCart {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #6b7280;
+  }
+  
+  .emptyIcon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 1rem;
+    color: #9ca3af;
+  }
+  
+  .emptyTitle {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+  }
+  
+  .emptyText {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  
+  .shopButton {
+    margin-top: 1rem;
+  }
+  

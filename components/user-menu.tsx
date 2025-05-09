@@ -47,7 +47,7 @@ export default function UserMenu() {
                 </div>
               </div>
               <div className={styles.menuDivider}></div>
-              <Link href="/account/orders" className="user-menu-item" onClick={() => setIsOpen(false)}>
+              <Link href="/orders" className="user-menu-item" onClick={() => setIsOpen(false)}>
                 <ShoppingBag className="h-4 w-4" />
                 <span>{t("user.orders")}</span>
               </Link>
