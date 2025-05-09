@@ -172,6 +172,7 @@ export const es: Translations = {
     "user.register": "Registrarse",
     "user.logout": "Cerrar Sesión",
     "user.settings": "Configuración",
+    "user.orders": "Compras",
 
     "login.title": "Iniciar Sesión",
     "login.subtitle": "¡Bienvenido de nuevo! Por favor, inicia sesión en tu cuenta.",

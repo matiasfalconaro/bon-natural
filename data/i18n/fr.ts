@@ -170,6 +170,7 @@ export const fr: Translations = {
     "user.register": "S'inscrire",
     "user.logout": "Se Déconnecter",
     "user.settings": "Paramètres",
+    "user.orders": "Achats",
 
     "login.title": "Se Connecter",
     "login.subtitle": "Bienvenue! Veuillez vous connecter à votre compte.",

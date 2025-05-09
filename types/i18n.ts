@@ -168,6 +168,7 @@ export type TranslationKeys =
   | "user.register"
   | "user.logout"
   | "user.settings"
+  | "user.orders"
   | "login.title"
   | "login.subtitle"
   | "login.email"
