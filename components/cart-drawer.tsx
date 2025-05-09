@@ -62,53 +62,51 @@ export default function CartDrawer() {
     setCheckoutLoading(true);
   
     try {
-      // Sync each item to the backend cart
-      for (const item of items) {
-        await fetch("http://localhost:5100/api/cart", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({
-            productId: item.id,
-            quantity: item.quantity,
-            itemType: item.itemType,
-          }),
-        });
-      }
+      // Build order payload
+      const orderPayload = {
+        items: items.map(item => ({
+          productId: item.id,
+          itemType: item.itemType,
+          title: item.title,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image,
+        })),
+        total,
+      };
   
-      // Now trigger checkout
-      const response = await fetch("http://localhost:5100/api/cart/checkout", {
+      const response = await fetch("http://localhost:5100/api/orders", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({
-          items: items.map((item) => ({
-            productId: item.id,
-            quantity: item.quantity,
-            itemType: item.itemType,
-          })),
-        }),
+        body: JSON.stringify(orderPayload),
       });
   
-      const result = await response.json();
+      const rawText = await response.text();
   
-      if (!response.ok) throw new Error(result.message || "Checkout failed");
+      let result;
+      try {
+        result = JSON.parse(rawText);
+      } catch (parseError) {
+        console.error("Failed to parse JSON:", rawText);
+        throw new Error("Server returned invalid response.");
+      }
   
-      await clearCart(); // clear local cart
+      if (!response.ok) {
+        throw new Error(result.message || "Order failed");
+      }
+  
+      await clearCart();
       resetDiscount();
-      alert("✅ Purchase completed! Stock updated.");
+      alert("✅ Order successfully placed!");
       setIsOpen(false);
     } catch (err: any) {
-      console.error("Checkout failed:", err);
-      alert(`❌ ${err.message || "Checkout failed, please try again."}`);
+      console.error("Order failed:", err);
+      alert(`❌ ${err.message || "Order failed, please try again."}`);
     } finally {
       setCheckoutLoading(false);
     }
-  };
+  };  
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
