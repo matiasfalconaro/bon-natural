@@ -168,6 +168,7 @@ export type TranslationKeys =
   | "user.register"
   | "user.logout"
   | "user.settings"
+  | "user.orders"
   | "login.title"
   | "login.subtitle"
   | "login.email"
@@ -204,7 +205,11 @@ export type TranslationKeys =
   | "password.resetSuccessTitle"
   | "password.resetSuccessDescription"
   | "password.resetErrorTitle"
-  | "password.resetErrorDescription";
+  | "password.resetErrorDescription"
+  | "orders.empty"
+  | "orders.orderId"
+  | "orders.placedOn"
+  | "orders.back";
 
   export type Translations = Record<TranslationKeys, string>;
 

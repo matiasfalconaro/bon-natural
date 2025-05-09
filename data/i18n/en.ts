@@ -170,6 +170,7 @@ export const en: Translations = {
     "user.register": "Register",
     "user.logout": "Log Out",
     "user.settings": "Settings",
+    "user.orders": "Purchases",
 
     "login.title": "Log In",
     "login.subtitle": "Welcome back! Please log in to your account.",
@@ -222,6 +223,11 @@ export const en: Translations = {
     "password.resetSuccessDescription": "We sent you a password reset link.",
     "password.resetErrorTitle": "Error",
     "password.resetErrorDescription": "Something went wrong. Please try again later.",
+
+    "orders.empty": "You have no previous orders.",
+    "orders.orderId": "Order ID",
+    "orders.placedOn": "Placed on",
+    "orders.back": "Home",
 }
 
 const checkTranslations: Translations = en

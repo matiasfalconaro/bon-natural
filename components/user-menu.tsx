@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { User, Settings, LogOut, LogIn } from "lucide-react"
+import { User, Settings, LogOut, LogIn, ShoppingBag } from "lucide-react"
 import { useAuth } from "@/contexts/auth-context"
 import { useCart } from "@/contexts/cart-context";
 import { useLanguage } from "@/contexts/language-context"
@@ -47,6 +47,10 @@ export default function UserMenu() {
                 </div>
               </div>
               <div className={styles.menuDivider}></div>
+              <Link href="/orders" className="user-menu-item" onClick={() => setIsOpen(false)}>
+                <ShoppingBag className="h-4 w-4" />
+                <span>{t("user.orders")}</span>
+              </Link>
               <Link href="/account" className="user-menu-item" onClick={() => setIsOpen(false)}>
                 <Settings className="h-4 w-4" />
                 <span>{t("user.settings")}</span>

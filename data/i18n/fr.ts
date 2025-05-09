@@ -170,6 +170,7 @@ export const fr: Translations = {
     "user.register": "S'inscrire",
     "user.logout": "Se Déconnecter",
     "user.settings": "Paramètres",
+    "user.orders": "Achats",
 
     "login.title": "Se Connecter",
     "login.subtitle": "Bienvenue! Veuillez vous connecter à votre compte.",
@@ -222,6 +223,11 @@ export const fr: Translations = {
     "password.resetSuccessDescription": "Nous vous avons envoyé un lien pour réinitialiser votre mot de passe.",
     "password.resetErrorTitle": "Erreur",
     "password.resetErrorDescription": "Une erreur est survenue. Veuillez réessayer plus tard.",
+
+    "orders.empty": "Vous n'avez aucune commande précédente.",
+    "orders.orderId": "ID de commande",
+    "orders.placedOn": "Passée le",
+    "orders.back": "Home",
 }
 
 const checkTranslations: Translations = fr
