@@ -39,7 +39,7 @@ export default function OrdersPage() {
           <ShoppingBag className="mr-2 h-6 w-6" />
           {t("user.orders")}
         </h1>
-        <Link href="/home" className={styles.backLink}>
+        <Link href="/" className={styles.backLink}>
           <ArrowLeft className="mr-2 h-4 w-4" />
           {t("orders.back")}
         </Link>
