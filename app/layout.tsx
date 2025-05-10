@@ -2,6 +2,7 @@ import { AuthProvider } from "@/contexts/auth-context";
 import { CartProvider } from "@/contexts/cart-context";
 import { Inter } from "next/font/google";
 import { LanguageProvider } from "@/contexts/language-context";
+import { SocketProvider } from "@/contexts/socket-context";
 import { ThemeProvider } from "@/contexts/theme-context";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
@@ -26,10 +27,12 @@ export default function RootLayout({
       <ThemeProvider>
         <LanguageProvider>
           <AuthProvider>
-            <CartProvider>
-              <LayoutContent>{children}</LayoutContent>
-              <Toaster />
-            </CartProvider>
+            <SocketProvider>
+              <CartProvider>
+                <LayoutContent>{children}</LayoutContent>
+                <Toaster />
+              </CartProvider>
+              </SocketProvider>
           </AuthProvider>
         </LanguageProvider>
       </ThemeProvider>

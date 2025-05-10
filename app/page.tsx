@@ -12,6 +12,7 @@ import { useAuth } from "@/contexts/auth-context";
 import { useLanguage } from "@/contexts/language-context";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSocket } from "@/contexts/socket-context";
 import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "@/components/product-card";
@@ -23,11 +24,23 @@ import styles from "./page.module.css";
 export default function Home() {
   const { t, language } = useLanguage();
   const { user, isLoading } = useAuth();
+  const socket = useSocket();
   const router = useRouter();
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [promos, setPromos] = useState<PromoCombo[]>([]);
+
+  const loadData = async () => {
+    const [fetchedCategories, fetchedProducts, fetchedPromos] = await Promise.all([
+      getAllCategories(),
+      getAllProducts(),
+      getAllPromos(),
+    ]);
+    setCategories(fetchedCategories);
+    setProducts(fetchedProducts);
+    setPromos(fetchedPromos);
+  };
 
   useEffect(() => {
     if (!isLoading && !user) {
@@ -36,29 +49,31 @@ export default function Home() {
   }, [user, isLoading, router]);
 
   useEffect(() => {
-    async function loadData() {
-      const [fetchedCategories, fetchedProducts, fetchedPromos] = await Promise.all([
-        getAllCategories(),
-        getAllProducts(),
-        getAllPromos(),
-      ]);
-      setCategories(fetchedCategories);
-      setProducts(fetchedProducts);
-      setPromos(fetchedPromos);
-    }
     if (user) {
       loadData();
     }
   }, [user]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleUpdate = () => {
+      loadData();
+    };
+
+    socket.on("stockUpdated", handleUpdate);
+
+    return () => {
+      socket.off("stockUpdated", handleUpdate);
+    };
+  }, [socket]);
 
   const featuredProducts =
     products.filter((p) => p.featured).length > 0
       ? products.filter((p) => p.featured)
       : products.slice(0, 4);
 
-  if (isLoading || !user) {
-    return null;
-  }
+  if (isLoading || !user) return null;
 
   return (
     <div className={styles.container}>
