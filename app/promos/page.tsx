@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
+import { useSocket } from "@/contexts/socket-context";
 import { getAllPromos } from "@/lib/api/promos";
 import { PromoCombo } from "@/types/promos";
 import { useLanguage } from "@/contexts/language-context";
@@ -13,6 +14,7 @@ import styles from "../products/page.module.css";
 export default function PromosPage() {
   const { language, t } = useLanguage();
   const lang = language as "en" | "es" | "fr";
+  const socket = useSocket();
 
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get("search") || "";
@@ -21,18 +23,31 @@ export default function PromosPage() {
   const [filteredPromos, setFilteredPromos] = useState<PromoCombo[]>([]);
   const initialized = useRef(false);
 
-  useEffect(() => {
-    const loadPromos = async () => {
-      const promos = await getAllPromos();
-      setAllPromos(promos);
-      setFilteredPromos(applyFilters(promos, searchTerm));
-      initialized.current = true;
-    };
+  const loadPromos = async () => {
+    const promos = await getAllPromos();
+    setAllPromos(promos);
+    setFilteredPromos(applyFilters(promos, searchTerm));
+    initialized.current = true;
+  };
 
+  useEffect(() => {
     if (!initialized.current) {
       loadPromos();
     }
   }, [searchTerm, lang]);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleUpdate = () => {
+      loadPromos();
+    };
+
+    socket.on("stockUpdated", handleUpdate);
+    return () => {
+      socket.off("stockUpdated", handleUpdate);
+    };
+  }, [socket]);
 
   const applyFilters = (
     promos: PromoCombo[],

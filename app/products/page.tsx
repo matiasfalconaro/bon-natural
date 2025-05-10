@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
+import { useSocket } from "@/contexts/socket-context";
 import { useLanguage } from "@/contexts/language-context";
 import { Product } from "@/types/products";
 import ProductCard from "@/components/product-card";
@@ -21,41 +22,7 @@ export default function ProductsPage() {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const initialized = useRef(false);
-
-  useEffect(() => {
-    const fetchAllProducts = async () => {
-      try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/products`, {
-          cache: "no-store",
-          credentials: "include",
-        });
-
-        if (res.status === 401) {
-          console.warn("Unauthorized. Redirecting or showing login.");
-          setAllProducts([]);
-          setFilteredProducts([]);
-          return;
-        }
-
-        if (!res.ok) {
-          console.error("Failed to fetch products:", res.status);
-          return;
-        }
-
-        const products: Product[] = await res.json();
-        setAllProducts(products);
-        setFilteredProducts(applyFilters(products, searchTerm));
-      } catch (error) {
-        console.error("Failed to fetch products", error);
-      } finally {
-        initialized.current = true;
-      }
-    };
-
-    if (!initialized.current) {
-      fetchAllProducts();
-    }
-  }, [searchTerm, lang]);
+  const socket = useSocket();
 
   const applyFilters = (
     products: Product[],
@@ -95,6 +62,56 @@ export default function ProductsPage() {
 
     return result;
   };
+
+  const fetchAllProducts = async () => {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/products`, {
+        cache: "no-store",
+        credentials: "include",
+      });
+
+      if (res.status === 401) {
+        setAllProducts([]);
+        setFilteredProducts([]);
+        return;
+      }
+
+      if (!res.ok) {
+        console.error("Failed to fetch products:", res.status);
+        return;
+      }
+
+      const products: Product[] = await res.json();
+      setAllProducts(products);
+      setFilteredProducts(applyFilters(products, searchTerm));
+    } catch (error) {
+      console.error("Failed to fetch products", error);
+    } finally {
+      initialized.current = true;
+    }
+  };
+
+  useEffect(() => {
+    if (!initialized.current) {
+      fetchAllProducts();
+    }
+  }, [searchTerm, lang]);
+
+useEffect(() => {
+  if (!socket) return;
+
+  const handleStockUpdate = () => {
+    fetchAllProducts();
+  };
+
+  socket.on("stockUpdated", handleStockUpdate);
+
+  return () => {
+    if (socket) {
+      socket.off("stockUpdated", handleStockUpdate);
+    }
+  };
+  }, [socket, searchTerm]);
 
   const handleFilter = (filters: {
     categories: string[];
