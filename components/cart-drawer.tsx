@@ -4,22 +4,39 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ShoppingBag, Plus, Minus, Trash2, Tag } from "lucide-react";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { useCart } from "@/contexts/cart-context";
 import { useLanguage } from "@/contexts/language-context";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./cart-drawer.module.css";
+import PaymentMethodForm from "@/components/payment-form";
 
 export default function CartDrawer() {
   const [isOpen, setIsOpen] = useState(false);
-  const { items, removeItem, updateQuantity, clearCart, itemCount, subtotal, loading } = useCart();
+  const {
+    items,
+    removeItem,
+    updateQuantity,
+    clearCart,
+    itemCount,
+    subtotal,
+    loading,
+  } = useCart();
   const { t } = useLanguage();
   const [discountCode, setDiscountCode] = useState("");
   const [discount, setDiscount] = useState(0);
   const [discountApplied, setDiscountApplied] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [orderId, setOrderId] = useState<string | null>(null);
 
   const handleApplyDiscount = async () => {
     try {
@@ -32,7 +49,6 @@ export default function CartDrawer() {
         body: JSON.stringify({ code: discountCode }),
       });
 
-  
       if (!response.ok) {
         const errorData = await response.json();
         alert(errorData.message);
@@ -40,7 +56,7 @@ export default function CartDrawer() {
         setDiscountApplied(false);
         return;
       }
-  
+
       const data = await response.json();
       setDiscount(data.amount);
       setDiscountApplied(true);
@@ -54,17 +70,16 @@ export default function CartDrawer() {
     setDiscount(0);
     setDiscountApplied(false);
     setDiscountCode("");
-  };  
+  };
 
   const total = subtotal - subtotal * (discount / 100);
 
   const handleCheckout = async () => {
     setCheckoutLoading(true);
-  
+
     try {
-      // Build order payload
       const orderPayload = {
-        items: items.map(item => ({
+        items: items.map((item) => ({
           productId: item.id,
           itemType: item.itemType,
           title: item.title,
@@ -74,16 +89,16 @@ export default function CartDrawer() {
         })),
         total,
       };
-  
+
       const response = await fetch("http://localhost:5100/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify(orderPayload),
       });
-  
+
       const rawText = await response.text();
-  
+
       let result;
       try {
         result = JSON.parse(rawText);
@@ -91,27 +106,30 @@ export default function CartDrawer() {
         console.error("Failed to parse JSON:", rawText);
         throw new Error("Server returned invalid response.");
       }
-  
+
       if (!response.ok) {
         throw new Error(result.message || "Order failed");
       }
-  
-      await clearCart();
+
       resetDiscount();
-      alert("✅ Order successfully placed!");
-      setIsOpen(false);
+      setOrderId(result.orderId);
+      setShowPaymentForm(true);
     } catch (err: any) {
       console.error("Order failed:", err);
       alert(`❌ ${err.message || "Order failed, please try again."}`);
     } finally {
       setCheckoutLoading(false);
     }
-  };  
+  };
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className={`${styles.button} ${styles.active}`}>
+        <Button
+          variant="ghost"
+          size="icon"
+          className={`${styles.button} ${styles.active}`}
+        >
           <ShoppingBag className="h-5 w-5" />
           {itemCount > 0 && <Badge className="cart-badge">{itemCount}</Badge>}
           <span className="sr-only">{t("cart.open")}</span>
@@ -130,6 +148,13 @@ export default function CartDrawer() {
           <div className={styles.emptyCart}>
             <p>Loading cart...</p>
           </div>
+        ) : showPaymentForm && orderId ? (
+          <div className="p-4">
+            <PaymentMethodForm
+              orderId={orderId}
+              onCancel={() => setShowPaymentForm(false)}
+            />
+          </div>
         ) : items.length === 0 ? (
           <div className={styles.emptyCart}>
             <p>{t("cart.empty")}</p>
@@ -141,8 +166,8 @@ export default function CartDrawer() {
           <>
             <div className={styles.cartItems}>
               {items.map((item, index) => (
-                <div 
-                  key={`${item.id}-${item.itemType}-${index}`} 
+                <div
+                  key={`${item.id}-${item.itemType}-${index}`}
                   className={styles.cartItem}
                 >
                   <div className={styles.itemImage}>
@@ -155,9 +180,7 @@ export default function CartDrawer() {
                     />
                   </div>
                   <div className={styles.itemDetails}>
-                    <h3 className={styles.itemTitle}>
-                      {item.title || "Unnamed Item"}
-                    </h3>
+                    <h3 className={styles.itemTitle}>{item.title || "Unnamed Item"}</h3>
                     <p className={styles.itemPrice}>
                       ${item.price?.toFixed(2) ?? "0.00"}
                     </p>
@@ -199,12 +222,13 @@ export default function CartDrawer() {
               <div className="discount-container">
                 <div className="flex items-center mb-2">
                   <Tag className="h-4 w-4 mr-2" />
-                  <span className="text-sm font-medium">{t("cart.discountCode")}</span>
+                  <span className="text-sm font-medium">
+                    {t("cart.discountCode")}
+                  </span>
                 </div>
                 <div className="discount-form">
                   <Input
                     type="text"
-                    // placeholder=""
                     value={discountCode}
                     onChange={(e) => setDiscountCode(e.target.value)}
                     className="discount-input"

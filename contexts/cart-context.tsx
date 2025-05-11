@@ -73,7 +73,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           productId: item.id,
-          quantity: item.quantity,
+          itemType: item.itemType,
         }),
       });
       setItems((prev) => [...prev, item]);
