@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { PromoCombo } from "@/types/promos";
 import type { SupportedLanguage } from "@/types/i18n";
+import styles from "../page.module.css";
 
 const getLocalized = (
   field: Record<SupportedLanguage, string> | undefined,
@@ -68,6 +69,11 @@ export default function BundlePageClient({bundle,relatedPromos,}: {
             ) : (
               <p className="text-2xl font-bold mt-2">${bundle.price.toFixed(2)}</p>
             )}
+            <p className={styles.stock}>
+              {bundle.stock > 0
+                ? `${t("product.stockAvailable")}: ${bundle.stock}`
+                : t("product.outOfStock")}
+            </p>
           </div>
 
           <p className="text-muted-foreground">{description}</p>

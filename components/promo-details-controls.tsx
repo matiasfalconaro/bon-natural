@@ -21,7 +21,7 @@ export default function BundleDetailsControls({ bundle }: { bundle: PromoCombo }
       price: bundle.price,
       image: bundle.image1,
       quantity: quantity,
-      itemType: "PromoCombo",
+      itemType: "promo",
     });
   };
 
@@ -50,6 +50,7 @@ export default function BundleDetailsControls({ bundle }: { bundle: PromoCombo }
       <Button
         className="flex-1 bg-[#5a7c5a] hover:bg-[#4a6a4a]"
         onClick={handleAddToCart}
+        disabled={bundle.stock === 0}
       >
         <ShoppingCart className="mr-2 h-4 w-4" />
         {t("product.addToCart")}

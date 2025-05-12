@@ -9,6 +9,7 @@ import ProductCard from "@/components/product-card"
 import ProductDetailsControls from "@/components/product-details-controls"
 import type { Product } from "@/types/products"
 import type { SupportedLanguage } from "@/types/i18n"
+import styles from "../page.module.css";
 
 const getLocalized = (
   field: Product["title"] | undefined,
@@ -62,6 +63,11 @@ export default function ProductPageClient({product, relatedProducts,}: {
             ) : (
               <p className="text-2xl font-bold mt-2">${product.price.toFixed(2)}</p>
             )}
+            <p className={styles.stock}>
+              {product.stock > 0
+                ? `${t("product.stockAvailable")}: ${product.stock}`
+                : t("product.outOfStock")}
+            </p>
           </div>
 
           <p className="text-muted-foreground">{getLocalized(product.description, language)}</p>
