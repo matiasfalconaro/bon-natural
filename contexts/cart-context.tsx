@@ -74,6 +74,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         body: JSON.stringify({
           productId: item.id,
           quantity: item.quantity,
+          itemType: item.itemType,
         }),
       });
       setItems((prev) => [...prev, item]);

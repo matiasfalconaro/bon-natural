@@ -1,12 +1,10 @@
-// src/types/cart.ts
-
 export interface CartItem {
     id: string;
     title: string;
     price: number;
     image: string;
     quantity: number;
-    itemType: "product" | "promo";
+    itemType: "Product" | "promo";
   }
   
   export interface CartContextType {
