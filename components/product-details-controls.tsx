@@ -50,6 +50,7 @@ export default function ProductDetailsControls({ product }: { product: Product }
       <Button
         className="flex-1 bg-[#5a7c5a] hover:bg-[#4a6a4a]"
         onClick={handleAddToCart}
+        disabled={product.stock === 0}
       >
         <ShoppingCart className="mr-2 h-4 w-4" />
         Add to Cart

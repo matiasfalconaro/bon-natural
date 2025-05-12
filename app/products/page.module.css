@@ -113,3 +113,9 @@
 :global(.dark).noResults {
   color: hsl(33, 20%, 75%);
 }
+
+.stock {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
