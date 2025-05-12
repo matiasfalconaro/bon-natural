@@ -21,7 +21,7 @@ export default function ProductDetailsControls({ product }: { product: Product }
       price: product.price,
       image: product.image,
       quantity: quantity,
-      itemType: "product",
+      itemType: "Product",
     });
   };
 

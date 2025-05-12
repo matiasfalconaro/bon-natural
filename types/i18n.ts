@@ -209,6 +209,23 @@ export type TranslationKeys =
   | "orders.empty"
   | "orders.orderId"
   | "orders.placedOn"
+  | "payment.title"
+  | "payment.subtitle"
+  | "payment.debit"
+  | "payment.credit"
+  | "payment.paypal"
+  | "payment.mercado"
+  | "payment.fullName"
+  | "payment.city"
+  | "payment.cardNumber"
+  | "payment.month"
+  | "payment.year"
+  | "payment.cvc"
+  | "payment.processing"
+  | "payment.continue"
+  | "payment.cancel"
+  | "payment.redirect.paypal"
+  | "payment.redirect.mercado"
   | "orders.back";
 
   export type Translations = Record<TranslationKeys, string>;

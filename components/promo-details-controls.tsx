@@ -21,7 +21,7 @@ export default function BundleDetailsControls({ bundle }: { bundle: PromoCombo }
       price: bundle.price,
       image: bundle.image1,
       quantity: quantity,
-      itemType: "promo",
+      itemType: "PromoCombo",
     });
   };
 

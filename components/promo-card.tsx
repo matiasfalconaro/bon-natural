@@ -24,7 +24,7 @@ export default function PromoCard({ promo }: { promo: PromoCombo }) {
       price: promo.price,
       image: promo.image1,
       quantity: 1,
-      itemType: "promo",
+      itemType: "PromoCombo",
     });
   };
 

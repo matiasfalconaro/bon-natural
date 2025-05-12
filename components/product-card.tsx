@@ -30,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
         price: discountedPrice,
         image: product.image,
         quantity: 1,
-        itemType: "product",
+        itemType: "Product",
       });
     
       toast({

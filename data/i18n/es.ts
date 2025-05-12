@@ -230,6 +230,24 @@ export const es: Translations = {
     "orders.orderId": "ID del pedido",
     "orders.placedOn": "Realizado el",
     "orders.back": "Home",
+
+    "payment.title": "Método de pago",
+    "payment.subtitle": "Elige cómo deseas pagar.",
+    "payment.debit": "Tarjeta de débito",
+    "payment.credit": "Tarjeta de crédito",
+    "payment.paypal": "Paypal",
+    "payment.mercado": "Mercado Pago",
+    "payment.fullName": "Nombre completo",
+    "payment.city": "Ciudad",
+    "payment.cardNumber": "Número de tarjeta",
+    "payment.month": "MM",
+    "payment.year": "AA",
+    "payment.cvc": "CVC",
+    "payment.processing": "Procesando...",
+    "payment.continue": "Continuar",
+    "payment.cancel": "Cancelar",
+    "payment.redirect.paypal": "Serás redirigido a Paypal para completar el pago.",
+    "payment.redirect.mercado": "Serás redirigido a Mercado Pago para completar el pago.",
 }
 
 const checkTranslations: Translations = es
