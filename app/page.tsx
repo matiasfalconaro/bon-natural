@@ -96,6 +96,11 @@ export default function Home() {
                 <Button variant="outline" asChild>
                   <Link href="/about">{t("hero.learnMore")}</Link>
                 </Button>
+                <Button variant="outline" asChild>
+                  <Link href="/admin">
+                    Admin Panel
+                  </Link>
+                </Button>
               </div>
             </div>
             <div className={styles.heroImageContainer}></div>

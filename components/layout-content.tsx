@@ -29,9 +29,14 @@ export default function LayoutContent({ children }: { children: React.ReactNode 
 
   const publicPaths = ["/login", "/register", "/forgot-password"];
   const isPublicPage = publicPaths.includes(pathname);
+  const isAdminRoute = pathname.startsWith("/admin");
 
   if (!user && !isPublicPage) {
     return null;
+  }
+
+  if (isAdminRoute) {
+    return <main>{children}</main>;
   }
 
   return (
