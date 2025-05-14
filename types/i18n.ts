@@ -226,7 +226,24 @@ export type TranslationKeys =
   | "payment.cancel"
   | "payment.redirect.paypal"
   | "payment.redirect.mercado"
-  | "orders.back";
+  | "orders.back"
+  | "sidebar.title"
+  | "sidebar.subtitle"
+  | "sidebar.dashboard"
+  | "sidebar.orders"
+  | "sidebar.customers"
+  | "sidebar.analitycs"
+  | "sidebar.cataloge"
+  | "sidebar.products"
+  | "sidebar.categories"
+  | "sidebar.bundles"
+  | "sidebar.discounts"
+  | "sidebar.actions"
+  | "sidebar.add.products"
+  | "sidebar.add.category"
+  | "sidebar.add.bundle"
+  | "sidebar.add.discount"
+  | "sidebar.settings";
 
   export type Translations = Record<TranslationKeys, string>;
 

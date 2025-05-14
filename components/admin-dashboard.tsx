@@ -84,7 +84,6 @@ export function AdminDashboard() {
         <div className="p-6">
           <div className="mb-8">
             <h1 className="text-3xl font-bold tracking-tight text-green-800">{getSectionTitle()}</h1>
-            <p className="text-muted-foreground">Manage your organic food e-commerce store</p>
           </div>
           {renderContent()}
         </div>

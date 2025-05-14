@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { BarChart3, Gift, Home, Leaf, Package, Percent, Plus, Settings, ShoppingCart, Tag, Users } from "lucide-react"
-
 import { Button } from "@/components/ui/button"
 import {
   Sidebar,
@@ -18,8 +17,13 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { CreateItemDialog } from "./create-item-dialog"
+import { useLanguage } from "@/contexts/language-context";
+
+type SupportedLanguage = "en" | "es" | "fr";
 
 export function AdminSidebar() {
+  const { language, t } = useLanguage();
+  const lang = language as SupportedLanguage;
   const [open, setOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("dashboard")
   const [createDialogType, setCreateDialogType] = useState<"product" | "category" | "promo" | "discount" | null>(null)
@@ -41,12 +45,12 @@ export function AdminSidebar() {
       <SidebarHeader className="border-b">
         <div className="flex items-center gap-2 px-4 py-2">
           <Leaf className="h-6 w-6 text-green-600" />
-          <span className="font-semibold">Bon Natural Boutique</span>
+          <span className="font-semibold">{t("sidebar.title")}</span>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Overview</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("sidebar.subtitle")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -55,13 +59,13 @@ export function AdminSidebar() {
                   onClick={() => handleSectionChange("dashboard")}
                 >
                   <Home className="h-4 w-4" />
-                  <span>Dashboard</span>
+                  <span>{t("sidebar.dashboard")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton isActive={activeSection === "orders"} onClick={() => handleSectionChange("orders")}>
                   <ShoppingCart className="h-4 w-4" />
-                  <span>Orders</span>
+                  <span>{t("sidebar.orders")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
@@ -70,7 +74,7 @@ export function AdminSidebar() {
                   onClick={() => handleSectionChange("customers")}
                 >
                   <Users className="h-4 w-4" />
-                  <span>Customers</span>
+                  <span>{t("sidebar.customers")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
@@ -79,7 +83,7 @@ export function AdminSidebar() {
                   onClick={() => handleSectionChange("analytics")}
                 >
                   <BarChart3 className="h-4 w-4" />
-                  <span>Analytics</span>
+                  <span>{t("sidebar.analitycs")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -87,7 +91,7 @@ export function AdminSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Catalog Management</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("sidebar.cataloge")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -96,7 +100,7 @@ export function AdminSidebar() {
                   onClick={() => handleSectionChange("products")}
                 >
                   <Package className="h-4 w-4" />
-                  <span>Products</span>
+                  <span>{t("sidebar.products")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
@@ -105,7 +109,7 @@ export function AdminSidebar() {
                   onClick={() => handleSectionChange("categories")}
                 >
                   <Tag className="h-4 w-4" />
-                  <span>Categories</span>
+                  <span>{t("sidebar.categories")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
@@ -114,7 +118,7 @@ export function AdminSidebar() {
                   onClick={() => handleSectionChange("promotions")}
                 >
                   <Gift className="h-4 w-4" />
-                  <span>Promotions & Bundles</span>
+                  <span>{t("sidebar.bundles")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
@@ -123,7 +127,7 @@ export function AdminSidebar() {
                   onClick={() => handleSectionChange("discounts")}
                 >
                   <Percent className="h-4 w-4" />
-                  <span>Discounts</span>
+                  <span>{t("sidebar.discounts")}</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -131,23 +135,23 @@ export function AdminSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Actions</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("sidebar.actions")}</SidebarGroupLabel>
           <SidebarGroupContent className="space-y-2">
             <Button variant="outline" className="w-full justify-start" onClick={() => handleCreateNew("product")}>
               <Plus className="mr-2 h-4 w-4" />
-              Add New Product
+              {t("sidebar.add.products")}
             </Button>
             <Button variant="outline" className="w-full justify-start" onClick={() => handleCreateNew("category")}>
               <Plus className="mr-2 h-4 w-4" />
-              Add New Category
+              {t("sidebar.add.category")}
             </Button>
             <Button variant="outline" className="w-full justify-start" onClick={() => handleCreateNew("promo")}>
               <Plus className="mr-2 h-4 w-4" />
-              Create New Bundle
+              {t("sidebar.add.bundle")}
             </Button>
             <Button variant="outline" className="w-full justify-start" onClick={() => handleCreateNew("discount")}>
               <Plus className="mr-2 h-4 w-4" />
-              Create New Discount
+              {t("sidebar.add.discount")}
             </Button>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -157,7 +161,7 @@ export function AdminSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton>
               <Settings className="h-4 w-4" />
-              <span>Settings</span>
+              <span>{t("sidebar.settings")}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
