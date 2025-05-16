@@ -61,3 +61,23 @@ export async function getAllProducts(token?: string): Promise<Product[]> {
     return [];
   }
 }
+
+export async function getAdminProducts(token?: string): Promise<Product[]> {
+  try {
+    const res = await fetch(`${API_BASE}/api/products`, {
+      cache: "no-store",
+      credentials: "include",
+      headers: token ? { Cookie: `token=${token}` } : {},
+    });
+
+    if (!res.ok) {
+      console.error("❌ Failed to fetch admin products. Status:", res.status);
+      return [];
+    }
+
+    return await res.json();
+  } catch (err) {
+    console.error("❌ Error fetching admin products:", err);
+    return [];
+  }
+}
