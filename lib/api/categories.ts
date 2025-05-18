@@ -1,20 +1,23 @@
 import { Category } from "@/types/categories"
 
-export async function getAllCategories(): Promise<Category[]> {
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE
+
+export async function getAllCategories(token?: string): Promise<(Category & { productCount?: number })[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/api/categories`, {
+    const res = await fetch(`${API_BASE}/api/categories`, {
       cache: "no-store",
       credentials: "include",
-    });
+      headers: token ? { Cookie: `token=${token}` } : {},
+    })
 
     if (!res.ok) {
-      console.error("Failed to fetch categories");
-      return [];
+      console.error("❌ Failed to fetch admin categories. Status:", res.status)
+      return []
     }
 
-    return await res.json();
+    return await res.json()
   } catch (err) {
-    console.error("Error fetching categories", err);
-    return [];
+    console.error("❌ Error fetching admin categories:", err)
+    return []
   }
 }

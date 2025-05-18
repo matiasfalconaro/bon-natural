@@ -23,93 +23,27 @@ import { Badge } from "@/components/ui/badge"
 import { EditItemDialog } from "./edit-item-dialog"
 import { DeleteItemDialog } from "./delete-item-dialog"
 
-type Category = {
-  id: string
-  name: string
-  description: string
-  parentCategory: string | null
-  productCount: number
-  featured: boolean
-}
-
-const data: Category[] = [
-  {
-    id: "1",
-    name: "Fruits",
-    description: "Fresh organic fruits",
-    parentCategory: null,
-    productCount: 24,
-    featured: true,
-  },
-  {
-    id: "2",
-    name: "Vegetables",
-    description: "Fresh organic vegetables",
-    parentCategory: null,
-    productCount: 36,
-    featured: true,
-  },
-  {
-    id: "3",
-    name: "Dairy",
-    description: "Organic dairy products",
-    parentCategory: null,
-    productCount: 18,
-    featured: false,
-  },
-  {
-    id: "4",
-    name: "Grains & Cereals",
-    description: "Organic grains and cereals",
-    parentCategory: null,
-    productCount: 15,
-    featured: false,
-  },
-  {
-    id: "5",
-    name: "Citrus Fruits",
-    description: "Organic citrus fruits",
-    parentCategory: "Fruits",
-    productCount: 8,
-    featured: true,
-  },
-  {
-    id: "6",
-    name: "Berries",
-    description: "Organic berries",
-    parentCategory: "Fruits",
-    productCount: 12,
-    featured: true,
-  },
-  {
-    id: "7",
-    name: "Leafy Greens",
-    description: "Organic leafy greens",
-    parentCategory: "Vegetables",
-    productCount: 14,
-    featured: false,
-  },
-]
+import { useAdminCategories, CategoryRow } from "@/hooks/use-admin-categories"
 
 export function CategoriesTable() {
+  const { categories: data, loading } = useAdminCategories()
+
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
-  const [editItem, setEditItem] = useState<Category | null>(null)
-  const [deleteItem, setDeleteItem] = useState<Category | null>(null)
+  const [editItem, setEditItem] = useState<CategoryRow | null>(null)
+  const [deleteItem, setDeleteItem] = useState<CategoryRow | null>(null)
 
-  const columns: ColumnDef<Category>[] = [
+  const columns: ColumnDef<CategoryRow>[] = [
     {
       accessorKey: "name",
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Category Name
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      header: ({ column }) => (
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          Category Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      ),
       cell: ({ row }) => (
         <div className="flex flex-col">
           <span className="font-medium">{row.getValue("name")}</span>
@@ -133,14 +67,12 @@ export function CategoriesTable() {
     },
     {
       accessorKey: "productCount",
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Products
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      header: ({ column }) => (
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          Products
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      ),
       cell: ({ row }) => <div className="text-center">{row.getValue("productCount")}</div>,
     },
     {
@@ -204,40 +136,44 @@ export function CategoriesTable() {
           <Button className="bg-green-600 hover:bg-green-700">Add New Category</Button>
         </div>
       </div>
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
+
+      {loading ? (
+        <div className="text-center py-20 text-muted-foreground">Loading categories...</div>
+      ) : (
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
                     <TableHead key={header.id}>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
-                  )
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No categories found.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    No categories found.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      )}
+
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="text-sm text-muted-foreground">
           Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
