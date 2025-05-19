@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { AdminSidebar } from "@/components/admin-sidebar"
 import { ProductsTable } from "@/components/products-table"
 import { CategoriesTable } from "@/components/categories-table"
-import { PromotionsTable } from "@/components/promotions-table"
+import { PromosTable } from "@/components/promos-table"
 import { DiscountsTable } from "@/components/discount-table"
 import { OrdersTable } from "@/components/orders-table"
 import { CustomersTable } from "@/components/customers-table"
@@ -39,8 +39,8 @@ export function AdminDashboard() {
         return <ProductsTable />
       case "categories":
         return <CategoriesTable />
-      case "promotions":
-        return <PromotionsTable />
+      case "promos":
+        return <PromosTable />
       case "discounts":
         return <DiscountsTable />
       case "orders":
@@ -61,8 +61,8 @@ export function AdminDashboard() {
         return "Organic Products"
       case "categories":
         return "Product Categories"
-      case "promotions":
-        return "Promotions & Bundles"
+      case "promos":
+        return "Promos & Bundles"
       case "discounts":
         return "Discounts & Offers"
       case "orders":

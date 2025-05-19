@@ -114,8 +114,8 @@ export function AdminSidebar() {
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton
-                  isActive={activeSection === "promotions"}
-                  onClick={() => handleSectionChange("promotions")}
+                  isActive={activeSection === "promos"}
+                  onClick={() => handleSectionChange("promos")}
                 >
                   <Gift className="h-4 w-4" />
                   <span>{t("sidebar.bundles")}</span>

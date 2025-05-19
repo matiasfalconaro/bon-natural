@@ -256,7 +256,7 @@ export const fr: Translations = {
     "sidebar.cataloge": "Gestion du catalogue",
     "sidebar.products": "Produits",
     "sidebar.categories": "Catégories",
-    "sidebar.bundles": "Promotions",
+    "sidebar.bundles": "Promos",
     "sidebar.discounts": "Réductions",
     "sidebar.actions": "Actions",
     "sidebar.add.products": "Ajouter un nouveau produit",

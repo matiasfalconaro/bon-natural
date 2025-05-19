@@ -152,8 +152,8 @@ export function DashboardOverview() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Active Promotions</CardTitle>
-            <CardDescription>Currently running promotions and bundles</CardDescription>
+            <CardTitle>Active Promos</CardTitle>
+            <CardDescription>Currently running promos and bundles</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">

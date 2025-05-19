@@ -256,7 +256,7 @@ export const en: Translations = {
     "sidebar.cataloge": "Catalog Management",
     "sidebar.products": "Products",
     "sidebar.categories": "Categories",
-    "sidebar.bundles": "Promotions & Bundles",
+    "sidebar.bundles": "Promos & Bundles",
     "sidebar.discounts": "Discounts",
     "sidebar.actions": "Actions",
     "sidebar.add.products": "Add New Product",
