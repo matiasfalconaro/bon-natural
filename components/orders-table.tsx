@@ -44,12 +44,12 @@ export function OrdersTable() {
       cell: ({ row }) => <div>{row.getValue("customer")}</div>,
     },
     {
-      accessorKey: "date",
+      accessorKey: "createdAt",
       header: ({ column }) => (
         <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>Date<ArrowUpDown className="ml-2 h-4 w-4" /></Button>
       ),
       cell: ({ row }) => {
-        const date = new Date(row.getValue("date")).toLocaleDateString()
+        const date = new Date(row.getValue("createdAt")).toLocaleDateString()
         return <div>{date}</div>
       },
     },
