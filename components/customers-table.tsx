@@ -20,92 +20,12 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Input } from "@/components/ui/input"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-
-type Customer = {
-  id: string
-  name: string
-  email: string
-  phone: string
-  orders: number
-  totalSpent: number
-  lastOrder: string
-  status: "Active" | "Inactive" | "New"
-}
-
-const data: Customer[] = [
-  {
-    id: "1",
-    name: "Sarah Johnson",
-    email: "sarah.johnson@example.com",
-    phone: "(555) 123-4567",
-    orders: 12,
-    totalSpent: 845.75,
-    lastOrder: "2025-05-12",
-    status: "Active",
-  },
-  {
-    id: "2",
-    name: "Michael Chen",
-    email: "michael.chen@example.com",
-    phone: "(555) 234-5678",
-    orders: 5,
-    totalSpent: 342.5,
-    lastOrder: "2025-05-11",
-    status: "Active",
-  },
-  {
-    id: "3",
-    name: "Emma Davis",
-    email: "emma.davis@example.com",
-    phone: "(555) 345-6789",
-    orders: 8,
-    totalSpent: 678.25,
-    lastOrder: "2025-05-11",
-    status: "Active",
-  },
-  {
-    id: "4",
-    name: "James Wilson",
-    email: "james.wilson@example.com",
-    phone: "(555) 456-7890",
-    orders: 3,
-    totalSpent: 156.99,
-    lastOrder: "2025-05-10",
-    status: "Active",
-  },
-  {
-    id: "5",
-    name: "Olivia Martinez",
-    email: "olivia.martinez@example.com",
-    phone: "(555) 567-8901",
-    orders: 1,
-    totalSpent: 67.5,
-    lastOrder: "2025-05-10",
-    status: "New",
-  },
-  {
-    id: "6",
-    name: "Noah Thompson",
-    email: "noah.thompson@example.com",
-    phone: "(555) 678-9012",
-    orders: 0,
-    totalSpent: 0,
-    lastOrder: "",
-    status: "Inactive",
-  },
-  {
-    id: "7",
-    name: "Sophia Garcia",
-    email: "sophia.garcia@example.com",
-    phone: "(555) 789-0123",
-    orders: 7,
-    totalSpent: 423.75,
-    lastOrder: "2025-05-09",
-    status: "Active",
-  },
-]
+import { useCustomers } from "@/hooks/use-admin-customers"
+import type { Customer } from "@/types/customers"
 
 export function CustomersTable() {
+  const { customers, loading } = useCustomers()
+
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -114,14 +34,12 @@ export function CustomersTable() {
   const columns: ColumnDef<Customer>[] = [
     {
       accessorKey: "name",
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Customer Name
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      header: ({ column }) => (
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          Customer Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      ),
       cell: ({ row }) => <div className="font-medium">{row.getValue("name")}</div>,
     },
     {
@@ -146,26 +64,22 @@ export function CustomersTable() {
     },
     {
       accessorKey: "orders",
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Orders
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      header: ({ column }) => (
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          Orders
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      ),
       cell: ({ row }) => <div className="text-center">{row.getValue("orders")}</div>,
     },
     {
       accessorKey: "totalSpent",
-      header: ({ column }) => {
-        return (
-          <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-            Total Spent
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
-        )
-      },
+      header: ({ column }) => (
+        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+          Total Spent
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      ),
       cell: ({ row }) => {
         const amount = Number.parseFloat(row.getValue("totalSpent"))
         const formatted = new Intl.NumberFormat("en-US", {
@@ -187,19 +101,17 @@ export function CustomersTable() {
       accessorKey: "status",
       header: "Status",
       cell: ({ row }) => {
-        const status = row.getValue("status") as string
+        const status = row.getValue("status") as Customer["status"]
         return (
           <Badge
             variant="outline"
-            className={`
-              ${
-                status === "Active"
-                  ? "bg-green-100 text-green-800 border-green-200"
-                  : status === "New"
-                    ? "bg-blue-100 text-blue-800 border-blue-200"
-                    : "bg-gray-100 text-gray-800 border-gray-200"
-              }
-            `}
+            className={`${
+              status === "Active"
+                ? "bg-green-100 text-green-800 border-green-200"
+                : status === "New"
+                ? "bg-blue-100 text-blue-800 border-blue-200"
+                : "bg-gray-100 text-gray-800 border-gray-200"
+            }`}
           >
             {status}
           </Badge>
@@ -230,7 +142,7 @@ export function CustomersTable() {
   ]
 
   const table = useReactTable({
-    data,
+    data: customers,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -247,6 +159,10 @@ export function CustomersTable() {
       rowSelection,
     },
   })
+
+  if (loading) {
+    return <div className="text-center py-10 text-muted-foreground">Loading customers...</div>
+  }
 
   return (
     <div>
@@ -267,13 +183,11 @@ export function CustomersTable() {
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  )
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
