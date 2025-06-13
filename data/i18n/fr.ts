@@ -246,6 +246,24 @@ export const fr: Translations = {
     "payment.cancel": "Annuler",
     "payment.redirect.paypal": "Vous serez redirigé vers Paypal pour finaliser votre paiement.",
     "payment.redirect.mercado": "Vous serez redirigé vers Mercado Pago pour finaliser votre paiement.",
+
+    "sidebar.title": "Bon Natural Boutique",
+    "sidebar.subtitle": "Général",
+    "sidebar.dashboard": "Tableau de bord",
+    "sidebar.orders": "Commandes",
+    "sidebar.customers": "Clients",
+    "sidebar.analitycs": "Analytique",
+    "sidebar.cataloge": "Gestion du catalogue",
+    "sidebar.products": "Produits",
+    "sidebar.categories": "Catégories",
+    "sidebar.bundles": "Promos",
+    "sidebar.discounts": "Réductions",
+    "sidebar.actions": "Actions",
+    "sidebar.add.products": "Ajouter un nouveau produit",
+    "sidebar.add.category": "Ajouter une nouvelle catégorie",
+    "sidebar.add.bundle": "	Créer un nouveau lot",
+    "sidebar.add.discount": "Créer une nouvelle réduction",
+    "sidebar.settings": "Paramètres"
 }
 
 const checkTranslations: Translations = fr
